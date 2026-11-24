@@ -2,8 +2,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v2.3">
-<meta name="at-build" content="23f9457a9cd47a47">
+<meta name="at-version" content="v2.4">
+<meta name="at-build" content="fab4dfee000a0a61">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -508,7 +508,8 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 
 /* 首頁快速指令 */
 .quick-bar { display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
-.quick-label { align-self: center; font-size: 13px; font-weight: 700; color: var(--muted); margin-right: 4px; }
+.quick-label { align-self: center; min-width: 4.5em; font-size: 13px; font-weight: 700; color: var(--muted); margin-right: 4px; }
+.quick-bar.x { grid-template-columns: auto repeat(4, minmax(0, 1fr)); }
 .quick-btn { font: inherit; min-width: 0; padding: 5px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; text-align: left; line-height: 1.35; background: var(--card); color: var(--ink); border: 1px solid var(--ink); cursor: pointer; }
 .quick-text { min-width: 0; display: flex; flex-direction: column; }
 .quick-text strong { font-size: 14px; font-weight: 700; }
@@ -517,8 +518,9 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 .quick-btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 .quick-btn svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 820px) {
-  .quick-bar { grid-template-columns: 1fr; gap: 6px; }
+  .quick-bar, .quick-bar.x { grid-template-columns: 1fr; gap: 6px; }
   .quick-label { display: none; }
+  .quick-bar.x .quick-label { display: block; }
   .quick-btn { min-height: 40px; }
   .quick-text { flex-direction: row; align-items: baseline; gap: 8px; }
   .quick-text strong { flex: none; }
@@ -577,6 +579,10 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 .bc-arch:focus-visible { outline: 3px solid #e2c27f; outline-offset: 2px; }
 .lead-acts { margin: 6px 0 4px; }
 
+/* 小卡最下方的原編號（AI-001） */
+.bc-orig { margin: 6px 4px 0; text-align: right; font: 600 12px/1.2 var(--sans); letter-spacing: .04em; color: var(--gold); opacity: .85; }
+.bcard.cream .bc-orig { color: var(--navy); }
+
 </style>
 </head>
 <body>
@@ -601,8 +607,13 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v2.3",
+ "version": "v2.4",
  "changes": [
+  {
+   "v": "v2.4",
+   "date": "2026-11-25",
+   "text": "每張小卡最下方加註原編號（AI-001）；私人版首頁加「跨模型」快捷列（XR 交叉審查、XP 事前驗屍、XE 交給 Claude 執行、XV 唯讀複驗），按鈕從小卡提示詞標籤「XR｜」自動產生；說明頁簡碼加「跨模型縮寫」"
+  },
   {
    "v": "v2.3",
    "date": "2026-11-24",
@@ -699,6 +710,7 @@ window.ATLAS_DATA = {
  "built": "2026-11-25",
  "preview": false,
  "quickPrompts": [],
+ "xPrompts": [],
  "entries": [
   {
    "id": "2026-11-23_讓AI讀得到的私密網站發布",
@@ -1201,19 +1213,19 @@ window.ATLAS_DATA = {
      ],
      "prompts": [
       {
-       "label": "在 Claude 使用",
+       "label": "XR｜在 Claude 使用（請 Codex 審查）",
        "text": "請 Codex 審查這份文件：<檔案位置>"
       },
       {
-       "label": "在 Codex 使用（反方向）",
+       "label": "XR｜在 Codex 使用（請 Claude 審查）",
        "text": "請 Claude 審查這份文件：<檔案位置>"
       },
       {
-       "label": "送審前事前驗屍（計畫書、申請表適用，在 Claude 使用）",
+       "label": "XP｜送審前事前驗屍（計畫書、申請表，在 Claude 使用）",
        "text": "請 Codex 審查這份文件：<檔案位置>\n審查角度加一項：假設這份文件已經被審查委員退件，列出最可能的 5 個原因，依嚴重度排序。"
       },
       {
-       "label": "程式碼審查與修正（在 Claude Code 的 Git 專案使用）",
+       "label": "XC｜程式碼審查與修正（在 Claude Code 的 Git 專案使用）",
        "text": "/codex:review --wait"
       },
       {
@@ -1254,11 +1266,11 @@ window.ATLAS_DATA = {
      ],
      "prompts": [
       {
-       "label": "交辦給 Claude（在 Codex 使用）",
+       "label": "XE｜交給 Claude 執行（在 Codex 使用）",
        "text": "請交給 Claude 執行（claude-executor）。先寫任務單給我確認，再呼叫 Claude。\n1. 目標：<要完成的事>\n2. 範圍：只能改 <資料夾或檔案>，不能改 <排除項目>。\n3. 成品：<要交出的檔案或畫面>\n4. 驗收標準：<怎樣算完成>\n5. 停止條件：遇到發布、刪除、付款或範圍外的檔案，先停下來問我。\nClaude 做完後，請讀實際檔案逐項判斷「通過／不通過／無法驗證」，不要只看 Claude 的回報。\nClaude 執行失敗、沒有回報或額度不足時，一律算「無法驗證」，不可當作通過。\n修正後最多複驗 2 輪，還沒通過就停下來，列出剩下的問題給我決定。"
       },
       {
-       "label": "修正後複驗（在 Codex 使用）",
+       "label": "XV｜修正後複驗（在 Codex 使用）",
        "text": "唯讀複驗，不可修改檔案，也不要呼叫 Claude。\n上次問題：<問題>。現已改為：<修正內容>。\n只檢查這項改動，以及會不會影響 <相關畫面或功能>，回報通過或不通過。"
       }
      ],
@@ -1441,12 +1453,16 @@ window.ATLAS_DATA = {
   }
 
   // 首頁快速指令：資料只存在私人預覽版
-  function quickBar() {
-    var list = DATA.quickPrompts || [];
+  // 跨模型快捷（xPrompts）由 build 從小卡提示詞「XR｜…」自動產生
+  function quickRow(list, label, attr, cls) {
     if (!list.length) return '';
-    return '<div class="quick-bar"><span class="quick-label">快速指令</span>' + list.map(function (p, i) {
-      return '<button type="button" class="quick-btn" data-quick="' + i + '" aria-label="複製提示詞：' + esc(p.label) + '，' + esc(p.hint) + '" title="點一下複製"><span class="quick-text"><strong>' + esc(p.label) + '</strong><small>' + esc(p.hint) + '</small></span>' + ICON.copy + '</button>';
+    return '<div class="quick-bar' + (cls ? ' ' + cls : '') + '"><span class="quick-label">' + label + '</span>' + list.map(function (p, i) {
+      return '<button type="button" class="quick-btn" ' + attr + '="' + i + '" aria-label="複製提示詞：' + esc(p.label) + '，' + esc(p.hint) + '" title="點一下複製"><span class="quick-text"><strong>' + esc(p.label) + '</strong><small>' + esc(p.hint) + '</small></span>' + ICON.copy + '</button>';
     }).join('') + '</div>';
+  }
+  function quickBar() {
+    return quickRow(DATA.quickPrompts || [], '快速指令', 'data-quick') +
+      quickRow(DATA.xPrompts || [], '跨模型', 'data-xquick', 'x');
   }
 
   // ---------- 頁面 ----------
@@ -1664,6 +1680,11 @@ window.ATLAS_DATA = {
     return '<span class="bc-prepared" role="img" aria-label="整理：' + tool + '" title="整理：' + tool + '">' + tool + '</span>';
   }
 
+  // 卡片最下方加註原本的固定編號（例如 AI-001）
+  function origNo(c) {
+    return c.code && c.code !== '待分配' ? '<p class="bc-orig">原編號 ' + esc(c.code) + '</p>' : '';
+  }
+
   // mode = 'mini'（卡冊、日誌右欄：奶油白）／'full'（完整卡：深藍，可直接複製指令）
   function battleCard(e, mode, opts) {
     var c = e.card, s = c.series || { name: '', desc: '' }; opts = opts || {};
@@ -1688,7 +1709,7 @@ window.ATLAS_DATA = {
     if (!full) {
       return '<article class="bcard mini ' + theme + (opts.compact ? ' compact' : '') + '" style="--s:' + seriesColor(s.name) + '">' +
         head + code + name + use + (opts.compact ? '' : '<div class="bc-panel">' + when + '</div>') +
-        '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '<span class="bc-go">看小卡 →</span></footer></article>';
+        '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '<span class="bc-go">看小卡 →</span></footer>' + origNo(c) + '</article>';
     }
     var prompts = '<section class="bc-prompts" id="ch-copy' + (opts.suffix || '') + '"><h4 class="bc-ptitle">' + ICON.chat + 'Prompt</h4>' +
       c.prompts.map(function (p, i) {
@@ -1709,7 +1730,7 @@ window.ATLAS_DATA = {
       '<div class="bc-swash" aria-hidden="true"></div>' + use + figure +
       '<div class="bc-panel">' + when + notFor + prompts + notes + cardMore(c) + '</div>' +
       '<footer class="bc-foot"><span>' + ICON.book + '來源：' + (opts.inLog ? fmtDate(e.date) + ' 筆記' : '<a href="#/log/' + enc(e.logId || e.id) + '">' + fmtDate(e.date) + ' 筆記</a>') + preparedBadge(c.preparedBy) + '</span>' +
-      '<span>指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '</footer></article>';
+      '<span>指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '</footer>' + origNo(c) + '</article>';
   }
 
   // 完整卡的「完整資料」：預設收合，舊卡沒有這些欄位就不顯示
@@ -1885,6 +1906,8 @@ window.ATLAS_DATA = {
           codeTable('使用領域', [['W', '工作職場', 'Work'], ['H', '家庭生活', 'Home']]) +
           codeTable('系別', seriesCodes) +
           codeTable('小卡欄位', [['T', '卡名', 'Title'], ['D', '用途', 'Description'], ['A', '適用', 'Applies to'], ['P', '提示詞', 'Prompt'], ['N', '注意', 'Notes'], ['BY', '整理標記', 'Prepared by']]) +
+          codeTable('跨模型縮寫（Claude、Codex、ChatGPT 通用）', [['XR', '交叉審查：請另一個 AI 只讀挑錯', 'Cross Review'], ['XP', '事前驗屍：假設被退件，列最可能原因', 'Premortem'], ['XE', '交給 Claude 執行，Codex 驗收（在 Codex 用）', 'Execute'], ['XV', '唯讀複驗：只看上次的問題改好沒', 'Verify'], ['XC', '程式碼審查後修正（在 Claude Code 用）', 'Code review']]) +
+          '<p>用法：縮寫後面接檔案或任務，例如 <code>XR 申請表.docx</code>。在 ChatGPT App 叫不到別的 AI，XR、XP、XV 由 ChatGPT 自己扮審查委員。私人網址首頁的「跨模型」按鈕可一鍵複製完整指令。</p>' +
           '<p>小卡代號＝領域－系別－號碼。<code>C W-DE-01 D 縮短</code> 是縮短第一張小卡的用途；<code>P2</code> 指第 2 段提示詞。原本的固定編號（例如 <code>AI-001</code>）繼續保留，新舊代號都能搜尋。</p>')) +
       sec('ab-log', '04', '筆記怎麼寫',
         '<ol><li>做什麼（一句話）</li><li>怎麼做</li><li>學到什麼</li><li>相關小卡</li><li>來源</li></ol>' +
@@ -1977,6 +2000,8 @@ window.ATLAS_DATA = {
   app.addEventListener('click', function (ev) {
     var b = ev.target.closest('[data-quick]');
     if (b) copyText(DATA.quickPrompts[+b.dataset.quick].text);
+    var x = ev.target.closest('[data-xquick]');
+    if (x) copyText(DATA.xPrompts[+x.dataset.xquick].text);
   });
   app.addEventListener('submit', function (ev) {
     var f = ev.target.closest('form.search');
