@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta name="at-version" content="v2.4">
-<meta name="at-build" content="fab4dfee000a0a61">
+<meta name="at-build" content="152039eb3b79c997">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -713,6 +713,151 @@ window.ATLAS_DATA = {
  "xPrompts": [],
  "entries": [
   {
+   "id": "2026-11-25_跨模型縮寫",
+   "title": "跨模型縮寫：打兩個字母就叫另一個 AI 幫忙",
+   "date": "2026-11-25",
+   "format": "note",
+   "summary": "用 5 個縮寫，在三種 AI 裡快速叫出審查或交辦。",
+   "cost": [],
+   "tags": [
+    "交叉審查",
+    "Claude",
+    "Codex",
+    "AI 協作",
+    "文件審查"
+   ],
+   "sources": [
+    {
+     "title": "Claude × Codex 官方外掛安裝教學（Notion）",
+     "url": "https://app.notion.com/p/Claude-Codex-OpenAI-422b7e19746a80059c82f7c93efd4875"
+    },
+    {
+     "title": "Trail of Bits：second-opinion",
+     "url": "https://trailofbits.com/skills/second-opinion/"
+    },
+    {
+     "title": "claude-codex-review（事前驗屍、限制輪數）",
+     "url": "https://github.com/KamakuraCrypto/claude-codex-review"
+    },
+    {
+     "title": "Codex 官方外掛原始碼（GitHub）",
+     "url": "https://github.com/openai/codex-plugin-cc"
+    }
+   ],
+   "internalSources": 1,
+   "draft": false,
+   "archived": false,
+   "archivedDate": "",
+   "top3": [],
+   "related": [
+    "AI-009",
+    "AI-001",
+    "AI-008"
+   ],
+   "sections": [
+    {
+     "title": "做什麼",
+     "html": "<p>用 5 個縮寫，在三種 AI 裡快速叫出審查或交辦。</p>"
+    },
+    {
+     "title": "怎麼做",
+     "html": "<ol><li>研究外部教學與 GitHub 技能，只借做法、不安裝。</li><li>縮寫寫進 Claude、Codex 與 ChatGPT 的設定。</li><li>網站首頁按鈕從小卡指令自動產生。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>同一個縮寫，在不同 AI 做對應的事。</li><li>ChatGPT 叫不到別的 AI，就自己當審查委員。</li><li>縮寫定義只放一處，其他地方指過去。</li></ol>"
+    }
+   ],
+   "cards": [
+    {
+     "code": "AI-009",
+     "name": "跨模型縮寫",
+     "use": "打一個縮寫，就讓 Claude、Codex 或 ChatGPT 做跨模型審查、交辦或複驗。",
+     "when": [
+      "正式文件送審前，想快速找第二意見。",
+      "在 Codex 想把任務交給 Claude 做。",
+      "修正後只想確認上次的問題。"
+     ],
+     "notes": [
+      "ChatGPT、Claude Chat 要先把總說明短版貼進自訂指令，才認得縮寫。",
+      "送審前先遮公司名、人名、統編。",
+      "對方沒跑完算「無法驗證」；複驗最多 2 輪。"
+     ],
+     "prompts": [
+      {
+       "label": "XR 交叉審查（Claude、Codex、ChatGPT 都能用）",
+       "text": "XR <檔案位置>"
+      },
+      {
+       "label": "XP 事前驗屍（計畫書、申請表送審前）",
+       "text": "XP <檔案位置>"
+      },
+      {
+       "label": "XE 交給 Claude 執行（只在 Codex 用）",
+       "text": "XE <要完成的事>\n範圍：只能改 <資料夾或檔案>\n驗收標準：<怎樣算完成>"
+      },
+      {
+       "label": "XV 唯讀複驗（Claude、Codex、ChatGPT 都能用）",
+       "text": "XV 上次問題：<問題>。現已改為：<修正內容>"
+      },
+      {
+       "label": "XC 程式碼審查（只在 Claude Code 的 Git 專案用）",
+       "text": "XC"
+      }
+     ],
+     "preparedBy": "Claude",
+     "promptOutline": false,
+     "domain": "工作職場",
+     "notFor": [
+      "短訊息、閒聊：浪費額度。",
+      "有個人資料又不能遮蔽的檔案。",
+      "要對外發布、付款或刪除的工作。"
+     ],
+     "steps": [
+      "XR 交叉審查：在 Claude 打，Claude 請 Codex 審查；在 Codex 打，Codex 請 Claude 審查。審查的 AI 只列問題、不改檔。",
+      "XP 事前驗屍：做法同 XR，再加一題「假設這份已被退件，列最可能的 5 個原因」。適合計畫書、申請表送審前。",
+      "XE 交給 Claude 執行：只在 Codex 用。Codex 先寫任務單給我確認，再呼叫 Claude 動手，最後讀實際檔案驗收。",
+      "XV 唯讀複驗：只檢查上次的問題改好沒、有沒有影響別處。不改檔，也不再叫別的 AI。",
+      "XC 程式碼審查：只在 Claude Code 的 Git 專案用。Codex 審程式改動，Claude 逐點判斷、修正並重新測試。",
+      "在 ChatGPT App：XR、XP、XV 由 ChatGPT 自己審查；打 XE、XC 時，它會提醒我換到 Codex 或 Claude Code。",
+      "不想打字時，打開私人網址首頁，按「跨模型」那排按鈕，就會複製完整指令。"
+     ],
+     "tools": [
+      "AGENTS.md「跨模型縮寫」：縮寫的正式定義，Claude 和 Codex 都會讀。",
+      "AI 回答習慣總說明：貼到 ChatGPT、Claude Chat 自訂指令的版本。",
+      "codex-reviewer、claude-reviewer、claude-executor：三個技能都把縮寫加進觸發詞。",
+      "<a href=\"https://github.com/openai/codex-plugin-cc\" target=\"_blank\" rel=\"noopener\">Codex 官方外掛原始碼（GitHub）</a>"
+     ],
+     "practice": [
+      {
+       "date": "2026-11-25",
+       "project": "AI 工作圖鑑",
+       "status": "已實作未驗證",
+       "how": "縮寫寫進 Claude、Codex、ChatGPT 設定，首頁加跨模型按鈕",
+       "result": "5 個縮寫、4 個快捷按鈕",
+       "log": "2026-11-25_跨模型縮寫",
+       "learned": "按鈕從小卡自動產生，改一處就好"
+      }
+     ],
+     "practiceCount": 1,
+     "versions": [
+      "v0.1｜2026-11-25｜建立：XR、XP、XE、XV、XC 五個縮寫"
+     ],
+     "image": {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NjAgNDMwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1BpbmdGYW5nIFRDJywgJ05vdG8gU2FucyBUQycsIHNhbnMtc2VyaWYiPgogIDxyZWN0IHdpZHRoPSI3NjAiIGhlaWdodD0iNDMwIiBmaWxsPSIjZmJmN2VlIi8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMWYyZjRkIj7ot6jmqKHlnovnuK7lr6vpgJ/mn6Xooag8L3RleHQ+CiAgPHRleHQgeD0iNzM2IiB5PSIzOCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzZiNmI2YiIgdGV4dC1hbmNob3I9ImVuZCI+57iu5a+r5b6M6Z2i5o6l5qqU5qGI5oiW5Lu75YuZPC90ZXh0PgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPgogICAgPHJlY3QgeD0iMTYiIHk9IjU0IiB3aWR0aD0iNzI4IiBoZWlnaHQ9IjM0IiBmaWxsPSIjMWYyZjRkIi8+CiAgICA8dGV4dCB4PSIzMCIgeT0iNzYiPue4ruWvqzwvdGV4dD4KICAgIDx0ZXh0IHg9Ijk2IiB5PSI3NiI+5oSP5oCdPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSI3NiI+5ZyoIENsYXVkZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQzNiIgeT0iNzYiPuWcqCBDb2RleDwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iNzYiPuWcqCBDaGF0R1BUIEFwcDwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxMyIgZmlsbD0iIzIyMiI+CiAgICA8cmVjdCB4PSIxNiIgeT0iODgiIHdpZHRoPSI3MjgiIGhlaWdodD0iNjQiIGZpbGw9IiNmZmZmZmYiLz4KICAgIDx0ZXh0IHg9IjMwIiB5PSIxMjYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNiMDNhMmUiPlhSPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjExNCIgZm9udC13ZWlnaHQ9IjcwMCI+5Lqk5Y+J5a+p5p+lPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjEzNCIgZmlsbD0iIzU1NSI+5Y+q5YiX5ZWP6aGM44CB5LiN5pS55qqUPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIxMjQiPuiriyBDb2RleCDlr6nmn6U8L3RleHQ+CiAgICA8dGV4dCB4PSI0MzYiIHk9IjEyNCI+6KuLIENsYXVkZSDlr6nmn6U8L3RleHQ+CiAgICA8dGV4dCB4PSI1OTYiIHk9IjEyNCI+6Ieq5bex55W25a+p5p+l5aeU5ZOhPC90ZXh0PgoKICAgIDxyZWN0IHg9IjE2IiB5PSIxNTIiIHdpZHRoPSI3MjgiIGhlaWdodD0iNjQiIGZpbGw9IiNmM2VlZTIiLz4KICAgIDx0ZXh0IHg9IjMwIiB5PSIxOTAiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNiMDNhMmUiPlhQPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjE3OCIgZm9udC13ZWlnaHQ9IjcwMCI+5LqL5YmN6amX5bGNPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjE5OCIgZmlsbD0iIzU1NSI+5YGH6Kit6KKr6YCA5Lu277yM5YiXIDUg5YCL5Y6f5ZugPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIxODgiPuiriyBDb2RleCDlgZo8L3RleHQ+CiAgICA8dGV4dCB4PSI0MzYiIHk9IjE4OCI+6KuLIENsYXVkZSDlgZo8L3RleHQ+CiAgICA8dGV4dCB4PSI1OTYiIHk9IjE4OCI+6Ieq5bex5YGaPC90ZXh0PgoKICAgIDxyZWN0IHg9IjE2IiB5PSIyMTYiIHdpZHRoPSI3MjgiIGhlaWdodD0iNjQiIGZpbGw9IiNmZmZmZmYiLz4KICAgIDx0ZXh0IHg9IjMwIiB5PSIyNTQiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNiMDNhMmUiPlhFPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjI0MiIgZm9udC13ZWlnaHQ9IjcwMCI+5Lqk57WmIENsYXVkZSDln7fooYw8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMjYyIiBmaWxsPSIjNTU1Ij5DbGF1ZGUg5YGa44CBQ29kZXgg6amX5pS2PC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIyNTIiIGZpbGw9IiM4ODgiPuS4jemBqeeUqDwvdGV4dD4KICAgIDx0ZXh0IHg9IjQzNiIgeT0iMjQ0Ij7lhYjlr6vku7vli5nllq7ntabmiJHnorroqo08L3RleHQ+CiAgICA8dGV4dCB4PSI0MzYiIHk9IjI2MiI+5YaN5ZG85Y+rIENsYXVkZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iMjUyIiBmaWxsPSIjODg4Ij7mj5DphpLmj5vliLAgQ29kZXg8L3RleHQ+CgogICAgPHJlY3QgeD0iMTYiIHk9IjI4MCIgd2lkdGg9IjcyOCIgaGVpZ2h0PSI2NCIgZmlsbD0iI2YzZWVlMiIvPgogICAgPHRleHQgeD0iMzAiIHk9IjMxOCIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2IwM2EyZSI+WFY8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzA2IiBmb250LXdlaWdodD0iNzAwIj7llK/oroDopIfpqZc8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzI2IiBmaWxsPSIjNTU1Ij7lj6rnnIvkuIrmrKHnmoTllY/poYzmlLnlpb3mspI8L3RleHQ+CiAgICA8dGV4dCB4PSIyNzYiIHk9IjMxNiI+6Ieq5bex5qqi5p+lPC90ZXh0PgogICAgPHRleHQgeD0iNDM2IiB5PSIzMTYiPuiHquW3seaqouafpTwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iMzE2Ij7oh6rlt7HmqqLmn6U8L3RleHQ+CgogICAgPHJlY3QgeD0iMTYiIHk9IjM0NCIgd2lkdGg9IjcyOCIgaGVpZ2h0PSI2NCIgZmlsbD0iI2ZmZmZmZiIvPgogICAgPHRleHQgeD0iMzAiIHk9IjM4MiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2IwM2EyZSI+WEM8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzcwIiBmb250LXdlaWdodD0iNzAwIj7nqIvlvI/norzlr6nmn6U8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzkwIiBmaWxsPSIjNTU1Ij5Db2RleCDlr6njgIFDbGF1ZGUg5L+u5q2jPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIzNzIiPi9jb2RleDpyZXZpZXcgLS13YWl0PC90ZXh0PgogICAgPHRleHQgeD0iNDM2IiB5PSIzODAiIGZpbGw9IiM4ODgiPuS4jemBqeeUqDwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iMzgwIiBmaWxsPSIjODg4Ij7mj5DphpLmj5vliLAgQ2xhdWRlIENvZGU8L3RleHQ+CiAgPC9nPgogIDxyZWN0IHg9IjE2IiB5PSI1NCIgd2lkdGg9IjcyOCIgaGVpZ2h0PSIzNTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmMmY0ZCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSIyNCIgeT0iNDI0IiBmb250LXNpemU9IjExIiBmaWxsPSIjNmI2YjZiIj7lhbHlkIzopo/liYfvvJrlr6nmn6XkuI3mlLnmqpTvvZzmspLot5HlroznrpfjgIznhKHms5XpqZforYnjgI3vvZzopIfpqZfmnIDlpJogMiDovKo8L3RleHQ+Cjwvc3ZnPgo=",
+      "alt": "跨模型縮寫"
+     },
+     "archived": false,
+     "archivedDate": "",
+     "series": {
+      "name": "防禦系",
+      "desc": "審查與風險控管"
+     },
+     "id": "2026-11-25_跨模型縮寫"
+    }
+   ]
+  },
+  {
    "id": "2026-11-23_讓AI讀得到的私密網站發布",
    "title": "讓 AI 讀得到、別人進不來：私密網站發布",
    "date": "2026-11-23",
@@ -1180,7 +1325,8 @@ window.ATLAS_DATA = {
    "top3": [],
    "related": [
     "AI-001",
-    "AI-008"
+    "AI-008",
+    "AI-009"
    ],
    "sections": [
     {
