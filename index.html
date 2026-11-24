@@ -2,13 +2,13 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v1.9">
-<meta name="at-build" content="59d71dcf18be4c5a">
+<meta name="at-version" content="v2.0">
+<meta name="at-build" content="783674be023447bb">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI 工作圖鑑</title>
-<meta name="description" content="Lynn's AI Work Atlas：記錄用 AI 完成工作的過程，整理成可重複使用的指令卡。">
+<meta name="description" content="Lynn's AI Work Atlas：記錄用 AI 完成工作的過程，整理成可重複使用的小卡。">
 <meta name="theme-color" content="#8f1d22">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iI2ZiZjhmNSIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI1MTIiIGhlaWdodD0iNDAiIGZpbGw9IiM4ZjFkMjIiLz4KICA8dGV4dCB4PSIyNTYiIHk9IjMzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsICdUaW1lcyBOZXcgUm9tYW4nLCBzZXJpZiIgZm9udC13ZWlnaHQ9IjcwMCIgZm9udC1zaXplPSIyMzAiIGZpbGw9IiMxNDE0MTQiPkFJPC90ZXh0PgogIDxyZWN0IHg9IjE3NiIgeT0iMzkwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjIyIiBmaWxsPSIjOGYxZDIyIi8+Cjwvc3ZnPgo=" type="image/svg+xml">
@@ -549,6 +549,12 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 .related-cards h2 { margin: 0 0 6px; font-size: 18px; }
 .related-cards ul { margin: 0; padding-left: 20px; }
 
+/* v2.0 說明頁收合區、小卡「不適用」 */
+.ab-fold { margin: 14px 0; border: 1px solid var(--rule); border-radius: 10px; padding: 0 14px; }
+.ab-fold summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; }
+.ab-fold[open] { padding-bottom: 10px; }
+.bc-notfor .bc-lab { color: #8a3a2e; }
+
 </style>
 </head>
 <body>
@@ -557,8 +563,8 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
     <a class="brand" href="#/" aria-label="回首頁：AI 工作圖鑑"><span class="brand-home" aria-hidden="true">⌂</span><span class="brand-zh">AI 工作圖鑑</span><span class="brand-en">LYNN'S AI WORK ATLAS</span></a>
     <nav class="nav" aria-label="主選單">
       <a href="#/" data-nav="home">首頁</a>
-      <a href="#/cards" data-nav="cards">AI 指令卡</a>
-      <a href="#/logs" data-nav="logs">AI 學習日誌</a>
+      <a href="#/cards" data-nav="cards">小卡</a>
+      <a href="#/logs" data-nav="logs">筆記</a>
       <a href="#/about" data-nav="about">說明</a>
     </nav>
   </div>
@@ -573,8 +579,13 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v1.9",
+ "version": "v2.0",
  "changes": [
+  {
+   "v": "v2.0",
+   "date": "2026-11-24",
+   "text": "讀者用詞改為筆記／小卡／說明；筆記新格式（做什麼／怎麼做／學到什麼／相關小卡／來源）；小卡卡面顯示適用／不適用／注意；不顯示 Token、固定驗證狀態與掌握程度；說明頁精簡、簡碼與改版紀錄收合"
+  },
   {
    "v": "v1.9",
    "date": "2026-11-23",
@@ -656,6 +667,7 @@ window.ATLAS_DATA = {
    "id": "2026-11-23_讓AI讀得到的私密網站發布",
    "title": "讓 AI 讀得到、別人進不來：私密網站發布",
    "date": "2026-11-23",
+   "format": "log",
    "summary": "人看的網站要密碼，AI 有專用網址，每次更新都核對線上內容。",
    "cost": [],
    "tags": [
@@ -709,8 +721,6 @@ window.ATLAS_DATA = {
      "preparedBy": "Claude",
      "promptOutline": true,
      "domain": "工作職場",
-     "verify": "網站與 AI 網址已用未登入狀態核對；ChatGPT 實際讀取待驗證",
-     "mastery": "待 Lynn 自評",
      "notFor": [
       "內容有個人資料、客戶機密或金鑰。",
       "需要個別帳號權限或稽核紀錄的正式系統。"
@@ -754,6 +764,7 @@ window.ATLAS_DATA = {
    "id": "2026-11-22_AI工作圖鑑技能卡設計",
    "title": "AI 工作圖鑑開發日誌｜把技能卡做成可重複套用的版型",
    "date": "2026-11-22",
+   "format": "log",
    "summary": "從 ChatGPT 的卡片設計討論收斂出固定欄位、雙色館藏與分類規則，再交由 Claude Code 套用到既有網站。",
    "cost": [],
    "tags": [
@@ -801,8 +812,6 @@ window.ATLAS_DATA = {
      "preparedBy": "Codex",
      "promptOutline": true,
      "domain": "工作職場",
-     "verify": "",
-     "mastery": "",
      "notFor": [],
      "steps": [],
      "tools": [],
@@ -818,17 +827,14 @@ window.ATLAS_DATA = {
   },
   {
    "id": "2026-11-22_國二段考互動學習網站",
-   "title": "迷你布學習系統：AI 開發錦囊",
+   "title": "迷你布學習系統",
    "date": "2026-11-22",
-   "summary": "開發國中學習系統時，實際用過的 AI 做法、程式與工具。",
+   "format": "note",
+   "summary": "製作可逐年擴充的國中學習網站。",
    "cost": [
     {
      "k": "花費時間",
      "v": "11/22 約 2.4 小時"
-    },
-    {
-     "k": "Token",
-     "v": "11/22 約 1.87 億（多為快取）"
     }
    ],
    "tags": [
@@ -838,6 +844,10 @@ window.ATLAS_DATA = {
     "工具選擇"
    ],
    "sources": [
+    {
+     "title": "迷你布學園（成果網站）",
+     "url": "https://claude.ai/artifact/JTfND6dJAH4XSsSFmGviKs"
+    },
     {
      "title": "story-skills（故事寫作技能）",
      "url": "https://github.com/danjdewhurst/story-skills"
@@ -853,20 +863,24 @@ window.ATLAS_DATA = {
    ],
    "internalSources": 2,
    "draft": false,
-   "top3": [
-    "找工具先搜 GitHub Skill，再看它底層用什麼。",
-    "資料不常變就放進網站，省下 API 的費用與維護。",
-    "請 AI 標示題目來源，真題、改編題、AI 仿題不混用。"
+   "top3": [],
+   "related": [
+    "AI-003",
+    "AI-005",
+    "AI-006"
    ],
-   "related": [],
    "sections": [
     {
-     "title": "任務背景",
-     "html": "<ul><li>開發國中學習系統，需要真實地圖、題庫，並能逐年擴充。</li></ul>"
+     "title": "做什麼",
+     "html": "<p>製作可逐年擴充的國中學習網站。</p>"
     },
     {
-     "title": "做了什麼",
-     "html": "<ul><li><strong>地圖</strong>：d3-geo 繪圖、Natural Earth 提供資料，做成可旋轉地球儀。</li><li><strong>故事</strong>：用 GitHub 的 story-skills 方法，先寫故事規則再生成內容。</li><li><strong>架構</strong>：內容與程式分開，新增章節或科目不用改程式。</li></ul>"
+     "title": "怎麼做",
+     "html": "<ol><li>用公開地圖資料製作可旋轉地球儀。</li><li>先訂故事規則，再編寫教材內容。</li><li>把教材內容與網站程式分開，方便新增章節。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>先辨認功能需要的是工具、程式，還是資料。</li><li>資料不常變時，可放進網站，減少 API 費用與維護。</li><li>題目要區分真題、改編題與 AI 仿題。</li></ol>"
     }
    ],
    "cards": [
@@ -892,8 +906,6 @@ window.ATLAS_DATA = {
      "preparedBy": "Claude",
      "promptOutline": true,
      "domain": "家庭生活",
-     "verify": "",
-     "mastery": "",
      "notFor": [],
      "steps": [],
      "tools": [],
@@ -927,8 +939,6 @@ window.ATLAS_DATA = {
      "preparedBy": "Claude",
      "promptOutline": true,
      "domain": "家庭生活",
-     "verify": "AI 瀏覽器測試通過；使用者實際效果待驗證",
-     "mastery": "待 Lynn 自評",
      "notFor": [
       "導航、即時路況或精準測量。",
       "需要法律效力的邊界資料。"
@@ -976,7 +986,7 @@ window.ATLAS_DATA = {
     },
     {
      "code": "AI-006",
-     "name": "工具選擇判斷",
+     "name": "工具選擇",
      "use": "動手前判斷該用 Skill、程式庫、公開資料、靜態檔案或 API。",
      "when": [
       "要加新功能，不確定用什麼工具。",
@@ -984,9 +994,9 @@ window.ATLAS_DATA = {
       "資料要放進網站，不確定多久更新一次。"
      ],
      "notes": [
-      "時事題是開發時查資料寫成的固定題目，不會自動更新。",
-      "課本會考題、改編題、AI 仿題要分開標示。",
-      "本案網站目前沒有官方歷屆真題。"
+      "放進網站的資料不會自動更新，例如時事題要手動改。",
+      "題目要分開標示真題、改編題與 AI 仿題。",
+      "涉及付款、個資或正式系統時，另做資安檢查。"
      ],
      "prompts": [
       {
@@ -997,10 +1007,8 @@ window.ATLAS_DATA = {
      "preparedBy": "Claude",
      "promptOutline": true,
      "domain": "家庭生活",
-     "verify": "已用於本案判斷；尚未在第二個專案驗證",
-     "mastery": "待 Lynn 自評",
      "notFor": [
-      "涉及付款、個資或正式系統串接時，只能做初步判斷，還要做資安檢查。"
+      "付款、個資或正式系統串接的最後決定；這張卡只做初步判斷。"
      ],
      "steps": [
       "先找成熟可信的 AI Skill。",
@@ -1035,6 +1043,7 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 2,
      "versions": [
+      "v0.3｜2026-11-24｜改名「工具選擇」，改用適用／不適用／注意，移除固定驗證狀態",
       "v0.2｜2026-11-23｜新增 AI 工作圖鑑實戰紀錄",
       "v0.1｜2026-11-23｜依迷你布開發紀錄建立"
      ],
@@ -1049,6 +1058,7 @@ window.ATLAS_DATA = {
    "id": "2026-11-20_Claude與Codex交叉審查",
    "title": "讓兩個 AI 互相檢查：Claude × Codex 交叉審查",
    "date": "2026-11-20",
+   "format": "log",
    "summary": "一個 AI 完成工作，另一個 AI 獨立檢查，最後由人判斷是否修改。",
    "cost": [],
    "tags": [
@@ -1117,8 +1127,6 @@ window.ATLAS_DATA = {
      "preparedBy": "Claude",
      "promptOutline": false,
      "domain": "工作職場",
-     "verify": "",
-     "mastery": "",
      "notFor": [],
      "steps": [],
      "tools": [],
@@ -1217,25 +1225,25 @@ window.ATLAS_DATA = {
     var latest = entries.slice(0, 3);
     var favN = favCount();
     return '' +
-      '<div class="topline"><span>LYNN\'S AI WORK ATLAS</span><span>' + cards.length + ' 張指令卡／' + entries.length + ' 篇日誌｜<a href="#/about">第一次來？看說明 →</a></span></div>' +
+      '<div class="topline"><span>LYNN\'S AI WORK ATLAS</span><span>' + cards.length + ' 張小卡／' + entries.length + ' 篇筆記｜<a href="#/about">第一次來？看說明 →</a></span></div>' +
       quickBar() +
       '<div class="hero"><div>' +
         '<span class="kicker">Lynn 的 AI 學習紀錄</span>' +
         '<h1 class="hero-title">AI 工作圖鑑</h1>' +
         '<p class="hero-sub">Lynn\'s AI Work Atlas</p><div class="redbar"></div>' +
-      '</div><aside class="story"><h2>THE STORY</h2><p>記下每次用 AI 完成工作的過程；<br>值得再用的方法，<br>整理成可複製的指令卡。</p></aside></div>' +
+      '</div><aside class="story"><h2>THE STORY</h2><p>每次用 AI 完成工作，記成一篇筆記；<br>值得再用的方法，<br>整理成可複製的小卡。</p></aside></div>' +
       searchBox('logs', '') +
       tagLinks(allTags(entries), 'logs') +
       '<div class="doors">' +
-        '<a class="door door-card" href="#/cards"><span class="num">01</span><h3>AI 指令卡</h3><p>從日誌收穫的方法：一句話用途＋可複製指令。</p></a>' +
-        '<a class="door" href="#/logs"><span class="num">02</span><h3>AI 學習日誌</h3><p>1 分鐘看重點：3 points、任務背景、做了什麼。</p></a>' +
-        '<a class="door" href="' + CLAUDE_URL + '" target="_blank" rel="noopener"><span class="num">03</span><h3>開啟 Claude ↗</h3><p>複製指令卡上的提示詞，再開啟 Claude 貼上使用。</p></a>' +
+        '<a class="door door-card" href="#/cards"><span class="num">01</span><h3>小卡</h3><p>可重複使用的方法：一句話用途＋可複製提示詞。</p></a>' +
+        '<a class="door" href="#/logs"><span class="num">02</span><h3>筆記</h3><p>真實做過的 AI 工作：做什麼、怎麼做、學到什麼。</p></a>' +
+        '<a class="door" href="' + CLAUDE_URL + '" target="_blank" rel="noopener"><span class="num">03</span><h3>開啟 Claude ↗</h3><p>複製小卡上的提示詞，再開啟 Claude 貼上使用。</p></a>' +
       '</div>' +
-      (cards.length ? '<div class="card-theme"><div class="sec-head"><span class="en">CARDS</span><span class="zh">AI 指令卡</span></div>' +
+      (cards.length ? '<div class="card-theme"><div class="sec-head"><span class="en">CARDS</span><span class="zh">小卡</span></div>' +
         seriesBar({}) +
         '<div class="bc-grid">' + cards.slice(0, 6).map(function (e) { return battleCard(e, 'mini'); }).join('') + '</div>' +
-        '<p class="more-links"><a href="#/cards">看全部指令卡 →</a>' + (favN ? '<a href="#/cards?fav=1">' + ICON.bookmark + '我的收藏（' + favN + '）→</a>' : '') + '</p></div>' : '') +
-      '<div class="sec-head"><span class="en">LATEST</span><span class="zh">最新日誌</span></div>' +
+        '<p class="more-links"><a href="#/cards">看全部小卡 →</a>' + (favN ? '<a href="#/cards?fav=1">' + ICON.bookmark + '我的收藏（' + favN + '）→</a>' : '') + '</p></div>' : '') +
+      '<div class="sec-head"><span class="en">LATEST</span><span class="zh">最新筆記</span></div>' +
       listHtml(latest, 'log');
   }
 
@@ -1247,7 +1255,7 @@ window.ATLAS_DATA = {
       var title = isCard ? (e.card.code ? e.card.code + '　' : '') + e.card.name : e.title;
       var href = '#/' + kind + '/' + enc(e.id);
       return '<li class="item"><div class="date">' + esc(e.date) + '</div><div>' +
-        '<h3><a href="' + href + '">' + esc(title) + '</a>' + (!isCard && e.card ? '<span class="badge">有指令卡</span>' : '') + draftBadge(e) + '</h3>' +
+        '<h3><a href="' + href + '">' + esc(title) + '</a>' + (!isCard && e.card ? '<span class="badge">有小卡</span>' : '') + draftBadge(e) + '</h3>' +
         (e.summary ? '<p>' + esc(e.summary) + '</p>' : '') +
         tagLinks(e.tags, isCard ? 'cards' : 'logs') + '</div></li>';
     }).join('') + '</ul>';
@@ -1280,8 +1288,8 @@ window.ATLAS_DATA = {
       return '<li><a class="cnav-link' + (on ? ' on' : '') + '" href="' + href + '"' + (on ? ' aria-current="true"' : '') + '>' + inner + '</a></li>';
     };
     var all = !st.series && !st.fav && !st.domain && !st.single;
-    return '<nav class="card-nav" aria-label="指令卡分類"><ul>' +
-      item('#/cards', all, '<span class="cnav-name">全部卡片</span><b>' + cards.length + '</b>') +
+    return '<nav class="card-nav" aria-label="小卡分類"><ul>' +
+      item('#/cards', all, '<span class="cnav-name">全部小卡</span><b>' + cards.length + '</b>') +
       (doms.length > 1 ? doms.map(function (d) {
         return item('#/cards?domain=' + enc(d.name), st.domain === d.name, '<span class="cnav-name">' + esc(d.name) + '</span><b>' +
           cards.filter(function (e) { return (e.card.domain || '工作職場') === d.name; }).length + '</b>');
@@ -1313,7 +1321,7 @@ window.ATLAS_DATA = {
     };
     var note;
     if (fav && !list.length) {
-      note = '<p class="empty fav-empty">還沒有收藏。點卡片右上角的' + ICON.bookmark + '書籤，就會收進「我的收藏」。<br><a href="#/cards">看全部指令卡 →</a></p>';
+      note = '<p class="empty fav-empty">還沒有收藏。點卡片右上角的' + ICON.bookmark + '書籤，就會收進「我的收藏」。<br><a href="#/cards">看全部小卡 →</a></p>';
     } else if (tag || q || series || fav || domain) {
       var other = isCard ? entries : cards;
       var otherN = (series || fav || domain) ? 0 : other.filter(function (e) { return (!tag || e.tags.indexOf(tag) >= 0) && matches(e, q); }).length;
@@ -1325,12 +1333,12 @@ window.ATLAS_DATA = {
         (q ? '<a class="chip" href="' + link(tag, '') + '" aria-label="移除搜尋 ' + esc(q) + '">搜尋：' + esc(q) + ' <b aria-hidden="true">✕</b></a>' : '') +
         '</div><div class="filter-row"><strong class="count">共 ' + list.length + ' 筆</strong>' +
         '<a class="btn ghost small" href="#/' + kind + '">清除全部篩選</a></div>' +
-        (otherN ? '<p class="filter-other">' + (isCard ? 'AI 學習日誌' : 'AI 指令卡') + '中也有 ' + otherN + ' 筆符合：<a href="' + link(tag, q).replace('#/' + kind, '#/' + (isCard ? 'logs' : 'cards')) + '">去看 →</a></p>' : '') +
+        (otherN ? '<p class="filter-other">' + (isCard ? '筆記' : '小卡') + '中也有 ' + otherN + ' 筆符合：<a href="' + link(tag, q).replace('#/' + kind, '#/' + (isCard ? 'logs' : 'cards')) + '">去看 →</a></p>' : '') +
         '</div>';
     } else note = '<p class="filter-note">共 ' + list.length + ' 筆｜點關鍵字按鈕或輸入文字可以篩選</p>';
-    return (isCard ? '<div class="card-theme">' : '') + crumbs([{ title: isCard ? 'AI 指令卡' : 'AI 學習日誌' }]) +
-      '<div class="sec-head"><span class="en">' + (isCard ? 'PROMPT CARDS' : 'LEARNING LOG') + '</span><span class="zh">' + (isCard ? 'AI 指令卡' : 'AI 學習日誌') + '</span></div>' +
-      '<p class="lede">' + (isCard ? '從日誌收穫、值得再用的方法。點卡片看完整內容與指令；按書籤收藏常用的卡。' : '依日期記錄用 AI 完成工作的過程。') + '</p>' +
+    return (isCard ? '<div class="card-theme">' : '') + crumbs([{ title: isCard ? '小卡' : '筆記' }]) +
+      '<div class="sec-head"><span class="en">' + (isCard ? 'CARDS' : 'NOTES') + '</span><span class="zh">' + (isCard ? '小卡' : '筆記') + '</span></div>' +
+      '<p class="lede">' + (isCard ? '可重複使用的方法。點小卡看提示詞；按書籤收藏常用的小卡。' : '依日期記錄真實做過的 AI 工作。') + '</p>' +
       (isCard ? '<div class="card-layout">' + cardNav({ series: series, fav: fav, domain: domain }) + '<div class="card-main">' : '') +
       searchBox(kind, q, tag) + tagLinks(allTags(pool), kind, tag) + note +
       (fav && !list.length ? '' : listHtml(list, isCard ? 'card' : 'log')) + (isCard ? '</div></div></div>' : '');
@@ -1378,7 +1386,8 @@ window.ATLAS_DATA = {
     warn: SVG('<path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2v.3"/>'),
     copy: SVG('<rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/>'),
     book: SVG('<path d="M3.5 5.5h6a2.5 2.5 0 0 1 2.5 2.5v11.5a2 2 0 0 0-2-2h-6.5z"/><path d="M20.5 5.5h-6A2.5 2.5 0 0 0 12 8v11.5a2 2 0 0 1 2-2h6.5z"/>'),
-    bookmark: SVG('<path d="M6.5 3.5h11v17l-5.5-4.5-5.5 4.5z"/>', ' class="i-bm"')
+    bookmark: SVG('<path d="M6.5 3.5h11v17l-5.5-4.5-5.5 4.5z"/>', ' class="i-bm"'),
+    no: SVG('<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>')
   };
   // 系別代號、英文、顏色和圖示。系別說明來自 _關鍵字清單.md。
   var SERIES = {
@@ -1442,12 +1451,12 @@ window.ATLAS_DATA = {
       name = '<h3 class="bc-name"><a class="bc-link" ' + attr + '>' + esc(c.name) + '</a></h3>';
     }
     var use = '<p class="bc-use">' + esc(c.use) + '</p>';
-    var when = c.when.length ? '<section class="bc-row"><h4 class="bc-lab">' + ICON.target + '適合</h4><ul class="bc-list">' +
+    var when = c.when.length ? '<section class="bc-row"><h4 class="bc-lab">' + ICON.target + '適用</h4><ul class="bc-list">' +
       c.when.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>' : '';
     if (!full) {
       return '<article class="bcard mini ' + theme + (opts.compact ? ' compact' : '') + '" style="--s:' + seriesColor(s.name) + '">' +
         head + code + name + use + (opts.compact ? '' : '<div class="bc-panel">' + when + '</div>') +
-        '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span><span class="bc-go">看完整卡 →</span></footer></article>';
+        '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span><span class="bc-go">看小卡 →</span></footer></article>';
     }
     var prompts = '<section class="bc-prompts" id="ch-copy' + (opts.suffix || '') + '"><h4 class="bc-ptitle">' + ICON.chat + 'Prompt</h4>' +
       c.prompts.map(function (p, i) {
@@ -1460,34 +1469,34 @@ window.ATLAS_DATA = {
           '<pre' + (c.promptOutline ? ' class="bc-prompt-outline"' : '') + '>' + promptText + '</pre>' +
           '<button type="button" class="bc-copy" data-copy="' + i + '" data-id="' + esc(e.id) + '" aria-label="複製指令：' + esc(p.label || p.text) + '">' + ICON.copy + '</button></div>';
       }).join('') + '</section>';
+    var notFor = (c.notFor || []).length ? '<section class="bc-row bc-notfor"><h4 class="bc-lab">' + ICON.no + '不適用</h4><ul class="bc-list">' +
+      c.notFor.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>' : '';
     var notes = c.notes.length ? '<section class="bc-row bc-notes"><h4 class="bc-lab">' + ICON.warn + '注意</h4><ul class="bc-list">' +
       c.notes.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>' : '';
     return '<article class="bcard full ' + theme + '" style="--s:' + seriesColor(s.name) + '">' + head + code + name +
       '<div class="bc-swash" aria-hidden="true"></div>' + use +
-      '<div class="bc-panel">' + when + prompts + notes + cardMore(c) + '</div>' +
-      '<footer class="bc-foot"><span>' + ICON.book + '來源：' + (opts.inLog ? fmtDate(e.date) + ' 學習日誌' : '<a href="#/log/' + enc(e.logId || e.id) + '">' + fmtDate(e.date) + ' 學習日誌</a>') + preparedBadge(c.preparedBy) + '</span>' +
+      '<div class="bc-panel">' + when + notFor + prompts + notes + cardMore(c) + '</div>' +
+      '<footer class="bc-foot"><span>' + ICON.book + '來源：' + (opts.inLog ? fmtDate(e.date) + ' 筆記' : '<a href="#/log/' + enc(e.logId || e.id) + '">' + fmtDate(e.date) + ' 筆記</a>') + preparedBadge(c.preparedBy) + '</span>' +
       '<span>指令 ×' + c.prompts.length + '</span></footer></article>';
   }
 
   // 完整卡的「完整資料」：預設收合，舊卡沒有這些欄位就不顯示
   function cardMore(c) {
     var practice = c.practice || [];
-    var has = c.verify || c.mastery || (c.notFor || []).length || (c.steps || []).length || (c.tools || []).length || practice.length || (c.versions || []).length;
+    var has = (c.steps || []).length || (c.tools || []).length || practice.length || (c.versions || []).length;
     if (!has) return '';
     var list = function (title, items, tag) {
       return items && items.length ? '<section class="bm-sec"><h5>' + title + '</h5><' + (tag || 'ul') + '>' +
         items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</' + (tag || 'ul') + '></section>' : '';
     };
-    var status = (c.verify ? '<p><b>驗證狀態</b>' + esc(c.verify) + '</p>' : '') + (c.mastery ? '<p><b>Lynn 掌握</b>' + esc(c.mastery) + '</p>' : '');
     var rows = practice.map(function (p) {
       var hasLog = p.log && entries.some(function (x) { return x.id === p.log; });
       return '<li><span class="bm-state">' + esc(p.status) + '</span><strong>' + esc(p.project) + '</strong>' + (p.date ? '<small>' + esc(p.date) + '</small>' : '') +
         (p.how ? '<p>' + esc(p.how) + '</p>' : '') + (p.learned ? '<p>新學到：' + esc(p.learned) + '</p>' : '') +
-        (p.result || hasLog ? '<p class="bm-links">' + (p.result ? '成果：' + p.result : '') + (hasLog ? '<a href="#/log/' + enc(p.log) + '">對應日誌 →</a>' : '') + '</p>' : '') + '</li>';
+        (p.result || hasLog ? '<p class="bm-links">' + (p.result ? '成果：' + p.result : '') + (hasLog ? '<a href="#/log/' + enc(p.log) + '">對應筆記 →</a>' : '') + '</p>' : '') + '</li>';
     }).join('');
-    return '<details class="bc-more"><summary>完整資料<small>驗證、步驟' + (practice.length ? '、實戰 ' + (c.practiceCount || 0) + ' 次' : '') + '</small></summary>' +
-      (status ? '<section class="bm-sec bm-status">' + status + '</section>' : '') +
-      list('不適用情境', c.notFor) + list('操作步驟', c.steps, 'ol') + list('工具與來源', c.tools) +
+    return '<details class="bc-more"><summary>完整資料<small>步驟、工具' + (practice.length ? '、實戰 ' + (c.practiceCount || 0) + ' 次' : '') + '</small></summary>' +
+      list('操作步驟', c.steps, 'ol') + list('工具與來源', c.tools) +
       (practice.length ? '<section class="bm-sec"><h5>實戰紀錄（' + (c.practiceCount || 0) + ' 次，規劃應用不計入）</h5><ul class="bm-practice">' + rows + '</ul></section>' : '') +
       list('版本紀錄', c.versions) + '</details>';
   }
@@ -1508,12 +1517,17 @@ window.ATLAS_DATA = {
   }
 
   function logPage(e) {
+    var isNote = e.format === 'note';
     var chapters = e.sections.map(function (s, i) { return { id: 'ch-' + i, title: s.title }; });
+    var related = (e.related || []).map(function (code) {
+      return cards.filter(function (v) { return v.card.code === code; })[0];
+    }).filter(Boolean);
+    if (isNote && related.length) chapters.push({ id: 'ch-related', title: '相關小卡' });
     chapters.push({ id: 'ch-sources', title: '來源' });
     var logCards = cardsOfLog(e.id);
     var stageId = function (i) { return i ? 'ch-card-' + i : 'ch-card'; };
     logCards.forEach(function (v, i) {
-      chapters.push({ id: stageId(i), title: logCards.length > 1 ? v.card.name : 'AI 指令卡', num: esc(cardCode(v.card) || '卡'), card: true });
+      chapters.push({ id: stageId(i), title: logCards.length > 1 ? v.card.name : '小卡', num: esc(cardCode(v.card) || '卡'), card: true });
     });
     var top3 = e.top3 && e.top3.length ? '<div class="top3"><div class="top3-head">3 points</div><ol>' +
       e.top3.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol></div>' : '';
@@ -1522,19 +1536,19 @@ window.ATLAS_DATA = {
           return '<li><a href="#' + stageId(i) + '" data-goto="' + stageId(i) + '"><span>' + esc(cardCode(v.card)) + '</span><strong>' + esc(v.card.name) + '</strong></a></li>';
         }).join('') + '</ul>'
       : (logCards[0] ? battleCard(logCards[0], 'mini', { goto: 'ch-card', compact: true }) : '');
-    var related = (e.related || []).map(function (code) {
-      return cards.filter(function (v) { return v.card.code === code; })[0];
-    }).filter(Boolean);
-    var relatedHtml = related.length ? '<section class="related-cards"><h2>相關指令卡</h2><ul>' + related.map(function (v) {
+    var relatedList = '<ul>' + related.map(function (v) {
       return '<li><a href="#/card/' + enc(v.id) + '">' + esc(cardName(v.card)) + ' →</a></li>';
-    }).join('') + '</ul></section>' : '';
+    }).join('') + '</ul>';
+    var relatedHtml = !related.length ? '' : isNote
+      ? '<section id="ch-related" class="log-sec related-cards"><h2><span class="h-num">' + String(e.sections.length + 1).padStart(2, '0') + '</span>相關小卡</h2>' + relatedList + '</section>'
+      : '<section class="related-cards"><h2>相關小卡</h2>' + relatedList + '</section>';
     var head = '<header class="lead' + (e.card ? ' has-harvest' : '') + '">' +
-      '<div class="lead-main"><span class="kicker">AI 學習日誌</span>' +
+      '<div class="lead-main"><span class="kicker">筆記</span>' +
         '<h1>' + esc(e.title) + '</h1>' + metaLine(e) +
-        (e.summary ? '<p class="lede">' + esc(e.summary) + '</p>' : '') +
+        (e.summary && !isNote ? '<p class="lede">' + esc(e.summary) + '</p>' : '') +
         (e.card ? top3 : '') +
         tagLinks(e.tags, 'logs') + '</div>' +
-      (e.card ? '<aside class="harvest card-theme"><div class="harvest-head">本日收穫指令卡' + (logCards.length > 1 ? ' ' + logCards.length + ' 張' : '') + '</div>' +
+      (e.card ? '<aside class="harvest card-theme"><div class="harvest-head">本篇小卡' + (logCards.length > 1 ? ' ' + logCards.length + ' 張' : '') + '</div>' +
         harvest + '</aside>' : top3) +
       '</header>';
     var body = '<article class="article">' +
@@ -1544,28 +1558,28 @@ window.ATLAS_DATA = {
       relatedHtml + '<section id="ch-sources">' + sourcesHtml(e) + '</section></article>' +
       logCards.map(function (v, i) {
         return '<section id="' + stageId(i) + '" class="card-stage card-theme">' +
-          '<div class="sec-head"><span class="en">TODAY\'S CARD</span><span class="zh">本日收穫指令卡</span></div>' +
+          '<div class="sec-head"><span class="en">CARD</span><span class="zh">本篇小卡</span></div>' +
           battleCard(v, 'full', { inLog: true, suffix: i ? '-' + i : '' }) +
           '<p class="stage-links"><a class="btn ghost" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">開啟 Claude ↗</a>' +
-          '<a href="#/card/' + enc(v.id) + '">單獨開啟這張卡 →</a></p></section>';
+          '<a href="#/card/' + enc(v.id) + '">單獨開啟這張小卡 →</a></p></section>';
       }).join('') +
-      '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/logs">← 回日誌列表</a></div>';
-    return crumbs([{ title: 'AI 學習日誌', href: '#/logs' }, { title: e.title }]) + head +
+      '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/logs">← 回筆記列表</a></div>';
+    return crumbs([{ title: '筆記', href: '#/logs' }, { title: e.title }]) + head +
       withChapters(chapters, body, 'CONTENTS｜本篇章節');
   }
 
   // 指令卡頁：左邊一張卡，右邊出處與來源（不用章節欄，越簡單越好）
   function cardPage(e) {
     var c = e.card;
-    return '<div class="card-theme">' + crumbs([{ title: 'AI 指令卡', href: '#/cards' }, { title: cardName(c) }]) +
+    return '<div class="card-theme">' + crumbs([{ title: '小卡', href: '#/cards' }, { title: cardName(c) }]) +
       '<div class="card-layout">' + cardNav({ single: true, series: c.series ? c.series.name : '' }) +
       '<div class="card-main"><div class="card-page">' + battleCard(e, 'full') +
       '<aside class="card-side">' +
-        '<p class="meta"><a href="#/log/' + enc(e.logId || e.id) + '">出自日誌：' + esc(e.title) + ' →</a></p>' +
-        '<p class="howto">按「複製指令」，開啟 Claude 貼上，把 &lt;…&gt; 換成你的內容。</p>' +
+        '<p class="meta"><a href="#/log/' + enc(e.logId || e.id) + '">出自筆記：' + esc(e.title) + ' →</a></p>' +
+        '<p class="howto">按提示詞右上角的複製圖示，開啟 Claude 貼上，把 &lt;…&gt; 換成你的內容。</p>' +
         '<p><a class="btn red" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">開啟 Claude ↗</a></p>' +
         tagLinks(e.tags, 'cards') + '<section id="ch-sources">' + sourcesHtml(e) + '</section>' +
-        '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/cards">← 回指令卡列表</a></div>' +
+        '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/cards">← 回小卡列表</a></div>' +
       '</aside></div></div></div></div>';
   }
 
@@ -1590,12 +1604,12 @@ window.ATLAS_DATA = {
     var seriesRows = (DATA.series || []).map(function (x) {
       return '<li><span class="sdot" style="--s:' + seriesColor(x.name) + '">' + seriesIcon(x.name) + '</span><strong>' + esc(x.name) + '</strong>：' + esc(x.desc) + '</li>';
     }).join('');
-    // 更新紀錄：依日期自動整理（新日誌、新指令卡），不用手寫
+    // 更新紀錄：依日期自動整理（新筆記、新小卡），不用手寫
     var byDate = {};
     entries.forEach(function (e) { (byDate[e.date] = byDate[e.date] || []).push(e); });
     var updates = Object.keys(byDate).sort().reverse().map(function (d) {
       return '<li><span class="ab-date">' + esc(d) + '</span><span>' + byDate[d].map(function (e) {
-        return '新增日誌<a href="#/log/' + enc(e.id) + '">' + esc(e.title) + '</a>' + cardsOfLog(e.id).map(function (v) { return '＋指令卡<a href="#/card/' + enc(v.id) + '">' + esc(cardName(v.card)) + '</a>'; }).join('') + draftBadge(e);
+        return '新增筆記<a href="#/log/' + enc(e.id) + '">' + esc(e.title) + '</a>' + cardsOfLog(e.id).map(function (v) { return '＋小卡<a href="#/card/' + enc(v.id) + '">' + esc(cardName(v.card)) + '</a>'; }).join('') + draftBadge(e);
       }).join('；') + '</span></li>';
     }).join('');
     var changes = (DATA.changes || []).map(function (c) {
@@ -1611,51 +1625,50 @@ window.ATLAS_DATA = {
     var seriesCodes = Object.keys(SERIES).map(function (name) {
       return [SERIES[name].code, name, SERIES[name].en];
     });
-    var chapters = [['ab-what', '這個網站是什麼'], ['ab-use', '怎麼用'], ['ab-card', '指令卡怎麼看'], ['ab-codes', '圖鑑溝通簡碼'], ['ab-log', '日誌怎麼寫'], ['ab-rule', '公開與安全規則'], ['ab-version', '版次與更新紀錄']]
+    var fold = function (label, inner) {
+      return '<details class="ab-fold"><summary>' + esc(label) + '</summary>' + inner + '</details>';
+    };
+    var changeList = DATA.changes || [];
+    var chapters = [['ab-what', '筆記與小卡'], ['ab-use', '搜尋、複製、收藏'], ['ab-card', '小卡怎麼看'], ['ab-log', '筆記怎麼寫'], ['ab-rule', '公開與安全'], ['ab-version', '版次與更新']]
       .map(function (c) { return { id: c[0], title: c[1] }; });
     var body = '<article class="article about">' +
-      sec('ab-what', '01', '這個網站是什麼',
-        '<p>AI 規劃師的錦囊秘笈：<strong>學習日誌</strong>只記真實用過的 AI 做法、程式和工具；值得再用的方法，整理成可以直接複製的<strong>指令卡</strong>。一篇日誌可以收穫多張卡。</p>' +
-        '<ul><li><strong>紅色</strong>＝AI 學習日誌：1 分鐘看完重點。</li><li><strong>牌卡</strong>＝AI 指令卡：一句話用途＋可複製的指令。</li><li>不評分、不比較好壞，只記錄真的用過的做法。</li></ul>') +
-      sec('ab-use', '02', '怎麼用',
-        '<ol><li><strong>找</strong>：上方搜尋框打字，或點關鍵字按鈕；指令卡頁還可以依「領域」「系」篩選。</li>' +
-        '<li><strong>用</strong>：打開指令卡 → 按 Prompt 右上角的複製圖示 → 按「開啟 Claude」貼上 → 把 <code>&lt;…&gt;</code> 換成你的內容。</li>' +
-        '<li><strong>收</strong>：卡片右上角的書籤＝加入「我的收藏」。</li>' +
-        '<li><strong>回首頁</strong>：左上角「⌂ AI 工作圖鑑」或右下角圓形首頁鈕。</li></ol>' +
-        '<p class="ab-note">⚠️ 收藏只存在「這台裝置的這個瀏覽器」：手機和電腦不同步；清除瀏覽器資料或用無痕視窗會不見。</p>') +
-      sec('ab-card', '03', '指令卡怎麼看',
+      sec('ab-what', '01', '筆記與小卡',
+        '<ul><li><strong>筆記</strong>：記一次真實做過的 AI 工作，寫做什麼、怎麼做、學到什麼。</li>' +
+        '<li><strong>小卡</strong>：從筆記整理出的方法，可以重複使用，附可複製的提示詞。</li>' +
+        '<li>一篇筆記可以連到多張小卡；看方法找小卡，看來龍去脈找筆記。</li></ul>') +
+      sec('ab-use', '02', '搜尋、複製、收藏',
+        '<ol><li><strong>搜尋</strong>：上方搜尋框打字，或點關鍵字按鈕；小卡頁還能依「領域」「系」篩選。</li>' +
+        '<li><strong>複製</strong>：打開小卡，按提示詞右上角的複製圖示，再按「開啟 Claude」貼上，把 <code>&lt;…&gt;</code> 換成你的內容。</li>' +
+        '<li><strong>收藏</strong>：按小卡右上角的書籤，收進「我的收藏」。</li></ol>' +
+        '<p class="ab-note">⚠️ 收藏只存在這台裝置的這個瀏覽器：手機和電腦不同步，清除瀏覽器資料或用無痕視窗會不見。</p>') +
+      sec('ab-card', '03', '小卡怎麼看',
         '<div class="ab-swatches"><div class="ab-sw navy"><b>深藍</b>工作職場</div><div class="ab-sw cream"><b>奶油白</b>家庭生活</div></div>' +
-        '<ul><li><strong>底色＝領域</strong>：同一張卡在首頁、列表、完整卡都是同一個顏色。</li>' +
-        '<li><strong>徽章與色帶＝系</strong>（這張卡是哪一類能力）。下面是目前使用的系別。</li></ul>' +
+        '<ul><li><strong>底色＝領域</strong>，<strong>徽章與色帶＝系</strong>（哪一類能力）。</li>' +
+        '<li><strong>卡面</strong>：用途、適用、不適用、提示詞、注意。</li>' +
+        '<li><strong>完整資料</strong>（可展開）：步驟、工具與來源、實戰紀錄。實戰次數只算真正做過的案例。</li></ul>' +
         '<ul class="ab-series">' + seriesRows + '</ul>' +
-        '<p><strong>卡片內容</strong>包括一句話用途、適合情境、Prompt，以及使用前的注意事項。部分卡片可展開「完整資料」，查看驗證狀態、步驟和實戰紀錄。</p>' +
-        '<p><strong>實戰次數</strong>只算真正實作過的案例，規劃中的應用不計入；實戰次數也不等於 Lynn 的掌握程度。</p>') +
-      sec('ab-codes', '04', '圖鑑溝通簡碼',
-        '<p>整個網站叫 AI 工作圖鑑，口說可用 Atlas，打字用 <code>AT</code>。</p>' +
-        codeTable('網站與內容', [['AT', '整個網站', 'Atlas'], ['L', 'AI 學習日誌', 'Log'], ['C', 'AI 指令卡', 'Card']]) +
-        codeTable('使用領域', [['W', '工作職場', 'Work'], ['H', '家庭生活', 'Home']]) +
-        codeTable('系別', seriesCodes) +
-        '<p>未來可新增系別。優先取英文前兩碼，撞碼時用另一組尚未使用的英文兩碼，既有代號繼續使用。</p>' +
-        codeTable('卡片欄位', [['T', '卡名', 'Title'], ['D', '用途', 'Description'], ['A', '適合', 'Applies to'], ['P', '提示詞', 'Prompt'], ['N', '注意', 'Notes'], ['BY', '整理標記', 'Prepared by']]) +
-        '<p>卡片代號由使用領域、系別和號碼組成。<code>C W-DE-01 D 縮短</code> 是縮短第一張卡的用途。<code>P2</code> 指第 2 段 Prompt。原本的固定編號（例如 <code>AI-001</code>）繼續保留，新舊代號都能搜尋。</p>') +
-      sec('ab-log', '05', '日誌怎麼寫',
-        '<ol><li>3 points（放在首屏，先看懂重點）</li><li>任務背景</li><li>做了什麼</li><li>來源</li></ol>' +
-        '<p>只寫真實用過的 AI 做法、程式或工具技能。正文理想 200–300 字，最多 400 字；每一項最多 3 句。</p>' +
-        '<p>花費時間、Token、費用：有實際紀錄才用灰字顯示，沒有就不寫，不推算。每篇日誌有 3–5 個關鍵字，用固定的關鍵字清單，方便搜尋。</p>') +
-      sec('ab-rule', '06', '公開與安全規則',
-        '<ul><li>新日誌一律先「不公開」，Lynn 看過預覽版確認後才公開。</li>' +
-        '<li>不寫客戶名、人名、統編、聯絡方式、電腦裡的檔案路徑。</li>' +
-        '<li>更新網站時程式會自動檢查；發現可疑內容（路徑、Email、8 位數字、含個資字樣）就停止，網站不會更新。</li>' +
+        fold('溝通簡碼（和 AI 討論網站時用）',
+          '<p>整個網站叫 AI 工作圖鑑，打字用 <code>AT</code>。</p>' +
+          codeTable('網站與內容', [['AT', '整個網站', 'Atlas'], ['L', '筆記', 'Log'], ['C', '小卡', 'Card']]) +
+          codeTable('使用領域', [['W', '工作職場', 'Work'], ['H', '家庭生活', 'Home']]) +
+          codeTable('系別', seriesCodes) +
+          codeTable('小卡欄位', [['T', '卡名', 'Title'], ['D', '用途', 'Description'], ['A', '適用', 'Applies to'], ['P', '提示詞', 'Prompt'], ['N', '注意', 'Notes'], ['BY', '整理標記', 'Prepared by']]) +
+          '<p>小卡代號＝領域－系別－號碼。<code>C W-DE-01 D 縮短</code> 是縮短第一張小卡的用途；<code>P2</code> 指第 2 段提示詞。原本的固定編號（例如 <code>AI-001</code>）繼續保留，新舊代號都能搜尋。</p>')) +
+      sec('ab-log', '04', '筆記怎麼寫',
+        '<ol><li>做什麼（一句話）</li><li>怎麼做</li><li>學到什麼</li><li>相關小卡</li><li>來源</li></ol>' +
+        '<p>寫短句，每項只說一件事；只寫真實用過的 AI 做法、程式或工具。較早的筆記仍是舊格式（3 points、任務背景、做了什麼），會逐篇改寫。</p>') +
+      sec('ab-rule', '05', '公開與安全',
+        '<ul><li>新筆記先「不公開」，Lynn 看過預覽確認後才公開。</li>' +
+        '<li>不寫客戶名、人名、統編、聯絡方式和電腦檔案路徑；程式發現可疑內容就停止更新。</li>' +
         '<li>內部來源只顯示「另有 N 份內部紀錄」，不顯示內容。</li></ul>') +
-      sec('ab-version', '07', '版次與更新紀錄',
-        '<ul><li><strong>網站版本</strong>（目前 ' + esc(DATA.version || '—') + '）：只有<strong>版面或功能</strong>改變才升版號。</li>' +
-        '<li><strong>內容更新</strong>（新日誌、新指令卡）不升版號，看頁尾的「更新」日期；下面的更新紀錄會自動整理，不用手寫。</li></ul>' +
+      sec('ab-version', '06', '版次與更新',
+        '<p>網站目前是 <strong>' + esc(DATA.version || '—') + '</strong>。版面或功能改變才升版號；新增筆記、小卡只看頁尾的更新日期。</p>' +
         '<h3 class="ab-h3">內容更新紀錄（自動）</h3><ul class="ab-log">' + (updates || '<li>尚無</li>') + '</ul>' +
-        '<h3 class="ab-h3">網站改版紀錄</h3><ul class="ab-log">' + (changes || '<li>尚無</li>') + '</ul>') +
+        (changeList.length ? fold('網站改版紀錄（' + changeList.length + ' 筆）', '<ul class="ab-log">' + changes + '</ul>') : '')) +
       '</article><div class="actions">' + homeBtn() + '</div>';
     return crumbs([{ title: '說明' }]) +
       '<div class="sec-head"><span class="en">ABOUT</span><span class="zh">說明</span></div>' +
-      '<p class="lede">這個網站的規則、邏輯與用法。</p>' + withChapters(chapters, body, 'CONTENTS｜說明');
+      '<p class="lede">先看筆記與小卡的差別，再看怎麼搜尋、複製和收藏。</p>' + withChapters(chapters, body, 'CONTENTS｜說明');
   }
 
   function notFound() { return '<p class="empty">找不到這一頁。<a href="#/">回首頁</a></p>'; }
@@ -1672,9 +1685,9 @@ window.ATLAS_DATA = {
     var findCard = function (id) { return cards.filter(function (e) { return e.id === decodeURIComponent(id); })[0]; };
 
     if (!parts.length) html = home();
-    else if (parts[0] === 'logs') { nav = 'logs'; html = listPage('logs', params); title = 'AI 學習日誌｜AI 工作圖鑑'; }
+    else if (parts[0] === 'logs') { nav = 'logs'; html = listPage('logs', params); title = '筆記｜AI 工作圖鑑'; }
     else if (parts[0] === 'about') { nav = 'about'; html = aboutPage(); title = '說明｜AI 工作圖鑑'; }
-    else if (parts[0] === 'cards') { nav = 'cards'; html = listPage('cards', params); title = 'AI 指令卡｜AI 工作圖鑑'; }
+    else if (parts[0] === 'cards') { nav = 'cards'; html = listPage('cards', params); title = '小卡｜AI 工作圖鑑'; }
     else if (parts[0] === 'log' && find(parts[1])) { nav = 'logs'; var e = find(parts[1]); html = logPage(e); title = e.title + '｜AI 工作圖鑑'; }
     else if (parts[0] === 'card' && findCard(parts[1])) { nav = 'cards'; var c = findCard(parts[1]); html = cardPage(c); title = c.card.name + '｜AI 工作圖鑑'; }
     else html = notFound();
