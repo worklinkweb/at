@@ -2,8 +2,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v2.2">
-<meta name="at-build" content="ee4ecf7f68215536">
+<meta name="at-version" content="v2.3">
+<meta name="at-build" content="b3f3ef52fc3b6c5d">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -571,6 +571,12 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 .archive-link { white-space: nowrap; }
 .bc-code em.arch { background: #e4e0d8; color: #4a4336; }
 
+/* v2.3 封存按鈕放明顯處：小卡卡尾、筆記標題下方（只在私人預覽版） */
+.bc-arch { position: relative; z-index: 2; font: 700 12px/1 var(--sans); min-height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.bc-arch:hover { background: rgba(198,161,91,.25); }
+.bc-arch:focus-visible { outline: 3px solid #e2c27f; outline-offset: 2px; }
+.lead-acts { margin: 6px 0 4px; }
+
 </style>
 </head>
 <body>
@@ -595,8 +601,13 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v2.2",
+ "version": "v2.3",
  "changes": [
+  {
+   "v": "v2.3",
+   "date": "2026-11-24",
+   "text": "封存按鈕放到明顯處：每張小卡（列表與完整小卡）卡尾有「封存」，每篇筆記標題下方有「封存這篇筆記」；私人版上方選單固定顯示「封存」，沒東西時寫「封存區是空的」；寫作原則加「中英文之間要空格」，build 會檢查"
+  },
   {
    "v": "v2.2",
    "date": "2026-11-24",
@@ -693,8 +704,8 @@ window.ATLAS_DATA = {
    "id": "2026-11-23_讓AI讀得到的私密網站發布",
    "title": "讓 AI 讀得到、別人進不來：私密網站發布",
    "date": "2026-11-23",
-   "format": "log",
-   "summary": "人看的網站要密碼，AI 有專用網址，每次更新都核對線上內容。",
+   "format": "note",
+   "summary": "讓 AI 讀得到網站，人看的入口加密碼。",
    "cost": [],
    "tags": [
     "網站開發",
@@ -707,28 +718,29 @@ window.ATLAS_DATA = {
    "draft": false,
    "archived": false,
    "archivedDate": "",
-   "top3": [
-    "有密碼的頁面 AI 打不開，人和 AI 要分開入口。",
-    "上傳前先看 Git 歷史，只發布成品。",
-    "上傳成功不等於更新成功，要讀回線上內容核對。"
-   ],
+   "top3": [],
    "related": [
+    "AI-007",
     "AI-006"
    ],
    "sections": [
     {
-     "title": "任務背景",
-     "html": "<ul><li>想把網站網址交給 ChatGPT 直接評論，同時替人看的入口加上密碼。</li><li>私人網址要登入，靠程式顯示的頁面 AI 也不一定讀得到。</li></ul>"
+     "title": "做什麼",
+     "html": "<p>讓 AI 讀得到網站，人看的入口加密碼。</p>"
     },
     {
-     "title": "做了什麼",
-     "html": "<ul><li><strong>入口</strong>：GitHub Pages 放 StatiCrypt 加密網站，不公開列出的 Gist 放 AI 閱讀頁。</li><li><strong>安全</strong>：密碼存 macOS 鑰匙圈，只上傳加密成品，不上傳程式歷史。</li><li><strong>發布</strong>：用一支程式完成檢查、加密、上傳與線上核對。</li></ul>"
+     "title": "怎麼做",
+     "html": "<ol><li>人看的網站加密後放 GitHub Pages。</li><li>AI 閱讀頁放不公開列出的 Gist。</li><li>用一支程式完成檢查、加密、上傳與核對。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>有密碼的頁面 AI 打不開，入口要分開。</li><li>上傳前先看 Git 歷史，只發布成品。</li><li>上傳成功不等於更新成功，要讀回核對。</li></ol>"
     }
    ],
    "cards": [
     {
      "code": "AI-007",
-     "name": "讓 AI 讀得到的私密網站發布",
+     "name": "讓 AI 可讀的私密網站",
      "use": "把網站發布成人看要密碼、AI 有專用網址，並在每次更新後核對線上內容。",
      "when": [
       "想讓 ChatGPT 等 AI 直接讀你的網站。",
@@ -779,6 +791,7 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 1,
      "versions": [
+      "v0.2｜2026-11-24｜改名「讓 AI 可讀的私密網站」（原名：讓 AI 讀得到的私密網站發布）",
       "v0.1｜2026-11-23｜依 AT 上線 GitHub 的實作建立"
      ],
      "image": null,
@@ -794,34 +807,38 @@ window.ATLAS_DATA = {
   },
   {
    "id": "2026-11-22_AI工作圖鑑技能卡設計",
-   "title": "AI 工作圖鑑開發日誌｜把技能卡做成可重複套用的版型",
+   "title": "把小卡做成可重複套用的版型",
    "date": "2026-11-22",
-   "format": "log",
-   "summary": "從 ChatGPT 的卡片設計討論收斂出固定欄位、雙色館藏與分類規則，再交由 Claude Code 套用到既有網站。",
+   "format": "note",
+   "summary": "把圖鑑小卡做成每張都能沿用的版型。",
    "cost": [],
    "tags": [
     "Claude",
-    "Codex"
+    "Codex",
+    "網站開發",
+    "AI 協作"
    ],
    "sources": [],
    "internalSources": 1,
    "draft": false,
    "archived": false,
    "archivedDate": "",
-   "top3": [
-    "先決定訪客來圖鑑最常做什麼，再排首頁順序。我希望訪客先找到可以重複用的方法，所以技能卡排在日誌前面。",
-    "用生圖比較風格很快。選定參考圖後，把欄位、版型和辨識規則寫清楚，下一張才能沿用。",
-    "長對話要接續時，把已定案、待驗證的事項與下一步整理成短摘要，再附上當前版本。"
+   "top3": [],
+   "related": [
+    "AI-002"
    ],
-   "related": [],
    "sections": [
     {
-     "title": "任務背景",
-     "html": "<ul><li>我想把 AI 工作圖鑑從學習日誌延伸成一本可查找的技能卡冊。這次聚焦首頁順序與卡片版型，沿用原有網站架構。</li><li>這次設計從 11/22 開始，後續用 11/23 提供的網站 HTML 核對實作狀態。</li></ul>"
+     "title": "做什麼",
+     "html": "<p>把圖鑑小卡做成每張都能沿用的版型。</p>"
     },
     {
-     "title": "做了什麼",
-     "html": "<ul><li>在 ChatGPT 用參考圖和生圖比較卡片風格，最後選精練的學院風。工作職場用深藍，家庭生活用奶油白，兩者共用同一個版型。</li><li>定下卡名、用途、「適合」、Prompt、複製、注意事項、學習來源和指令數量等資訊。卡片用「系」辨認方法類型，用書籤收常用的卡。</li><li>整理成可交給 Claude Code 的版面規則。11/23 的 HTML 已能看到技能卡在最新日誌前面，第一張卡套用了工作職場配色、系別、書籤與兩段 Prompt。手機雙欄仍在規劃，公開站操作尚未驗證。</li></ul><ul><li>設計討論變長後，我把確認過的方向濃縮成一段交接摘要。11/23 把摘要和新版 HTML 帶到新對話，Codex 就能核對這一版做到了哪裡，接著討論下一項優化。</li></ul>"
+     "title": "怎麼做",
+     "html": "<ol><li>在 ChatGPT 用生圖比較卡片風格。</li><li>把欄位、配色、分類寫成版面規則。</li><li>交給 Claude Code 套用到原網站。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>先想讀者最常做什麼，再排首頁順序。</li><li>生圖適合比風格，選定後要寫成規則。</li><li>換對話前，先整理成交接摘要。</li></ol>"
     }
    ],
    "cards": [
@@ -926,7 +943,7 @@ window.ATLAS_DATA = {
    "cards": [
     {
      "code": "AI-003",
-     "name": "AI 網站系統開發重點",
+     "name": "網站規格",
      "use": "開發學習網站前，先把初衷、規則、內容來源和工具整理成一頁規格。",
      "when": [
       "想把教材做成互動學習網站或系統。",
@@ -951,7 +968,9 @@ window.ATLAS_DATA = {
      "tools": [],
      "practice": [],
      "practiceCount": 0,
-     "versions": [],
+     "versions": [
+      "v0.2｜2026-11-24｜改名「網站規格」（原名：AI 網站系統開發重點）"
+     ],
      "image": null,
      "archived": false,
      "archivedDate": "",
@@ -963,7 +982,7 @@ window.ATLAS_DATA = {
     },
     {
      "code": "AI-005",
-     "name": "互動式地圖製作",
+     "name": "互動地圖",
      "use": "用 d3-geo 和 Natural Earth，把地點、路線和區域做成可操作的互動地圖。",
      "when": [
       "要讓人理解地點、路線或區域關係。",
@@ -1020,6 +1039,7 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 1,
      "versions": [
+      "v0.3｜2026-11-24｜改名「互動地圖」（原名：互動式地圖製作）",
       "v0.2｜2026-11-24｜加互動地圖網頁示意圖；刪除過時的「尚未在第二個專案驗證」",
       "v0.1｜2026-11-23｜依迷你布開發紀錄建立"
      ],
@@ -1113,8 +1133,8 @@ window.ATLAS_DATA = {
    "id": "2026-11-20_Claude與Codex交叉審查",
    "title": "讓兩個 AI 互相檢查：Claude × Codex 交叉審查",
    "date": "2026-11-20",
-   "format": "log",
-   "summary": "一個 AI 完成工作，另一個 AI 獨立檢查，最後由人判斷是否修改。",
+   "format": "note",
+   "summary": "讓兩個 AI 互相檢查，或一個做、一個驗收。",
    "cost": [],
    "tags": [
     "交叉審查",
@@ -1135,26 +1155,33 @@ window.ATLAS_DATA = {
     {
      "title": "Codex 官方外掛原始碼（GitHub）",
      "url": "https://github.com/openai/codex-plugin-cc"
+    },
+    {
+     "title": "Claude × Codex 官方外掛安裝教學（Notion）",
+     "url": "https://app.notion.com/p/Claude-Codex-OpenAI-422b7e19746a80059c82f7c93efd4875"
     }
    ],
    "internalSources": 1,
    "draft": false,
    "archived": false,
    "archivedDate": "",
-   "top3": [
-    "/codex:review 只看 Git 記錄的程式改動，審文件要用自建的審查技能。",
-    "另一個 AI 的建議不一定對，要逐點判斷再採用。",
-    "審查的 AI 只列問題、不改檔，由人決定改不改。"
+   "top3": [],
+   "related": [
+    "AI-001",
+    "AI-008"
    ],
-   "related": [],
    "sections": [
     {
-     "title": "任務背景",
-     "html": "<ul><li>我寫正式文件（政府計畫書、報告、題庫）時，單靠一個 AI 容易漏看自己的錯。</li><li>看了兩篇教學文章介紹 Claude × Codex 外掛，想讓兩個 AI 互相當審查員。</li><li>目標：一個 AI 寫，另一個 AI 只讀不改、挑毛病，最後由我決定改不改。</li></ul>"
+     "title": "做什麼",
+     "html": "<p>讓兩個 AI 互相檢查，或一個做、一個驗收。</p>"
     },
     {
-     "title": "做了什麼",
-     "html": "<ul><li>在 Claude 安裝 OpenAI 官方的 Codex 外掛。</li><li>建立兩個技能：在 Claude 說「請 Codex 審查」，或在 Codex 說「請 Claude 審查」。</li><li>交給另一個 AI 之前，先自動遮蔽公司名、人名、統編等個資，金額保留。</li></ul>"
+     "title": "怎麼做",
+     "html": "<ol><li>在 Claude 安裝 Codex 官方外掛。</li><li>建立互相審查與「交給 Claude 執行」技能。</li><li>送審前先遮蔽公司名、人名、統編。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>/codex:review 只看程式改動，文件要用自建技能。</li><li>另一個 AI 的建議要逐點判斷再採用。</li><li>審查的 AI 只列問題、不改檔。</li></ol>"
     }
    ],
    "cards": [
@@ -1169,7 +1196,8 @@ window.ATLAS_DATA = {
      ],
      "notes": [
       "要先裝好 Codex 外掛和審查技能，Codex 用 ChatGPT 帳號登入。",
-      "短訊息不要用；程式碼改用 /codex:review。"
+      "短訊息不要用；程式碼改用 /codex:review。",
+      "事前驗屍只列退件原因，改不改仍由我決定。"
      ],
      "prompts": [
       {
@@ -1179,6 +1207,18 @@ window.ATLAS_DATA = {
       {
        "label": "在 Codex 使用（反方向）",
        "text": "請 Claude 審查這份文件：<檔案位置>"
+      },
+      {
+       "label": "送審前事前驗屍（計畫書、申請表適用，在 Claude 使用）",
+       "text": "請 Codex 審查這份文件：<檔案位置>\n審查角度加一項：假設這份文件已經被審查委員退件，列出最可能的 5 個原因，依嚴重度排序。"
+      },
+      {
+       "label": "程式碼審查與修正（在 Claude Code 的 Git 專案使用）",
+       "text": "/codex:review --wait"
+      },
+      {
+       "label": "",
+       "text": "請根據剛剛 Codex 的程式碼審查結果，修正已確認的問題，完成後重新測試功能。"
       }
      ],
      "preparedBy": "Claude",
@@ -1198,6 +1238,74 @@ window.ATLAS_DATA = {
       "desc": "審查與風險控管"
      },
      "id": "2026-11-20_Claude與Codex交叉審查"
+    },
+    {
+     "code": "AI-008",
+     "name": "跨模型接力",
+     "use": "把任務交給 Claude 動手做，再由 Codex 依驗收標準獨立檢查。",
+     "when": [
+      "任務範圍清楚、有明確成品，例如網站改版、文件批次修改。",
+      "想讓動手做的 AI 和檢查的 AI 分開。"
+     ],
+     "notes": [
+      "Codex 沙盒讀不到鑰匙圈，呼叫 Claude 時要核准在沙盒外執行。",
+      "會用到 Claude 方案額度；一件事最多一次跨模型檢查。",
+      "完整交辦流程尚未在正式工作驗證。"
+     ],
+     "prompts": [
+      {
+       "label": "交辦給 Claude（在 Codex 使用）",
+       "text": "請交給 Claude 執行（claude-executor）。先寫任務單給我確認，再呼叫 Claude。\n1. 目標：<要完成的事>\n2. 範圍：只能改 <資料夾或檔案>，不能改 <排除項目>。\n3. 成品：<要交出的檔案或畫面>\n4. 驗收標準：<怎樣算完成>\n5. 停止條件：遇到發布、刪除、付款或範圍外的檔案，先停下來問我。\nClaude 做完後，請讀實際檔案逐項判斷「通過／不通過／無法驗證」，不要只看 Claude 的回報。\nClaude 執行失敗、沒有回報或額度不足時，一律算「無法驗證」，不可當作通過。\n修正後最多複驗 2 輪，還沒通過就停下來，列出剩下的問題給我決定。"
+      },
+      {
+       "label": "修正後複驗（在 Codex 使用）",
+       "text": "唯讀複驗，不可修改檔案，也不要呼叫 Claude。\n上次問題：<問題>。現已改為：<修正內容>。\n只檢查這項改動，以及會不會影響 <相關畫面或功能>，回報通過或不通過。"
+      }
+     ],
+     "preparedBy": "Claude",
+     "promptOutline": true,
+     "domain": "工作職場",
+     "notFor": [
+      "只要第二意見、不需要對方動手：用 AI-001。",
+      "有個人資料、金鑰，或要對外發布、付款的工作。"
+     ],
+     "steps": [
+      "在 Codex 說「交給 Claude 執行」，寫清楚範圍、可改的檔案和驗收標準。",
+      "Codex 存成任務單，用最小權限呼叫 Claude。",
+      "Claude 做完回報，Codex 讀實際檔案逐項判斷通過或不通過。",
+      "不通過就修正，複驗只看上次的問題。",
+      "最多複驗 2 輪；還沒通過就停下，把剩下的問題交給我決定。"
+     ],
+     "tools": [
+      "claude-executor：Codex 技能，把任務交給 Claude 並獨立驗收。",
+      "<a href=\"https://github.com/openai/codex-plugin-cc\" target=\"_blank\" rel=\"noopener\">Codex 官方外掛原始碼（GitHub）</a>",
+      "<a href=\"https://trailofbits.com/skills/second-opinion/\" target=\"_blank\" rel=\"noopener\">Trail of Bits：second-opinion（失敗就算未完成）</a>",
+      "<a href=\"https://github.com/KamakuraCrypto/claude-codex-review\" target=\"_blank\" rel=\"noopener\">claude-codex-review（事前驗屍、限制輪數）</a>"
+     ],
+     "practice": [
+      {
+       "date": "2026-11-23",
+       "project": "AI 工作圖鑑",
+       "status": "已驗證完成",
+       "how": "Claude 改網站 v1.5，Codex 唯讀驗收並對照改版前版本",
+       "result": "抓到 1 個選單遮擋問題，修正後複驗通過",
+       "log": "2026-11-20_Claude與Codex交叉審查",
+       "learned": "複驗只看上次的問題，省時間和額度"
+      }
+     ],
+     "practiceCount": 1,
+     "versions": [
+      "v0.2｜2026-11-24｜參考 GitHub 跨模型審查技能：複驗最多 2 輪、失敗算無法驗證",
+      "v0.1｜2026-11-24｜依 claude-executor 技能與 AT 驗收紀錄建立"
+     ],
+     "image": null,
+     "archived": false,
+     "archivedDate": "",
+     "series": {
+      "name": "自動系",
+      "desc": "流程與批次處理"
+     },
+     "id": "2026-11-20_Claude與Codex交叉審查--AI-008"
     }
    ]
   }
@@ -1302,6 +1410,11 @@ window.ATLAS_DATA = {
     var what = kind === 'card' ? '小卡' : '筆記';
     return '<button type="button" class="btn ghost small act-' + action + '" data-act="' + action + '" data-kind="' + kind + '" data-id="' + esc(e.id) + '" title="複製請求，貼給 Claude 執行">' +
       ACT_LABEL[action] + (action === 'archive' ? '這' + (kind === 'card' ? '張' : '篇') + what : '') + '</button>';
+  }
+  // v2.3：小卡卡尾的封存小按鈕（列表小卡、完整小卡都有；只在私人預覽版）
+  function cardArchBtn(e) {
+    if (!DATA.preview || e.archived) return '';
+    return '<button type="button" class="bc-arch" data-act="archive" data-kind="card" data-id="' + esc(e.id) + '" title="複製封存請求，貼給 Claude 執行">封存</button>';
   }
   function archiveNote(kind, e) {
     if (!e.archived) return '';
@@ -1575,7 +1688,7 @@ window.ATLAS_DATA = {
     if (!full) {
       return '<article class="bcard mini ' + theme + (opts.compact ? ' compact' : '') + '" style="--s:' + seriesColor(s.name) + '">' +
         head + code + name + use + (opts.compact ? '' : '<div class="bc-panel">' + when + '</div>') +
-        '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span><span class="bc-go">看小卡 →</span></footer></article>';
+        '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '<span class="bc-go">看小卡 →</span></footer></article>';
     }
     var prompts = '<section class="bc-prompts" id="ch-copy' + (opts.suffix || '') + '"><h4 class="bc-ptitle">' + ICON.chat + 'Prompt</h4>' +
       c.prompts.map(function (p, i) {
@@ -1596,7 +1709,7 @@ window.ATLAS_DATA = {
       '<div class="bc-swash" aria-hidden="true"></div>' + use + figure +
       '<div class="bc-panel">' + when + notFor + prompts + notes + cardMore(c) + '</div>' +
       '<footer class="bc-foot"><span>' + ICON.book + '來源：' + (opts.inLog ? fmtDate(e.date) + ' 筆記' : '<a href="#/log/' + enc(e.logId || e.id) + '">' + fmtDate(e.date) + ' 筆記</a>') + preparedBadge(c.preparedBy) + '</span>' +
-      '<span>指令 ×' + c.prompts.length + '</span></footer></article>';
+      '<span>指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '</footer></article>';
   }
 
   // 完整卡的「完整資料」：預設收合，舊卡沒有這些欄位就不顯示
@@ -1663,7 +1776,7 @@ window.ATLAS_DATA = {
       : '<section class="related-cards"><h2>相關小卡</h2>' + relatedList + '</section>';
     var head = '<header class="lead' + (e.card ? ' has-harvest' : '') + '">' +
       '<div class="lead-main"><span class="kicker">筆記</span>' +
-        '<h1>' + esc(e.title) + '</h1>' + metaLine(e) +
+        '<h1>' + esc(e.title) + '</h1>' + metaLine(e) + (DATA.preview && !e.archived ? '<p class="lead-acts">' + actBtn('archive', 'log', e) + '</p>' : '') +
         (e.summary && !isNote ? '<p class="lede">' + esc(e.summary) + '</p>' : '') +
         (e.card ? top3 : '') +
         tagLinks(e.tags, 'logs') + '</div>' +
@@ -1680,9 +1793,9 @@ window.ATLAS_DATA = {
           '<div class="sec-head"><span class="en">CARD</span><span class="zh">本篇小卡</span></div>' +
           battleCard(v, 'full', { inLog: true, suffix: i ? '-' + i : '' }) +
           '<p class="stage-links"><a class="btn ghost" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">開啟 Claude ↗</a>' +
-          '<a href="#/card/' + enc(v.id) + '">單獨開啟這張小卡 →</a>' + (v.archived ? '' : actBtn('archive', 'card', v)) + '</p></section>';
+          '<a href="#/card/' + enc(v.id) + '">單獨開啟這張小卡 →</a></p></section>';
       }).join('') +
-      '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/logs">← 回筆記列表</a>' + (e.archived ? '' : actBtn('archive', 'log', e)) + '</div>';
+      '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/logs">← 回筆記列表</a></div>';
     return crumbs([{ title: e.archived ? '封存區' : '筆記', href: e.archived ? '#/archive' : '#/logs' }, { title: e.title }]) + archiveNote('log', e) + head +
       withChapters(chapters, body, 'CONTENTS｜本篇章節');
   }
@@ -1698,7 +1811,7 @@ window.ATLAS_DATA = {
         '<p class="howto">按提示詞右上角的複製圖示，開啟 Claude 貼上，把 &lt;…&gt; 換成你的內容。</p>' +
         '<p><a class="btn red" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">開啟 Claude ↗</a></p>' +
         tagLinks(e.tags, 'cards') + '<section id="ch-sources">' + sourcesHtml(e) + '</section>' +
-        '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/cards">← 回小卡列表</a>' + (e.archived ? '' : actBtn('archive', 'card', e)) + '</div>' +
+        '<div class="actions">' + homeBtn() + '<a class="btn ghost" href="#/cards">← 回小卡列表</a></div>' +
       '</aside></div></div></div></div>';
   }
 
@@ -1775,12 +1888,12 @@ window.ATLAS_DATA = {
           '<p>小卡代號＝領域－系別－號碼。<code>C W-DE-01 D 縮短</code> 是縮短第一張小卡的用途；<code>P2</code> 指第 2 段提示詞。原本的固定編號（例如 <code>AI-001</code>）繼續保留，新舊代號都能搜尋。</p>')) +
       sec('ab-log', '04', '筆記怎麼寫',
         '<ol><li>做什麼（一句話）</li><li>怎麼做</li><li>學到什麼</li><li>相關小卡</li><li>來源</li></ol>' +
-        '<p>寫短句，每項只說一件事；只寫真實用過的 AI 做法、程式或工具。較早的筆記仍是舊格式（3 points、任務背景、做了什麼），會逐篇改寫。</p>') +
+        '<p>寫短句，每項只說一件事；只寫真實用過的 AI 做法、程式或工具。</p><p>中英文之間要空格（數字也是）：寫「這是 AI 工作圖鑑」，不寫「這是AI工作圖鑑」。</p>') +
       sec('ab-rule', '05', '公開與安全',
         '<ul><li>新筆記先「不公開」，Lynn 看過預覽確認後才公開。</li>' +
         '<li>不寫客戶名、人名、統編、聯絡方式和電腦檔案路徑；程式發現可疑內容就停止更新。</li>' +
         '<li>內部來源只顯示「另有 N 份內部紀錄」，不顯示內容。</li>' +
-        '<li><strong>封存</strong>：不要的筆記或小卡先封存，不直接刪除。封存後列表和公開網站都不顯示，私人網址的「封存區」看得到；之後再決定還原或刪除。刪掉的小卡編號不再使用。</li></ul>') +
+        '<li><strong>封存</strong>：不要的筆記或小卡先封存，不直接刪除。封存後列表和公開網站都不顯示，私人網址的「封存區」看得到（上方選單「封存」）；之後再決定還原或刪除。封存按鈕在小卡卡尾、筆記標題下方，只在私人網址出現。刪掉的小卡編號不再使用。</li></ul>') +
       sec('ab-version', '06', '版次與更新',
         '<p>網站目前是 <strong>' + esc(DATA.version || '—') + '</strong>。版面或功能改變才升版號；新增筆記、小卡只看頁尾的更新日期。</p>' +
         '<h3 class="ab-h3">內容更新紀錄（自動）</h3><ul class="ab-log">' + (updates || '<li>尚無</li>') + '</ul>' +
@@ -1808,7 +1921,7 @@ window.ATLAS_DATA = {
     else if (parts[0] === 'logs') { nav = 'logs'; html = listPage('logs', params); title = '筆記｜AI 工作圖鑑'; }
     else if (parts[0] === 'about') { nav = 'about'; html = aboutPage(); title = '說明｜AI 工作圖鑑'; }
     else if (parts[0] === 'cards') { nav = 'cards'; html = listPage('cards', params); title = '小卡｜AI 工作圖鑑'; }
-    else if (parts[0] === 'archive') { nav = ''; html = archivePage(); title = '封存區｜AI 工作圖鑑'; }
+    else if (parts[0] === 'archive') { nav = 'archive'; html = archivePage(); title = '封存區｜AI 工作圖鑑'; }
     else if (parts[0] === 'log' && find(parts[1])) { nav = 'logs'; var e = find(parts[1]); html = logPage(e); title = e.title + '｜AI 工作圖鑑'; }
     else if (parts[0] === 'card' && findCard(parts[1])) { nav = 'cards'; var c = findCard(parts[1]); html = cardPage(c); title = c.card.name + '｜AI 工作圖鑑'; }
     else html = notFound();
@@ -1876,7 +1989,12 @@ window.ATLAS_DATA = {
     location.hash = '#/' + f.dataset.base + (p.length ? '?' + p.join('&') : '');
   });
 
-  if (DATA.preview) document.getElementById('draft-banner').hidden = false;
+  if (DATA.preview) {
+    document.getElementById('draft-banner').hidden = false;
+    // v2.3：私人預覽版的上方選單一直顯示「封存」，沒東西時頁面寫「封存區是空的」
+    var navEl = document.querySelector('.nav');
+    if (navEl && !navEl.querySelector('[data-nav="archive"]')) navEl.insertAdjacentHTML('beforeend', '<a href="#/archive" data-nav="archive">封存</a>');
+  }
   if (DATA.built) document.getElementById('built').innerHTML = '<a href="#/about?go=ab-version">' + esc((DATA.version ? DATA.version + '｜' : '') + '更新：' + DATA.built) + '</a>';
   window.addEventListener('hashchange', render);
   // 從手機寬度拉回電腦寬度時，章節欄一律展開
