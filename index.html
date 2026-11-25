@@ -2,8 +2,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v2.8">
-<meta name="at-build" content="87ed85044c58ec7b">
+<meta name="at-version" content="v2.9">
+<meta name="at-build" content="18723dc64ad5a2c4">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -697,8 +697,13 @@ body.zooming { overflow: hidden; }
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v2.8",
+ "version": "v2.9",
  "changes": [
+  {
+   "v": "v2.9",
+   "date": "2026-11-25",
+   "text": "首頁「AT 編輯」加「草稿上架」按鈕（ChatGPT、Codex 寫好的 AT 草稿回到 Claude 上架）"
+  },
   {
    "v": "v2.8",
    "date": "2026-11-25",
@@ -824,6 +829,11 @@ window.ATLAS_DATA = {
    "label": "寫成筆記",
    "hint": "工作完成時，在原對話貼上",
    "text": "請把這個對話整理成 AT 筆記：判斷有參考價值就直接寫（筆記 N-xxx，需要時加小卡 AI-xxx），寫完上傳 GitHub，回報編號。沒有參考價值就直接說不用寫。"
+  },
+  {
+   "label": "草稿上架",
+   "hint": "ChatGPT 或 Codex 寫好草稿後，回到 Claude 貼上",
+   "text": "請把這份 AT 草稿寫成 AT 筆記（ChatGPT 草稿貼在下面；Codex 草稿在 00_收件暫存）"
   },
   {
    "label": "加實戰紀錄",
