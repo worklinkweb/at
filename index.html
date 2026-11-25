@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta name="at-version" content="v2.7">
-<meta name="at-build" content="1e0e3c2e3bce8ebf">
+<meta name="at-build" content="ac89432f458ed931">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -702,7 +702,7 @@ window.ATLAS_DATA = {
   {
    "v": "v2.7",
    "date": "2026-11-25",
-   "text": "首頁最上層加「AT 編輯」常用指令（寫成筆記、加實戰紀錄），點一下複製，公開版也顯示；原有的快速指令、跨模型兩排保留；「寫成日誌」快速指令改為寫完直接上傳"
+   "text": "首頁最上層加「AT 編輯」常用指令（寫成筆記、加實戰紀錄），點一下複製，公開版也顯示；原有的快速指令、跨模型兩排保留，並改為公開版也顯示（公開版不含私人網址）；「寫成日誌」快速指令改為寫完直接上傳"
   },
   {
    "v": "v2.6",
@@ -826,8 +826,53 @@ window.ATLAS_DATA = {
    "text": "AI-001 加一筆實戰紀錄：日期、專案、實際做法、成果、新學到。"
   }
  ],
- "quickPrompts": [],
- "xPrompts": [],
+ "quickPrompts": [
+  {
+   "label": "寫成日誌",
+   "hint": "工作完成時，在原對話貼上",
+   "text": "請把這個對話整理成 AI 工作圖鑑日誌。\n先不要寫，先告訴我：\n1. 這次真實用過、值得留下的 AI 做法、程式或工具技能（沒有就直接說不用寫）\n2. 和現有日誌或卡片有沒有重複\n3. 值不值得做成指令卡\n我確認後依 _日誌範本.md 寫，只放重點，寫完直接上傳並回報編號。"
+  },
+  {
+   "label": "開新對話接續",
+   "hint": "要繼續改網站時，在新對話貼上",
+   "text": "接續「AI 工作圖鑑」網站。請先讀：\n1. 11_AI工作室/02_AI工作圖鑑/AT_PROJECT_CONTEXT.md\n2. 網站程式的 README.md（位置見 AT_PROJECT_CONTEXT.md）\n3. 00_總控中心/對話紀錄/2026-11-25_AT雙語提示詞與縮寫顏色v2.5.md\n目前：網站 v2.7，7 篇筆記、9 張小卡，已公開 7 篇。\n私人網址：（見 AGENTS.md）\n這次我想做：（例如寫新筆記、把程式備份到私人 GitHub）"
+  },
+  {
+   "label": "更新私人網址",
+   "hint": "自動更新沒跑時才用",
+   "text": "更新圖鑑私人網址：（見 AGENTS.md）"
+  }
+ ],
+ "xPrompts": [
+  {
+   "code": "XR",
+   "label": "XR 交叉審查",
+   "hint": "在 Claude 打：請 Codex 審查",
+   "text": "請 Codex 審查這份文件：<檔案位置>",
+   "en": "Please ask Codex to review this document: <file path>"
+  },
+  {
+   "code": "XP",
+   "label": "XP 風險預演",
+   "hint": "在 Claude 打：請 Codex 做風險預演（送審或上線前）",
+   "text": "請 Codex 審查這份文件：<檔案位置>\n審查角度加一項：風險預演。假設這份文件已經被退件或失敗，列出最可能的 5 個原因，依嚴重度排序。",
+   "en": "Please ask Codex to review this document: <file path>\nAdd one review angle: pre-mortem. Assume this document has already been rejected or has failed. List the 5 most likely reasons, ranked by severity."
+  },
+  {
+   "code": "XE",
+   "label": "XE 交給 Claude 執行",
+   "hint": "在 Codex 打：交給 Claude 執行",
+   "text": "請交給 Claude 執行（claude-executor）。先寫任務單給我確認，再呼叫 Claude。\n1. 目標：<要完成的事>\n2. 範圍：只能改 <資料夾或檔案>，不能改 <排除項目>。\n3. 成品：<要交出的檔案或畫面>\n4. 驗收標準：<怎樣算完成>\n5. 停止條件：遇到發布、刪除、付款或範圍外的檔案，先停下來問我。\nClaude 做完後，請讀實際檔案逐項判斷「通過／不通過／無法驗證」，不要只看 Claude 的回報。\nClaude 執行失敗、沒有回報或額度不足時，一律算「無法驗證」，不可當作通過。\n修正後最多複驗 2 輪，還沒通過就停下來，列出剩下的問題給我決定。",
+   "en": "Hand this to Claude (claude-executor). Write a task sheet for my approval first, then call Claude.\n1. Goal: <what to finish>\n2. Scope: change only <folders or files>. Do not change <excluded items>.\n3. Deliverable: <files or screens>\n4. Acceptance criteria: <what counts as done>\n5. Stop rule: if it involves publishing, deleting, payment, or files outside the scope, stop and ask me first.\nAfter Claude finishes, read the actual files and mark each item \"pass / fail / cannot verify\". Do not rely only on Claude's report.\nIf Claude fails, does not report, or runs out of quota, mark it \"cannot verify\", never \"pass\".\nAfter fixes, re-check at most 2 rounds. If it still fails, stop and list the remaining issues for me to decide."
+  },
+  {
+   "code": "XV",
+   "label": "XV 唯讀複驗",
+   "hint": "在 Codex 打：Codex 自己複驗（不呼叫 Claude）",
+   "text": "唯讀複驗，不可修改檔案，也不要呼叫 Claude。\n上次問題：<問題>。現已改為：<修正內容>。\n只檢查這項改動，以及會不會影響 <相關畫面或功能>，回報通過或不通過。",
+   "en": "Read-only re-check. Do not change any files, and do not call Claude.\nLast issue: <issue>. Now changed to: <fix>.\nCheck only this change, and whether it affects <related screens>. Report pass or fail."
+  }
+ ],
  "entries": [
   {
    "id": "2026-11-25_畫畫課影片自動剪輯",
