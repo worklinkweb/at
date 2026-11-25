@@ -3,134 +3,40 @@
 <p>版本：v2.11｜更新：2026-11-26｜筆記 7 篇｜小卡 10 張</p>
 <p>用詞：「筆記」是一次真實的 AI 工作紀錄（舊稱學習日誌、開發日誌、案例）；「小卡」是可重複使用的方法與提示詞（舊稱指令卡、技能卡）。</p>
 <p>給 AI 審查者：這是 Lynn 的 AI 學習錦囊。請先回報上方版本、筆記數與小卡數，再評論。請只提出建議，不要推測頁面沒有寫的內容。</p>
-<article><h2>筆記：從視覺提案到互動邀請網頁：設計交付與功能驗收</h2><p>日期：2026-11-25｜關鍵字：網站開發、視覺設計、功能驗收、AI 協作</p>
+<article><h2>筆記：請 AI 做互動網頁：先交設計圖，再驗功能</h2><p>日期：2026-11-25｜關鍵字：網站開發、視覺設計、功能驗收、AI 協作</p>
 
-<h4>做什麼</h4><p>把活動需求轉成 AI 開發工具能照做的網頁規格。</p><h4>怎麼做</h4><ol><li>用 ChatGPT 提出視覺方案與互動示意。</li><li>生成設計圖，連同完整提示詞交給 Work。</li><li>比對實際網頁落差，補修正與驗收指令。</li></ol><h4>學到什麼</h4><ol><li>只給文字提示詞，不一定能還原設計。</li><li>畫面做出來，不代表功能已經完成。</li><li>交付規格要寫資料儲存與驗收條件。</li></ol>
-<h4>相關小卡</h4><ul><li>W-CR-11 視覺設計交付</li><li>W-DE-12 功能驗收指令</li><li>H-KN-03 網站規格</li></ul>
+<h4>做什麼</h4><p>請 AI 做互動網頁時，避免做出「好看但不能用」的成品。</p><h4>怎麼做</h4><ol><li>先在 ChatGPT 定好畫面，生成設計圖。</li><li>設計圖加功能清單，一起交給開發用的 AI。</li><li>做完用三層驗收：看得到、按得動、存得住。</li></ol><h4>學到什麼</h4><ol><li>只給文字描述，做出來的畫面常和想像不同。</li><li>畫面做好，不代表按鈕和資料真的能用。</li><li>交辦時就要寫清楚：資料存哪裡、誰能看。</li></ol>
+<h4>相關小卡</h4><ul><li>W-CR-11 設計圖交辦</li><li>W-DE-12 三層驗收</li><li>H-KN-03 網站規格</li></ul>
 
-<section><h3>小卡 W-CR-11（AI-011）視覺設計交付</h3>
-<p>用途：讓 AI 開發工具照設計圖忠實還原畫面與功能。</p><p>系別：創造系｜領域：工作職場</p>
-<h4>適用</h4><ul><li>互動網頁與活動邀請函。</li><li>跨 AI 工具交接開發任務。</li><li>已有明確的視覺設計方向。</li></ul><h4>不適用</h4><ul><li>需求還沒確認的初期發想。</li><li>只需要產出靜態圖片。</li><li>不用開發的單純文案任務。</li></ul>
-<h4>提示詞</h4><pre>請以我上傳的設計圖為正式設計定稿，
-忠實還原版面、色彩、文字與操作流程。
-
-請依照以下規格執行：
-
-一、任務目標
-［填入使用情境與預期效益］
-
-二、視覺規格
-［填入色碼、風格、版面與元件］
-
-三、完整文案
-［填入各頁面及按鈕文字］
-
-四、功能規格
-［填入操作流程及必要功能］
-
-五、資料處理
-［填入儲存、統計及管理權限］
-
-六、驗收條件
-［填入可實際操作的測試情境］
-
-七、交付項目
-［填入網址、原始碼及操作說明］
-
-不得自行刪除已確認的功能。
-不得以靜態畫面取代實際功能。
-若有技術限制，請提出可行替代方案。
-完成後提供實際畫面與測試結果。</pre><p>English</p><pre>Use the uploaded design mockup as the approved visual specification.
-Faithfully reproduce its layout, colors, copy, components, and interaction flows.
-
-Follow these specifications:
-
-1. Task objectives
-[Use case and expected benefits]
-
-2. Visual specifications
-[Color codes, style, layout, and components]
-
-3. Complete interface copy
-[Text for every page and button]
-
-4. Functional requirements
-[User flows and required features]
-
-5. Data handling and access control
-[Storage, reporting, and admin permissions]
-
-6. Acceptance criteria
-[Test scenarios that can actually be performed]
-
-7. Required deliverables
-[URL, source code, and user guide]
-
-Do not remove approved features.
-Do not replace working functionality with static visual mockups.
-Explain technical limitations and propose practical alternatives.
-Provide actual screenshots and test results after implementation.</pre>
-<h4>使用說明</h4><ul><li>準備：已確認的完整介面設計圖。</li><li>準備：功能規格與完整文案。</li><li>限制：設計圖不等於可執行的程式。</li><li>提醒：明確指定資料儲存方式。</li><li>提醒：要實際測試，才能確認交付品質。</li></ul><h4>操作步驟</h4><ol><li>在 ChatGPT 確認視覺與功能。</li><li>生成完整介面設計圖。</li><li>整理文字、色碼與功能規格。</li><li>把設計圖和提示詞一起交給開發工具。</li><li>檢查實際網頁與設計的落差。</li></ol>
-<h4>實戰紀錄（1 次，規劃應用不計入）</h4><ul><li>2026-11-25｜商務活動互動邀請函｜已實作未驗證｜ChatGPT 出設計圖與規格，交給 Work 開發｜新學到：文字提示詞不一定能還原設計｜成果：網頁畫面完成，功能待驗收</li></ul>
-<h4>版本紀錄</h4><ul><li>v0.1｜2026-11-25｜建立（ChatGPT 草稿，Claude 整理上架）</li></ul></section><section><h3>小卡 W-DE-12（AI-012）功能驗收指令</h3>
-<p>用途：防止 AI 把「畫面做完」誤當「功能完成」。</p><p>系別：防禦系｜領域：工作職場</p>
-<h4>適用</h4><ul><li>AI 開發的互動網頁。</li><li>表單與資料統計工具。</li><li>跨工具交付的程式專案。</li></ul><h4>不適用</h4><ul><li>純靜態圖片。</li><li>單純文字創作。</li><li>還沒定義功能的概念提案。</li></ul>
-<h4>提示詞</h4><pre>請依照原始需求檢查目前的成果。
-
-區分以下三個完成層級：
-
-1. 視覺呈現完成。
-2. 互動操作完成。
-3. 資料儲存與統計完成。
-
-逐項檢查：
-
-- 按鈕是否具有實際功能？
-- 操作結果是否正確？
-- 資料是否成功寫入後台？
-- 不同裝置能否共用資料？
-- 修改是否造成重複紀錄？
-- 管理權限是否正確？
-- 重新整理後資料是否保留？
-
-列出未完成項目並直接修正。
-
-不得將示意畫面宣稱為完成品。
-不得將模擬資料宣稱為真實資料。
-不得將未測試功能宣稱為驗證完成。
-
-若無法執行測試，請明確標示。
-
-提供實際測試結果及剩餘問題。</pre><p>English</p><pre>Review the current implementation against the original requirements.
-
-Distinguish three completion levels:
-
-1. Visual implementation.
-2. Working interactions.
-3. Persistent data storage and reporting.
-
-Verify that:
-
-- Buttons perform their intended actions.
-- Actions produce correct results.
-- Data is saved to the backend successfully.
-- Multiple devices share the same data.
-- Updates do not create duplicate records.
-- Access permissions are enforced.
-- Saved data persists after refresh.
-
-List incomplete requirements and fix them.
-
-Do not claim that mockups are finished products.
-Do not claim that simulated data is real.
-Do not claim that untested features are verified.
-
-If you cannot run a test, say so clearly.
-
-Provide actual test results and remaining issues.</pre>
-<h4>使用說明</h4><ul><li>準備：原始需求與實際成果。</li><li>準備：明確的測試情境。</li><li>限制：沒有後台權限就無法驗證資料。</li><li>提醒：至少用兩個裝置測試。</li><li>提醒：驗收後清除測試資料。</li></ul><h4>操作步驟</h4><ol><li>列出原始功能需求。</li><li>比對實際網站與原始規格。</li><li>把每個功能轉成可操作的測試情境。</li><li>要求修正，並提供測試結果。</li></ol>
-<h4>實戰紀錄（1 次，規劃應用不計入）</h4><ul><li>2026-11-25｜商務活動互動邀請函｜已實作未驗證｜補功能規格與驗收指令，要求 Work 修正｜新學到：要分三層驗收：畫面、互動、資料｜成果：原版缺完整點餐功能，已要求補上</li></ul>
-<h4>版本紀錄</h4><ul><li>v0.1｜2026-11-25｜建立（ChatGPT 草稿，Claude 整理上架）</li></ul></section></article>
+<section><h3>小卡 W-CR-11（AI-011）設計圖交辦</h3>
+<p>用途：把網頁交給 AI 做時，讓成品照設計圖、功能不漏。</p><p>系別：創造系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>活動邀請、報名、點餐等互動網頁。</li><li>在 ChatGPT 設計，換另一個 AI 開發。</li></ul><h4>不適用</h4><ul><li>需求還沒想清楚：先用 AI-003 網站規格。</li><li>只要一張圖片或海報。</li></ul>
+<h4>提示詞</h4><pre>附件設計圖是定稿，請照圖做出網頁：版面、顏色、文字都照圖。
+必要功能：&lt;例如：填出席、選餐點、管理者看統計&gt;
+資料存在：&lt;例如：Google 試算表&gt;
+做不到的功能先告訴我，不要用假畫面代替。
+完成後給我網址，並說明每個功能怎麼測試。</pre><p>English</p><pre>The attached design is final. Build the web page to match it: same layout, colors, and text.
+Required features: &lt;e.g., RSVP, meal choice, admin summary&gt;
+Store data in: &lt;e.g., Google Sheets&gt;
+Tell me first if a feature can't be built. Do not replace it with a fake screen.
+When done, give me the URL and explain how to test each feature.</pre>
+<h4>使用說明</h4><ul><li>準備：設計圖要先確認，交出去就不再改。</li><li>提醒：功能寫成「誰、做什麼」，例如「來賓選餐點」。</li><li>提醒：一定要寫資料存哪裡，不然常只做畫面。</li></ul><h4>操作步驟</h4><ol><li>在 ChatGPT 生成網頁設計圖，確認滿意。</li><li>列出必要功能和資料要存哪裡。</li><li>把設計圖上傳給開發用的 AI，貼上指令。</li></ol>
+<h4>實戰紀錄（1 次，規劃應用不計入）</h4><ul><li>2026-11-25｜活動邀請網頁｜已實作未驗證｜ChatGPT 出設計圖，交給 Work 開發｜新學到：只給文字，畫面不一定照做｜成果：畫面完成，點餐功能不完整</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.2｜2026-11-26｜重寫：改名「設計圖交辦」，指令縮成 5 行</li><li>v0.1｜2026-11-25｜建立（ChatGPT 草稿，原名「視覺設計交付」）</li></ul></section><section><h3>小卡 W-DE-12（AI-012）三層驗收</h3>
+<p>用途：AI 說「做好了」時，檢查網頁是不是真的能用。</p><p>系別：防禦系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>AI 做的網頁、表單、報名或統計工具。</li><li>AI 回報完成，但你還沒親手試過。</li></ul><h4>不適用</h4><ul><li>純圖片或文章，沒有按鈕和資料。</li></ul>
+<h4>提示詞</h4><pre>請用三層檢查目前成果，每項標 ✅ 或 ❌：
+1. 看得到：畫面和設計圖一致。
+2. 按得動：每個按鈕都真的有反應。
+3. 存得住：重新整理後資料還在，換手機也看得到。
+❌ 的項目請直接修好；沒實際測過的寫「未測」。</pre><p>English</p><pre>Check the current build on three levels. Mark each item ✅ or ❌:
+1. Looks right: the screens match the design.
+2. Works: every button actually does something.
+3. Saves: data stays after refresh and shows on another phone.
+Fix every ❌ item. Mark anything you did not actually test as &quot;untested&quot;.</pre>
+<h4>使用說明</h4><ul><li>限制：AI 說「測過了」不一定真的測過。</li><li>提醒：第 3 層最常漏，一定要自己換手機試。</li><li>提醒：有管理者頁面的，要確認一般人看不到。</li></ul><h4>操作步驟</h4><ol><li>貼上指令，請 AI 先自己檢查並修正。</li><li>自己用手機和電腦各填一筆測試資料。</li><li>重新整理頁面，確認兩筆資料都還在。</li><li>測完刪掉測試資料。</li></ol>
+<h4>實戰紀錄（1 次，規劃應用不計入）</h4><ul><li>2026-11-25｜活動邀請網頁｜已實作未驗證｜發現點餐功能不完整，補驗收指令要求修正｜新學到：畫面完成不等於功能完成｜成果：已要求補上，待重測</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.2｜2026-11-26｜重寫：改名「三層驗收」，指令縮成 5 行，加自己測試的步驟</li><li>v0.1｜2026-11-25｜建立（ChatGPT 草稿，原名「功能驗收指令」）</li></ul></section></article>
 <article><h2>筆記：畫畫課影片自動剪輯：從成品反推規則再試剪</h2><p>日期：2026-11-25｜關鍵字：影片剪輯、Claude、工具選擇、AI 協作、AI 作曲</p>
 
 <h4>做什麼</h4><p>用 Claude 在本機把課程原稿剪成初剪，配好音樂和字幕。</p><h4>怎麼做</h4><ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>Claude 讀逐字稿判斷剪點，做剪點預覽片給剪輯者勾選。</li><li>AI 作曲墊配樂，Whisper 產生字幕再由 Claude 校對。</li></ol><h4>學到什麼</h4><ol><li>從人剪好的成品反推規則，比自己訂規則準。</li><li>去雜音用 AI 語音隔離，比音量門檻準。</li><li>記憶體不夠時 AI 不一定停下，可能回傳亂猜的結果。</li></ol>
