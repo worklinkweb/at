@@ -2,8 +2,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v2.6">
-<meta name="at-build" content="46616fa24fe4f1b8">
+<meta name="at-version" content="v2.7">
+<meta name="at-build" content="1fb8ecacb07cc9cf">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -667,6 +667,12 @@ body.zooming { overflow: hidden; }
 /* 筆記編號 N-001（v2.6） */
 .note-code { margin: 0 0 2px; font: 700 13px/1.4 var(--serif); letter-spacing: .12em; color: var(--red); }
 
+/* 首頁最上層「AT 編輯」常用指令（v2.7） */
+.quick-bar.edit { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 2px solid var(--ink); }
+.quick-bar.edit .quick-label { flex: 0 0 auto; color: var(--red); }
+.quick-bar.edit .quick-btn { flex: 1 1 150px; }
+@media (max-width: 820px) { .quick-bar.edit .quick-label { display: block; flex-basis: 100%; } }
+
 </style>
 </head>
 <body>
@@ -691,8 +697,13 @@ body.zooming { overflow: hidden; }
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v2.6",
+ "version": "v2.7",
  "changes": [
+  {
+   "v": "v2.7",
+   "date": "2026-11-25",
+   "text": "首頁最上層加「AT 編輯」常用指令（寫成筆記、改筆記、改小卡、加實戰紀錄、封存、還原、刪除），點一下複製，公開版也顯示；「寫成日誌」快速指令改為寫完直接上傳"
+  },
   {
    "v": "v2.6",
    "date": "2026-11-25",
@@ -803,6 +814,43 @@ window.ATLAS_DATA = {
  ],
  "built": "2026-11-25",
  "preview": false,
+ "editPrompts": [
+  {
+   "label": "寫成筆記",
+   "hint": "工作完成時，在原對話貼上",
+   "text": "請把這個對話整理成 AT 筆記：判斷有參考價值就直接寫（筆記 N-xxx，需要時加小卡 AI-xxx），寫完上傳 GitHub，回報編號。沒有參考價值就直接說不用寫。"
+  },
+  {
+   "label": "改筆記",
+   "hint": "用筆記編號指定",
+   "text": "N-001 的「學到什麼」第 2 點改成：……"
+  },
+  {
+   "label": "改小卡",
+   "hint": "用小卡編號指定",
+   "text": "AI-001 的使用說明第 2 點改成：……"
+  },
+  {
+   "label": "加實戰紀錄",
+   "hint": "同一方法又用了一次",
+   "text": "AI-001 加一筆實戰紀錄：日期、專案、實際做法、成果、新學到。"
+  },
+  {
+   "label": "封存",
+   "hint": "先收起來，之後可還原",
+   "text": "N-001 封存"
+  },
+  {
+   "label": "還原",
+   "hint": "從封存區拿回來",
+   "text": "N-001 從封存區還原"
+  },
+  {
+   "label": "刪除",
+   "hint": "確定不要（會先備份）",
+   "text": "AI-001 刪除"
+  }
+ ],
  "quickPrompts": [],
  "xPrompts": [],
  "entries": [
@@ -1956,7 +2004,8 @@ window.ATLAS_DATA = {
     }).join('') + '</div>';
   }
   function quickBar() {
-    return quickRow(DATA.quickPrompts || [], '快速指令', 'data-quick') +
+    return quickRow(DATA.editPrompts || [], 'AT 編輯', 'data-equick', 'edit') +
+      quickRow(DATA.quickPrompts || [], '快速指令', 'data-quick') +
       quickRow(DATA.xPrompts || [], '跨模型', 'data-xquick', 'x');
   }
 
@@ -2521,6 +2570,8 @@ window.ATLAS_DATA = {
   app.addEventListener('click', function (ev) {
     var b = ev.target.closest('[data-quick]');
     if (b) copyText(DATA.quickPrompts[+b.dataset.quick].text);
+    var q = ev.target.closest('[data-equick]');
+    if (q) copyText(DATA.editPrompts[+q.dataset.equick].text);
     var x = ev.target.closest('[data-xquick]');
     if (x) copyText(DATA.xPrompts[+x.dataset.xquick].text);
   });
