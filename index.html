@@ -2,8 +2,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v2.4">
-<meta name="at-build" content="152039eb3b79c997">
+<meta name="at-version" content="v2.6">
+<meta name="at-build" content="46616fa24fe4f1b8">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -583,6 +583,90 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 .bc-orig { margin: 6px 4px 0; text-align: right; font: 600 12px/1.2 var(--sans); letter-spacing: .04em; color: var(--gold); opacity: .85; }
 .bcard.cream .bc-orig { color: var(--navy); }
 
+/* 跨模型縮寫顏色系統（2026-11-25）：藍＝只看不改檔（XR、XP、XV），紫＝會動手改檔（XE、XC）；表頭色＝在哪個 AI 打 */
+:root { --x-read: #1f5fa8; --x-read-soft: #e3edf9; --x-act: #6a3d9a; --x-act-soft: #efe6f8; --t-claude: #b4532a; --t-codex: #2b2b2b; --t-gpt: #0f7a5f; }
+.x-chip { display: inline-block; min-width: 2.4em; text-align: center; font-weight: 800; font-size: 14px; letter-spacing: .02em; padding: 1px 8px; border-radius: 999px; color: #fff; background: var(--muted); margin-right: 6px; }
+.x-chip.x-read { background: var(--x-read); }
+.x-chip.x-act { background: var(--x-act); }
+.x-rule { margin: 4px 0 8px; }
+.x-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 14px; }
+.x-wrap { overflow-x: auto; margin: 10px 0 14px; }
+.x-table { width: 100%; min-width: 40rem; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.x-table th, .x-table td { text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); padding: 8px; }
+.x-table thead th { font-size: 13px; border-bottom: 2px solid var(--ink); }
+.x-table thead th.t-claude { color: var(--t-claude); border-bottom-color: var(--t-claude); }
+.x-table thead th.t-codex { color: var(--t-codex); border-bottom-color: var(--t-codex); }
+.x-table thead th.t-gpt { color: var(--t-gpt); border-bottom-color: var(--t-gpt); }
+.x-table tbody th b { display: block; margin-top: 4px; }
+.x-table tbody th small { display: block; color: var(--muted); font-weight: 400; }
+.x-table td.x-na { color: var(--muted); }
+/* 小卡提示詞標籤與首頁按鈕跟著縮寫上色 */
+.bc-plabel.x-read { background: var(--x-read-soft); color: var(--x-read); }
+.bc-plabel.x-act { background: var(--x-act-soft); color: var(--x-act); }
+.quick-btn.x-read { border-left: 5px solid var(--x-read); }
+.quick-btn.x-act { border-left: 5px solid var(--x-act); }
+.quick-btn.x-read strong { color: var(--x-read); }
+.quick-btn.x-act strong { color: var(--x-act); }
+/* 提示詞中文／English 切換 */
+.bc-phead { grid-area: label; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+.bc-phead .bc-plabel { grid-area: auto; }
+.bc-lang { display: inline-flex; border: 1px solid #b9c9dd; border-radius: 999px; overflow: hidden; }
+.bc-lang button { font: inherit; font-size: 12px; font-weight: 700; border: 0; background: transparent; color: #1f4f86; padding: 2px 10px; min-height: 28px; cursor: pointer; }
+.bc-lang button[aria-pressed="true"] { background: #1f4f86; color: #fff; }
+.bc-lang button:focus-visible { outline: 2px solid #e2c27f; outline-offset: 1px; }
+.bc-prompt pre[lang="en"] { text-align: left; font-family: var(--sans); }
+
+/* 使用說明（2026-11-25，舊稱注意）：準備／限制／提醒小標籤 */
+.bc-notes .bc-lab { color: var(--navy); }
+.bc-notes .bc-list li.has-k { padding-left: 0; }
+.bc-notes .bc-list li.has-k::before { display: none; }
+.nk { display: inline-block; margin-right: 6px; padding: 0 7px; border-radius: 4px; font-size: 12px; font-weight: 700; line-height: 1.7; vertical-align: 1px; }
+.nk-0 { background: #e3edf9; color: #1f4f86; }   /* 準備 */
+.nk-1 { background: #fbe3df; color: #8a3a2e; }   /* 限制 */
+.nk-2 { background: #fff1d1; color: #7a4f0c; }   /* 提醒 */
+.bc-xlegend { margin: 4px 0 0; font-size: 13px; color: var(--ink2); }
+.bc-xlegend .x-chip { font-size: 12px; min-width: 0; padding: 0 8px; margin-right: 4px; }
+
+/* 首頁區塊小註 */
+.sec-note { font-size: 13px; color: var(--muted); }
+.hero-end { margin-top: 32px; }
+
+/* 頁面選單圖示（2026-11-25）：上方分頁加圖示、左側固定圖示列；手機改成底部列 */
+.nav a { display: inline-flex; align-items: center; gap: 5px; }
+.nav a svg { width: 17px; height: 17px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.rail { position: fixed; left: 0; top: 0; bottom: 0; width: 60px; z-index: 9; background: var(--ink); display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 70px 0 16px; }
+.rail a { position: relative; width: 44px; height: 44px; display: grid; place-items: center; color: #fff; border-radius: 10px; text-decoration: none; }
+.rail a:hover { background: rgba(255,255,255,.16); }
+.rail a.on { background: var(--red); }
+.rail a:focus-visible { outline: 2px solid #e2c27f; outline-offset: 2px; }
+.rail svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.rail-tip { position: absolute; left: 52px; top: 50%; transform: translateY(-50%); background: var(--ink); color: #fff; font-size: 13px; padding: 3px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.rail a:hover .rail-tip, .rail a:focus-visible .rail-tip { opacity: 1; }
+body.has-rail { padding-left: 60px; }
+body.has-rail .fab-home { display: none !important; }
+@media (max-width: 560px) {
+  .rail { top: auto; right: 0; width: auto; height: auto; flex-direction: row; justify-content: space-around; gap: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); }
+  .rail-tip { display: none; }
+  body.has-rail { padding-left: 0; padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+  .toast { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .nav a svg { display: none; }
+}
+.bc-row { grid-template-columns: 96px minmax(0, 1fr); }
+.bc-lab { white-space: nowrap; }
+@media (max-width: 560px) { .bc-row { grid-template-columns: 1fr; } }
+
+/* 示意圖點一下放大（2026-11-25） */
+.bc-zoom { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 10px; }
+.bc-zoom:focus-visible { outline: 3px solid #e2c27f; outline-offset: 2px; }
+.zoom-box { position: fixed; inset: 0; z-index: 50; background: rgba(20,20,20,.88); display: flex; flex-direction: column; align-items: center; padding: 12px; }
+.zoom-close { align-self: flex-end; font: 700 15px/1 var(--sans); min-height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: #fff; color: var(--ink); cursor: pointer; margin-bottom: 8px; }
+.zoom-scroll { flex: 1; width: 100%; overflow: auto; display: flex; justify-content: center; align-items: flex-start; }
+.zoom-scroll img { width: min(100%, 720px); height: auto; background: #fff; border-radius: 8px; }
+body.zooming { overflow: hidden; }
+
+/* 筆記編號 N-001（v2.6） */
+.note-code { margin: 0 0 2px; font: 700 13px/1.4 var(--serif); letter-spacing: .12em; color: var(--red); }
+
 </style>
 </head>
 <body>
@@ -607,8 +691,18 @@ code { font-family: ui-monospace, Menlo, monospace; background: var(--red-soft);
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v2.4",
+ "version": "v2.6",
  "changes": [
+  {
+   "v": "v2.6",
+   "date": "2026-11-25",
+   "text": "筆記加編號 N-001（依日期由舊到新），列表與筆記標題上方顯示、可搜尋；build 檢查缺號與重複並顯示下一篇編號"
+  },
+  {
+   "v": "v2.5",
+   "date": "2026-11-25",
+   "text": "提示詞加英文版，每段可切換「中文／EN」，複製會複製目前顯示的語言；跨模型縮寫加顏色系統（藍＝只看不改檔 XR、XP、XV，紫＝會動手改檔 XE、XC；表頭色＝在哪個 AI 打）；說明頁新增「跨模型縮寫」章節，統一寫什麼時候用、在 Claude／Codex／ChatGPT 打會發生什麼；XP 改名「風險預演」；小卡「注意」改「使用說明」，分準備／限制／提醒小標籤，跨模型小卡在 Prompt 下方說明藍紫色；首頁先放最新小卡（新加入的在前）與最新 3 篇筆記；左側固定圖示選單（手機改底部列），上方分頁加圖示；示意圖點一下可全螢幕放大，AI-009 速查表改成直式大字版"
+  },
   {
    "v": "v2.4",
    "date": "2026-11-25",
@@ -713,7 +807,150 @@ window.ATLAS_DATA = {
  "xPrompts": [],
  "entries": [
   {
+   "id": "2026-11-25_畫畫課影片自動剪輯",
+   "code": "N-006",
+   "title": "畫畫課影片自動剪輯：從成品反推規則再試剪",
+   "date": "2026-11-25",
+   "format": "note",
+   "summary": "用 Claude 在本機把課程原稿剪成初剪，人只確認剪點。",
+   "cost": [],
+   "tags": [
+    "影片剪輯",
+    "Claude",
+    "工具選擇",
+    "AI 協作"
+   ],
+   "sources": [],
+   "internalSources": 4,
+   "draft": false,
+   "archived": false,
+   "archivedDate": "",
+   "top3": [],
+   "related": [
+    "AI-010"
+   ],
+   "sections": [
+    {
+     "title": "做什麼",
+     "html": "<p>用 Claude 在本機把課程原稿剪成初剪，人只確認剪點。</p>"
+    },
+    {
+     "title": "怎麼做",
+     "html": "<ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>程式分析講話與畫面動作，Claude 讀逐字稿判斷剪點。</li><li>做剪點預覽片和審片版，剪輯者依編號勾剪或不剪。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>從人剪好的成品反推規則，比自己訂規則準。</li><li>邊畫邊安靜不能剪，要看畫面有沒有在動。</li><li>去雜音用 AI 語音隔離，比音量門檻準。</li></ol>"
+    }
+   ],
+   "cards": [
+    {
+     "code": "AI-010",
+     "name": "課程影片初剪",
+     "use": "把邊講邊示範的課程原稿，自動剪成去背景音的初剪，並列出剪點給人確認。",
+     "when": [
+      "老師邊講邊示範的錄影課，有好幾支原稿要接起來。",
+      "已經有一集人工剪好的成品可以當範本。",
+      "要固定加系列片頭、片尾。"
+     ],
+     "notes": [
+      "準備：Mac 要先裝 ffmpeg 與 Whisper 環境，第一次約 10 分鐘。",
+      "限制：70 分鐘原稿，分析約 15 分鐘、輸出約 12 分鐘。",
+      "限制：影片檔很大，不放進 Git 和雲端同步資料夾。",
+      "提醒：第一版先保守剪，再依剪輯者的勾選調整。",
+      "提醒：剪點清單可先用 XR 請 Codex 依逐字稿抓誤剪。"
+     ],
+     "prompts": [
+      {
+       "label": "在 Claude Code 打：比對範本、歸納規則",
+       "text": "這是同一集課程的原稿和剪好的成品。\n請比對逐字稿，列出成品剪掉了哪些內容、保留了哪些，整理成剪輯規則。\n先說結論，規則分「要剪」「不剪」「聲音處理」三類。",
+       "en": "These are the raw clips and the finished edit of the same lesson.\nCompare the transcripts, list what the finished edit removed and kept, and turn it into editing rules.\nLead with the conclusion; group rules into \"cut\", \"keep\", and \"audio\"."
+      },
+      {
+       "label": "在 Claude Code 打：試剪新的一集",
+       "text": "請用剪輯規則試剪這一集：原稿在 <資料夾>。\n片頭片尾用 <檔案>。\n輸出初剪影片，並列出剪輯清單（時間、原因、講了什麼），讓剪輯者勾選剪或不剪。",
+       "en": "Use the editing rules to make a rough cut of this lesson. Raw clips are in <folder>.\nUse <files> as the opening and ending.\nExport the rough cut and a cut list (time, reason, what was said) for the editor to mark cut or keep."
+      }
+     ],
+     "preparedBy": "Claude",
+     "promptOutline": false,
+     "domain": "工作職場",
+     "notFor": [
+      "需要轉場、特效、字卡的精剪。",
+      "沒有講話的純示範影片：逐字稿判斷不了。",
+      "要用 AI 生成新畫面的影片。"
+     ],
+     "steps": [
+      "準備一集人剪好的成品和它的原稿，請 Claude 比對、整理剪輯規則。",
+      "新的一集：原稿依錄影順序放進同一個資料夾。",
+      "程式分析講話、畫面動作、逐字稿。",
+      "Claude 讀逐字稿，標出等學生、重講、講錯、結尾。",
+      "輸出剪點預覽片（紅框＋編號）和審片版（角落標原稿與時間）。",
+      "剪輯者依編號在清單勾剪或不剪，再輸出下一版。"
+     ],
+     "tools": [
+      "<a href=\"https://ffmpeg.org/\" target=\"_blank\" rel=\"noopener\">FFmpeg</a>：剪接、降噪、音量一致",
+      "<a href=\"https://github.com/ml-explore/mlx-examples/tree/main/whisper\" target=\"_blank\" rel=\"noopener\">mlx-whisper</a>：本機語音轉文字",
+      "<a href=\"https://github.com/Rikorose/DeepFilterNet\" target=\"_blank\" rel=\"noopener\">DeepFilterNet</a>：語音隔離"
+     ],
+     "practice": [
+      {
+       "date": "2026-11-25",
+       "project": "線上畫畫課 Ep2 範本",
+       "status": "已驗證完成",
+       "how": "原稿逐字稿比對成品字幕",
+       "result": "剪輯規則 v1",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "成品只剪掉 12%"
+      },
+      {
+       "date": "2026-11-25",
+       "project": "線上畫畫課 Ep2 帆船",
+       "status": "已實作未驗證",
+       "how": "10 支原稿自動試剪",
+       "result": "70.8 分鐘初剪、15 處剪點",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "第一版剪得比範本保守"
+      },
+      {
+       "date": "2026-11-25",
+       "project": "線上畫畫課 Ep2 帆船",
+       "status": "已實作未驗證",
+       "how": "改用剪點預覽片、審片版；8 種聲音樣本比較",
+       "result": "選定語音隔離",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "降噪加閘門會吃掉小聲講話"
+      },
+      {
+       "date": "2026-11-25",
+       "project": "線上畫畫課 Ep2 帆船",
+       "status": "已驗證完成",
+       "how": "XR：Codex 依逐字稿審查剪輯清單",
+       "result": "修正 3 個誤剪",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "誤剪比漏剪危險"
+      }
+     ],
+     "practiceCount": 4,
+     "versions": [
+      "v0.1｜2026-11-25｜建立",
+      "v0.2｜2026-11-25｜加剪點預覽片、審片版、語音隔離",
+      "v0.3｜2026-11-25｜加 XR 審查剪點"
+     ],
+     "image": null,
+     "archived": false,
+     "archivedDate": "",
+     "series": {
+      "name": "自動系",
+      "desc": "流程與批次處理"
+     },
+     "id": "2026-11-25_畫畫課影片自動剪輯"
+    }
+   ]
+  },
+  {
    "id": "2026-11-25_跨模型縮寫",
+   "code": "N-005",
    "title": "跨模型縮寫：打兩個字母就叫另一個 AI 幫忙",
    "date": "2026-11-25",
    "format": "note",
@@ -736,7 +973,7 @@ window.ATLAS_DATA = {
      "url": "https://trailofbits.com/skills/second-opinion/"
     },
     {
-     "title": "claude-codex-review（事前驗屍、限制輪數）",
+     "title": "claude-codex-review（風險預演、限制輪數）",
      "url": "https://github.com/KamakuraCrypto/claude-codex-review"
     },
     {
@@ -779,29 +1016,34 @@ window.ATLAS_DATA = {
       "修正後只想確認上次的問題。"
      ],
      "notes": [
-      "ChatGPT、Claude Chat 要先把總說明短版貼進自訂指令，才認得縮寫。",
-      "送審前先遮公司名、人名、統編。",
-      "對方沒跑完算「無法驗證」；複驗最多 2 輪。"
+      "準備：ChatGPT、Claude Chat 要先把總說明短版貼進自訂指令，才認得縮寫。",
+      "準備：送審前先遮公司名、人名、統編。",
+      "提醒：對方沒跑完算「無法驗證」；複驗最多 2 輪。",
+      "提醒：XP 舊稱「事前驗屍」，2026-11-25 改成較中性的「風險預演」。"
      ],
      "prompts": [
       {
-       "label": "XR 交叉審查（Claude、Codex、ChatGPT 都能用）",
-       "text": "XR <檔案位置>"
+       "label": "XR 交叉審查｜Claude、Codex、ChatGPT 都能打",
+       "text": "XR <檔案位置>",
+       "en": "XR <file path>"
       },
       {
-       "label": "XP 事前驗屍（計畫書、申請表送審前）",
-       "text": "XP <檔案位置>"
+       "label": "XP 風險預演｜Claude、Codex、ChatGPT 都能打（送審或上線前）",
+       "text": "XP <檔案位置>",
+       "en": "XP <file path>"
       },
       {
-       "label": "XE 交給 Claude 執行（只在 Codex 用）",
-       "text": "XE <要完成的事>\n範圍：只能改 <資料夾或檔案>\n驗收標準：<怎樣算完成>"
+       "label": "XE 交給 Claude 執行｜只在 Codex 打",
+       "text": "XE <要完成的事>\n範圍：只能改 <資料夾或檔案>\n驗收標準：<怎樣算完成>",
+       "en": "XE <what to finish>\nScope: change only <folders or files>\nAcceptance criteria: <what counts as done>"
       },
       {
-       "label": "XV 唯讀複驗（Claude、Codex、ChatGPT 都能用）",
-       "text": "XV 上次問題：<問題>。現已改為：<修正內容>"
+       "label": "XV 唯讀複驗｜Claude、Codex、ChatGPT 都能打",
+       "text": "XV 上次問題：<問題>。現已改為：<修正內容>",
+       "en": "XV Last issue: <issue>. Now changed to: <fix>"
       },
       {
-       "label": "XC 程式碼審查（只在 Claude Code 的 Git 專案用）",
+       "label": "XC 程式碼審查｜只在 Claude Code 打（指令不用翻譯）",
        "text": "XC"
       }
      ],
@@ -814,13 +1056,16 @@ window.ATLAS_DATA = {
       "要對外發布、付款或刪除的工作。"
      ],
      "steps": [
-      "XR 交叉審查：在 Claude 打，Claude 請 Codex 審查；在 Codex 打，Codex 請 Claude 審查。審查的 AI 只列問題、不改檔。",
-      "XP 事前驗屍：做法同 XR，再加一題「假設這份已被退件，列最可能的 5 個原因」。適合計畫書、申請表送審前。",
-      "XE 交給 Claude 執行：只在 Codex 用。Codex 先寫任務單給我確認，再呼叫 Claude 動手，最後讀實際檔案驗收。",
-      "XV 唯讀複驗：只檢查上次的問題改好沒、有沒有影響別處。不改檔，也不再叫別的 AI。",
-      "XC 程式碼審查：只在 Claude Code 的 Git 專案用。Codex 審程式改動，Claude 逐點判斷、修正並重新測試。",
-      "在 ChatGPT App：XR、XP、XV 由 ChatGPT 自己審查；打 XE、XC 時，它會提醒我換到 Codex 或 Claude Code。",
-      "不想打字時，打開私人網址首頁，按「跨模型」那排按鈕，就會複製完整指令。"
+      "記法：在哪個 AI 打，就請另一個 AI 來看或來做；打字的 AI 最後判斷。",
+      "顏色：藍色只看不改檔（XR、XP、XV）；紫色會動手改檔（XE、XC）。",
+      "XR 交叉審查：文件寫好、想要第二意見時。在 Claude 打由 Codex 審，在 Codex 打由 Claude 審。",
+      "XP 風險預演：送審或上線前。做法同 XR，再假設已被退件或失敗，列 5 個原因。",
+      "XE 交給 Claude 執行：只在 Codex 打。Codex 寫任務單，Claude 做，Codex 驗收。",
+      "XV 唯讀複驗：照審查意見改完後。在哪裡打，就由那個 AI 自己檢查，不叫別的 AI。",
+      "XC 程式碼審查：只在 Claude Code 打。Codex 審程式，Claude 修正並重新測試。",
+      "在 ChatGPT 打：XR、XP、XV 由 ChatGPT 自己做；XE、XC 會提醒換工具。",
+      "常見順序：做完 → XR（送審前用 XP）→ 修正 → XV。",
+      "AI 會在適合時，於回答最後提示要打哪個縮寫；我打了才執行。"
      ],
      "tools": [
       "AGENTS.md「跨模型縮寫」：縮寫的正式定義，Claude 和 Codex 都會讀。",
@@ -841,10 +1086,11 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 1,
      "versions": [
+      "v0.2｜2026-11-25｜XP 改名風險預演；加使用時機、顏色與英文版提示詞",
       "v0.1｜2026-11-25｜建立：XR、XP、XE、XV、XC 五個縮寫"
      ],
      "image": {
-      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NjAgNDMwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgJ1BpbmdGYW5nIFRDJywgJ05vdG8gU2FucyBUQycsIHNhbnMtc2VyaWYiPgogIDxyZWN0IHdpZHRoPSI3NjAiIGhlaWdodD0iNDMwIiBmaWxsPSIjZmJmN2VlIi8+CiAgPHRleHQgeD0iMjQiIHk9IjM4IiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMWYyZjRkIj7ot6jmqKHlnovnuK7lr6vpgJ/mn6Xooag8L3RleHQ+CiAgPHRleHQgeD0iNzM2IiB5PSIzOCIgZm9udC1zaXplPSIxMyIgZmlsbD0iIzZiNmI2YiIgdGV4dC1hbmNob3I9ImVuZCI+57iu5a+r5b6M6Z2i5o6l5qqU5qGI5oiW5Lu75YuZPC90ZXh0PgogIDxnIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPgogICAgPHJlY3QgeD0iMTYiIHk9IjU0IiB3aWR0aD0iNzI4IiBoZWlnaHQ9IjM0IiBmaWxsPSIjMWYyZjRkIi8+CiAgICA8dGV4dCB4PSIzMCIgeT0iNzYiPue4ruWvqzwvdGV4dD4KICAgIDx0ZXh0IHg9Ijk2IiB5PSI3NiI+5oSP5oCdPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSI3NiI+5ZyoIENsYXVkZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjQzNiIgeT0iNzYiPuWcqCBDb2RleDwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iNzYiPuWcqCBDaGF0R1BUIEFwcDwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxMyIgZmlsbD0iIzIyMiI+CiAgICA8cmVjdCB4PSIxNiIgeT0iODgiIHdpZHRoPSI3MjgiIGhlaWdodD0iNjQiIGZpbGw9IiNmZmZmZmYiLz4KICAgIDx0ZXh0IHg9IjMwIiB5PSIxMjYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNiMDNhMmUiPlhSPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjExNCIgZm9udC13ZWlnaHQ9IjcwMCI+5Lqk5Y+J5a+p5p+lPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjEzNCIgZmlsbD0iIzU1NSI+5Y+q5YiX5ZWP6aGM44CB5LiN5pS55qqUPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIxMjQiPuiriyBDb2RleCDlr6nmn6U8L3RleHQ+CiAgICA8dGV4dCB4PSI0MzYiIHk9IjEyNCI+6KuLIENsYXVkZSDlr6nmn6U8L3RleHQ+CiAgICA8dGV4dCB4PSI1OTYiIHk9IjEyNCI+6Ieq5bex55W25a+p5p+l5aeU5ZOhPC90ZXh0PgoKICAgIDxyZWN0IHg9IjE2IiB5PSIxNTIiIHdpZHRoPSI3MjgiIGhlaWdodD0iNjQiIGZpbGw9IiNmM2VlZTIiLz4KICAgIDx0ZXh0IHg9IjMwIiB5PSIxOTAiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNiMDNhMmUiPlhQPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjE3OCIgZm9udC13ZWlnaHQ9IjcwMCI+5LqL5YmN6amX5bGNPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjE5OCIgZmlsbD0iIzU1NSI+5YGH6Kit6KKr6YCA5Lu277yM5YiXIDUg5YCL5Y6f5ZugPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIxODgiPuiriyBDb2RleCDlgZo8L3RleHQ+CiAgICA8dGV4dCB4PSI0MzYiIHk9IjE4OCI+6KuLIENsYXVkZSDlgZo8L3RleHQ+CiAgICA8dGV4dCB4PSI1OTYiIHk9IjE4OCI+6Ieq5bex5YGaPC90ZXh0PgoKICAgIDxyZWN0IHg9IjE2IiB5PSIyMTYiIHdpZHRoPSI3MjgiIGhlaWdodD0iNjQiIGZpbGw9IiNmZmZmZmYiLz4KICAgIDx0ZXh0IHg9IjMwIiB5PSIyNTQiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNiMDNhMmUiPlhFPC90ZXh0PgogICAgPHRleHQgeD0iOTYiIHk9IjI0MiIgZm9udC13ZWlnaHQ9IjcwMCI+5Lqk57WmIENsYXVkZSDln7fooYw8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMjYyIiBmaWxsPSIjNTU1Ij5DbGF1ZGUg5YGa44CBQ29kZXgg6amX5pS2PC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIyNTIiIGZpbGw9IiM4ODgiPuS4jemBqeeUqDwvdGV4dD4KICAgIDx0ZXh0IHg9IjQzNiIgeT0iMjQ0Ij7lhYjlr6vku7vli5nllq7ntabmiJHnorroqo08L3RleHQ+CiAgICA8dGV4dCB4PSI0MzYiIHk9IjI2MiI+5YaN5ZG85Y+rIENsYXVkZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iMjUyIiBmaWxsPSIjODg4Ij7mj5DphpLmj5vliLAgQ29kZXg8L3RleHQ+CgogICAgPHJlY3QgeD0iMTYiIHk9IjI4MCIgd2lkdGg9IjcyOCIgaGVpZ2h0PSI2NCIgZmlsbD0iI2YzZWVlMiIvPgogICAgPHRleHQgeD0iMzAiIHk9IjMxOCIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2IwM2EyZSI+WFY8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzA2IiBmb250LXdlaWdodD0iNzAwIj7llK/oroDopIfpqZc8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzI2IiBmaWxsPSIjNTU1Ij7lj6rnnIvkuIrmrKHnmoTllY/poYzmlLnlpb3mspI8L3RleHQ+CiAgICA8dGV4dCB4PSIyNzYiIHk9IjMxNiI+6Ieq5bex5qqi5p+lPC90ZXh0PgogICAgPHRleHQgeD0iNDM2IiB5PSIzMTYiPuiHquW3seaqouafpTwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iMzE2Ij7oh6rlt7HmqqLmn6U8L3RleHQ+CgogICAgPHJlY3QgeD0iMTYiIHk9IjM0NCIgd2lkdGg9IjcyOCIgaGVpZ2h0PSI2NCIgZmlsbD0iI2ZmZmZmZiIvPgogICAgPHRleHQgeD0iMzAiIHk9IjM4MiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2IwM2EyZSI+WEM8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzcwIiBmb250LXdlaWdodD0iNzAwIj7nqIvlvI/norzlr6nmn6U8L3RleHQ+CiAgICA8dGV4dCB4PSI5NiIgeT0iMzkwIiBmaWxsPSIjNTU1Ij5Db2RleCDlr6njgIFDbGF1ZGUg5L+u5q2jPC90ZXh0PgogICAgPHRleHQgeD0iMjc2IiB5PSIzNzIiPi9jb2RleDpyZXZpZXcgLS13YWl0PC90ZXh0PgogICAgPHRleHQgeD0iNDM2IiB5PSIzODAiIGZpbGw9IiM4ODgiPuS4jemBqeeUqDwvdGV4dD4KICAgIDx0ZXh0IHg9IjU5NiIgeT0iMzgwIiBmaWxsPSIjODg4Ij7mj5DphpLmj5vliLAgQ2xhdWRlIENvZGU8L3RleHQ+CiAgPC9nPgogIDxyZWN0IHg9IjE2IiB5PSI1NCIgd2lkdGg9IjcyOCIgaGVpZ2h0PSIzNTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmMmY0ZCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSIyNCIgeT0iNDI0IiBmb250LXNpemU9IjExIiBmaWxsPSIjNmI2YjZiIj7lhbHlkIzopo/liYfvvJrlr6nmn6XkuI3mlLnmqpTvvZzmspLot5HlroznrpfjgIznhKHms5XpqZforYnjgI3vvZzopIfpqZfmnIDlpJogMiDovKo8L3RleHQ+Cjwvc3ZnPgo=",
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODAgMTE5NCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sICdQaW5nRmFuZyBUQycsICdOb3RvIFNhbnMgVEMnLCBzYW5zLXNlcmlmIj4KPHJlY3Qgd2lkdGg9IjQ4MCIgaGVpZ2h0PSIxMTk0IiBmaWxsPSIjZmJmN2VlIi8+Cjx0ZXh0IHg9IjIwIiB5PSI0MCIgZm9udC1zaXplPSIyNiIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iIzFmMmY0ZCIgdGV4dC1hbmNob3I9InN0YXJ0Ij7ot6jmqKHlnovnuK7lr6vpgJ/mn6Xooag8L3RleHQ+Cjx0ZXh0IHg9IjIwIiB5PSI3MiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9InN0YXJ0Ij7lnKjlk6rlgIsgQUkg5omT77yM5bCx6KuL44CM5Y+m5LiA5YCLIEFJ44CN5L6G55yL5oiW5L6G5YGa77ybPC90ZXh0Pgo8dGV4dCB4PSIyMCIgeT0iOTYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJzdGFydCI+5omT5a2X55qE6YKj5YCLIEFJIOacgOW+jOWIpOaWt+OAgeS/ruato+OAgjwvdGV4dD4KPHJlY3QgeD0iMjAiIHk9IjExMiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjI0IiByeD0iMTIiIGZpbGw9IiMxZjVmYTgiLz4KPHRleHQgeD0iNDAiIHk9IjEzMCIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+6JeNPC90ZXh0Pgo8dGV4dCB4PSI2OCIgeT0iMTMwIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMjIyIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuWPqueci+S4jeaUueaqlDwvdGV4dD4KPHJlY3QgeD0iMjAwIiB5PSIxMTIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyNCIgcng9IjEyIiBmaWxsPSIjNmEzZDlhIi8+Cjx0ZXh0IHg9IjIyMCIgeT0iMTMwIiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7ntKs8L3RleHQ+Cjx0ZXh0IHg9IjI0OCIgeT0iMTMwIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMjIyIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuacg+WLleaJi+aUueaqlDwvdGV4dD4KPHJlY3QgeD0iMTIiIHk9IjE1MiIgd2lkdGg9IjQ1NiIgaGVpZ2h0PSIxNzgiIHJ4PSIxMiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMWY1ZmE4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iMTIiIHk9IjE1MiIgd2lkdGg9IjgiIGhlaWdodD0iMTc4IiByeD0iNCIgZmlsbD0iIzFmNWZhOCIvPgo8cmVjdCB4PSIzMiIgeT0iMTY2IiB3aWR0aD0iNTQiIGhlaWdodD0iMzAiIHJ4PSIxNSIgZmlsbD0iIzFmNWZhOCIvPgo8dGV4dCB4PSI1OSIgeT0iMTg4IiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5YUjwvdGV4dD4KPHRleHQgeD0iOTgiIHk9IjE4OCIgZm9udC1zaXplPSIyMSIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iIzFmNWZhOCIgdGV4dC1hbmNob3I9InN0YXJ0Ij7kuqTlj4nlr6nmn6U8L3RleHQ+Cjx0ZXh0IHg9IjQ1MiIgeT0iMTg4IiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjNzc3IiB0ZXh0LWFuY2hvcj0iZW5kIj5Dcm9zcyBSZXZpZXc8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSIyMjAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJzdGFydCI+5L2V5pmC77ya5paH5Lu25oiW5oiQ5ZOB5a+r5aW977yM5oOz6KaB56ys5LqM5oSP6KaLPC90ZXh0Pgo8dGV4dCB4PSIzMiIgeT0iMjU0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjYjQ1MzJhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNsYXVkZSDmiZM8L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iMjU0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMjIyIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuiriyBDb2RleCDlr6k8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSIyODAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyYjJiMmIiIHRleHQtYW5jaG9yPSJzdGFydCI+Q29kZXgg5omTPC90ZXh0Pgo8dGV4dCB4PSIxNDAiIHk9IjI4MCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzIyMiIgdGV4dC1hbmNob3I9InN0YXJ0Ij7oq4sgQ2xhdWRlIOWvqTwvdGV4dD4KPHRleHQgeD0iMzIiIHk9IjMwNiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmN2E1ZiIgdGV4dC1hbmNob3I9InN0YXJ0Ij5DaGF0R1BUIOaJkzwvdGV4dD4KPHRleHQgeD0iMTQwIiB5PSIzMDYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiMyMjIiIHRleHQtYW5jaG9yPSJzdGFydCI+6Ieq5bex5a+pPC90ZXh0Pgo8cmVjdCB4PSIxMiIgeT0iMzQyIiB3aWR0aD0iNDU2IiBoZWlnaHQ9IjE3OCIgcng9IjEyIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMxZjVmYTgiIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxMiIgeT0iMzQyIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNzgiIHJ4PSI0IiBmaWxsPSIjMWY1ZmE4Ii8+CjxyZWN0IHg9IjMyIiB5PSIzNTYiIHdpZHRoPSI1NCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSIjMWY1ZmE4Ii8+Cjx0ZXh0IHg9IjU5IiB5PSIzNzgiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhQPC90ZXh0Pgo8dGV4dCB4PSI5OCIgeT0iMzc4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjMWY1ZmE4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiPumiqOmaqumgkOa8lDwvdGV4dD4KPHRleHQgeD0iNDUyIiB5PSIzNzgiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiM3NzciIHRleHQtYW5jaG9yPSJlbmQiPlByZS1tb3J0ZW08L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSI0MTAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJzdGFydCI+5L2V5pmC77ya6YCB5a+p5oiW5LiK57ea5YmN77yM5YGH6Kit5aSx5pWX5om+IDUg5YCL5Y6f5ZugPC90ZXh0Pgo8dGV4dCB4PSIzMiIgeT0iNDQ0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjYjQ1MzJhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNsYXVkZSDmiZM8L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iNDQ0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMjIyIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuiriyBDb2RleCDlgZo8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSI0NzAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyYjJiMmIiIHRleHQtYW5jaG9yPSJzdGFydCI+Q29kZXgg5omTPC90ZXh0Pgo8dGV4dCB4PSIxNDAiIHk9IjQ3MCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzIyMiIgdGV4dC1hbmNob3I9InN0YXJ0Ij7oq4sgQ2xhdWRlIOWBmjwvdGV4dD4KPHRleHQgeD0iMzIiIHk9IjQ5NiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmN2E1ZiIgdGV4dC1hbmNob3I9InN0YXJ0Ij5DaGF0R1BUIOaJkzwvdGV4dD4KPHRleHQgeD0iMTQwIiB5PSI0OTYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiMyMjIiIHRleHQtYW5jaG9yPSJzdGFydCI+6Ieq5bex5YGaPC90ZXh0Pgo8cmVjdCB4PSIxMiIgeT0iNTMyIiB3aWR0aD0iNDU2IiBoZWlnaHQ9IjE3OCIgcng9IjEyIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiM2YTNkOWEiIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxMiIgeT0iNTMyIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNzgiIHJ4PSI0IiBmaWxsPSIjNmEzZDlhIi8+CjxyZWN0IHg9IjMyIiB5PSI1NDYiIHdpZHRoPSI1NCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSIjNmEzZDlhIi8+Cjx0ZXh0IHg9IjU5IiB5PSI1NjgiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhFPC90ZXh0Pgo8dGV4dCB4PSI5OCIgeT0iNTY4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjNmEzZDlhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuS6pOe1piBDbGF1ZGUg5Z+36KGMPC90ZXh0Pgo8dGV4dCB4PSI0NTIiIHk9IjU2OCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3NyIgdGV4dC1hbmNob3I9ImVuZCI+RXhlY3V0ZTwvdGV4dD4KPHRleHQgeD0iMzIiIHk9IjYwMCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9InN0YXJ0Ij7kvZXmmYLvvJrlnKggQ29kZXgg6KOh77yM56+E5ZyN5riF5qWa55qE5bel5L2c6KaB5YuV5omLPC90ZXh0Pgo8dGV4dCB4PSIzMiIgeT0iNjM0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjYjQ1MzJhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNsYXVkZSDmiZM8L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iNjM0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjOGE4YThhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuS4jeeUqO+8jENsYXVkZSDnm7TmjqXlgZo8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSI2NjAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyYjJiMmIiIHRleHQtYW5jaG9yPSJzdGFydCI+Q29kZXgg5omTPC90ZXh0Pgo8dGV4dCB4PSIxNDAiIHk9IjY2MCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzIyMiIgdGV4dC1hbmNob3I9InN0YXJ0Ij7ku7vli5nllq4g4oaSIENsYXVkZSDlgZog4oaSIENvZGV4IOmpl+aUtjwvdGV4dD4KPHRleHQgeD0iMzIiIHk9IjY4NiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBmN2E1ZiIgdGV4dC1hbmNob3I9InN0YXJ0Ij5DaGF0R1BUIOaJkzwvdGV4dD4KPHRleHQgeD0iMTQwIiB5PSI2ODYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiM4YThhOGEiIHRleHQtYW5jaG9yPSJzdGFydCI+5o+Q6YaS5o+b5YiwIENvZGV4PC90ZXh0Pgo8cmVjdCB4PSIxMiIgeT0iNzIyIiB3aWR0aD0iNDU2IiBoZWlnaHQ9IjE3OCIgcng9IjEyIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMxZjVmYTgiIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxMiIgeT0iNzIyIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNzgiIHJ4PSI0IiBmaWxsPSIjMWY1ZmE4Ii8+CjxyZWN0IHg9IjMyIiB5PSI3MzYiIHdpZHRoPSI1NCIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSIjMWY1ZmE4Ii8+Cjx0ZXh0IHg9IjU5IiB5PSI3NTgiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhWPC90ZXh0Pgo8dGV4dCB4PSI5OCIgeT0iNzU4IiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjMWY1ZmE4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuWUr+iugOikh+mplzwvdGV4dD4KPHRleHQgeD0iNDUyIiB5PSI3NTgiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiM3NzciIHRleHQtYW5jaG9yPSJlbmQiPlZlcmlmeTwvdGV4dD4KPHRleHQgeD0iMzIiIHk9Ijc5MCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjUwMCIgZmlsbD0iIzMzMyIgdGV4dC1hbmNob3I9InN0YXJ0Ij7kvZXmmYLvvJrnhaflr6nmn6XmhI/opovmlLnlrozlvozvvIznorroqo3mlLnlpb3mspI8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSI4MjQiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNiNDUzMmEiIHRleHQtYW5jaG9yPSJzdGFydCI+Q2xhdWRlIOaJkzwvdGV4dD4KPHRleHQgeD0iMTQwIiB5PSI4MjQiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiMyMjIiIHRleHQtYW5jaG9yPSJzdGFydCI+6Ieq5bex5qqi5p+lPC90ZXh0Pgo8dGV4dCB4PSIzMiIgeT0iODUwIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMmIyYjJiIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNvZGV4IOaJkzwvdGV4dD4KPHRleHQgeD0iMTQwIiB5PSI4NTAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiMyMjIiIHRleHQtYW5jaG9yPSJzdGFydCI+6Ieq5bex5qqi5p+lPC90ZXh0Pgo8dGV4dCB4PSIzMiIgeT0iODc2IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMGY3YTVmIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNoYXRHUFQg5omTPC90ZXh0Pgo8dGV4dCB4PSIxNDAiIHk9Ijg3NiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzIyMiIgdGV4dC1hbmNob3I9InN0YXJ0Ij7oh6rlt7HmqqLmn6U8L3RleHQ+CjxyZWN0IHg9IjEyIiB5PSI5MTIiIHdpZHRoPSI0NTYiIGhlaWdodD0iMTc4IiByeD0iMTIiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzZhM2Q5YSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHg9IjEyIiB5PSI5MTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjE3OCIgcng9IjQiIGZpbGw9IiM2YTNkOWEiLz4KPHJlY3QgeD0iMzIiIHk9IjkyNiIgd2lkdGg9IjU0IiBoZWlnaHQ9IjMwIiByeD0iMTUiIGZpbGw9IiM2YTNkOWEiLz4KPHRleHQgeD0iNTkiIHk9Ijk0OCIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+WEM8L3RleHQ+Cjx0ZXh0IHg9Ijk4IiB5PSI5NDgiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IiM2YTNkOWEiIHRleHQtYW5jaG9yPSJzdGFydCI+56iL5byP56K85a+p5p+lPC90ZXh0Pgo8dGV4dCB4PSI0NTIiIHk9Ijk0OCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3NyIgdGV4dC1hbmNob3I9ImVuZCI+Q29kZSBSZXZpZXc8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSI5ODAiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJzdGFydCI+5L2V5pmC77yaQ2xhdWRlIENvZGUg5pS55a6MIEdpdCDlsIjmoYjnmoTnqIvlvI88L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSIxMDE0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjYjQ1MzJhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNsYXVkZSDmiZM8L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iMTAxNCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iIzIyMiIgdGV4dC1hbmNob3I9InN0YXJ0Ij5Db2RleCDlr6kg4oaSIENsYXVkZSDkv67mraPjgIHph43muKw8L3RleHQ+Cjx0ZXh0IHg9IjMyIiB5PSIxMDQwIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMmIyYjJiIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPkNvZGV4IOaJkzwvdGV4dD4KPHRleHQgeD0iMTQwIiB5PSIxMDQwIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjOGE4YThhIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuS4jemBqeeUqDwvdGV4dD4KPHRleHQgeD0iMzIiIHk9IjEwNjYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwZjdhNWYiIHRleHQtYW5jaG9yPSJzdGFydCI+Q2hhdEdQVCDmiZM8L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iMTA2NiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzhhOGE4YSIgdGV4dC1hbmNob3I9InN0YXJ0Ij7mj5DphpLmj5vliLAgQ2xhdWRlIENvZGU8L3RleHQ+Cjx0ZXh0IHg9IjIwIiB5PSIxMTI2IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMWYyZjRkIiB0ZXh0LWFuY2hvcj0ic3RhcnQiPuW4uOimi+mghuW6j++8muWBmuWujCDihpIgWFLvvIjpgIHlr6nliY3nlKggWFDvvInihpIg5L+u5q2jIOKGkiBYVjwvdGV4dD4KPHRleHQgeD0iMjAiIHk9IjExNTIiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiM1NTUiIHRleHQtYW5jaG9yPSJzdGFydCI+5a+p5p+l5LiN5pS55qqU772c5rKS6LeR5a6M566X44CM54Sh5rOV6amX6K2J44CN772c6KSH6amX5pyA5aSaIDIg6LyqPC90ZXh0Pgo8dGV4dCB4PSIyMCIgeT0iMTE3NCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzU1NSIgdGV4dC1hbmNob3I9InN0YXJ0Ij5BSSDlj6rmj5DnpLrnuK7lr6vvvIzkvaDmiZPkuobmiY3ln7fooYw8L3RleHQ+Cjwvc3ZnPgo=",
       "alt": "跨模型縮寫"
      },
      "archived": false,
@@ -859,6 +1105,7 @@ window.ATLAS_DATA = {
   },
   {
    "id": "2026-11-23_讓AI讀得到的私密網站發布",
+   "code": "N-004",
    "title": "讓 AI 讀得到、別人進不來：私密網站發布",
    "date": "2026-11-23",
    "format": "note",
@@ -905,14 +1152,15 @@ window.ATLAS_DATA = {
       "內容常更新，不想每次手動上傳。"
      ],
      "notes": [
-      "Gist 不是密碼保護，網址只給需要的 AI。",
-      "StatiCrypt 只保護內容，不能管理個別帳號權限。",
-      "這段提示詞依本案整理，尚未在第二個專案驗證。"
+      "限制：Gist 不是密碼保護，網址只給需要的 AI。",
+      "限制：StatiCrypt 只保護內容，不能管理個別帳號權限。",
+      "限制：這段提示詞依本案整理，尚未在第二個專案驗證。"
      ],
      "prompts": [
       {
        "label": "",
-       "text": "請幫我把這個網站發布成「人看要密碼、AI 有專用網址」。先不要上傳，先回報計畫等我確認。\n1. 盤點：列出要公開的內容，檢查路徑、Email、金鑰、私人網址和 Git 歷史。\n2. AI 閱讀頁：產生不需執行程式就能讀的純文字頁，標示版本與更新日期。\n3. 人看入口：用 StatiCrypt 加密後放 GitHub Pages，只上傳成品。\n4. AI 入口：放不公開列出的 Gist，並提醒我拿到網址的人都能讀。\n5. 密碼：由我本人輸入並存在 macOS 鑰匙圈，不要讓 AI 看到。\n6. 核對：上傳後用未登入狀態讀回線上內容並比對版本，沒對上就回報失敗。"
+       "text": "請幫我把這個網站發布成「人看要密碼、AI 有專用網址」。先不要上傳，先回報計畫等我確認。\n1. 盤點：列出要公開的內容，檢查路徑、Email、金鑰、私人網址和 Git 歷史。\n2. AI 閱讀頁：產生不需執行程式就能讀的純文字頁，標示版本與更新日期。\n3. 人看入口：用 StatiCrypt 加密後放 GitHub Pages，只上傳成品。\n4. AI 入口：放不公開列出的 Gist，並提醒我拿到網址的人都能讀。\n5. 密碼：由我本人輸入並存在 macOS 鑰匙圈，不要讓 AI 看到。\n6. 核對：上傳後用未登入狀態讀回線上內容並比對版本，沒對上就回報失敗。",
+       "en": "Help me publish this website so people need a password and AI has its own URL. Do not upload yet. First report the plan and wait for my approval.\n1. Inventory: list what will be public, and check for file paths, emails, keys, private URLs, and Git history.\n2. AI reading page: create a plain-text page that works without running code, with the version and update date.\n3. Human entrance: encrypt it with StatiCrypt and put it on GitHub Pages. Upload only the finished page.\n4. AI entrance: put it in an unlisted Gist, and remind me that anyone with the URL can read it.\n5. Password: I will type it myself and store it in the macOS Keychain. Do not let the AI see it.\n6. Check: after upload, read the live content while logged out and compare the version. If it does not match, report a failure."
       }
      ],
      "preparedBy": "Claude",
@@ -948,6 +1196,7 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 1,
      "versions": [
+      "v0.3｜2026-11-25｜提示詞加英文版（English）",
       "v0.2｜2026-11-24｜改名「讓 AI 可讀的私密網站」（原名：讓 AI 讀得到的私密網站發布）",
       "v0.1｜2026-11-23｜依 AT 上線 GitHub 的實作建立"
      ],
@@ -964,6 +1213,7 @@ window.ATLAS_DATA = {
   },
   {
    "id": "2026-11-22_AI工作圖鑑技能卡設計",
+   "code": "N-002",
    "title": "把小卡做成可重複套用的版型",
    "date": "2026-11-22",
    "format": "note",
@@ -1008,13 +1258,15 @@ window.ATLAS_DATA = {
       "已在 ChatGPT 用語音討論過，準備把確認的內容交給 Codex 或 Claude Code。"
      ],
      "notes": [
-      "先在原對話整理，再把摘要和最新版檔案貼進新對話。這段提示詞是依圖鑑實際交接整理出的可填模板。",
-      "這次用最新 HTML 核對畫面。在其他專案中，附上當前簡報、網站網址或課程稿即可。"
+      "提醒：先在原對話整理，再把摘要和最新版檔案貼進新對話。",
+      "提醒：其他專案要附上當前簡報、網站網址或課程稿。",
+      "限制：這段是依圖鑑實際交接整理的模板。"
      ],
      "prompts": [
       {
        "label": "把目前這段對話整理成交接摘要",
-       "text": "請把我們目前這段對話整理成一頁內的專案交接摘要，讓沒看過前文的 AI 也能接著做。\n先用一句話說明專案目標，再分成三項：\n1. 已定案：我已確認的方向、限制，以及目前已完成且有依據的成果。\n2. 待驗證：還沒確認或只規劃過的功能，以及接手時應查看的最新版檔案或網址。\n3. 下一步：請接手的 AI 先處理的一件事，並寫出怎樣算完成。\n只根據這段對話整理。缺少檔案、網址或進度證據時，標明待補。"
+       "text": "請把我們目前這段對話整理成一頁內的專案交接摘要，讓沒看過前文的 AI 也能接著做。\n先用一句話說明專案目標，再分成三項：\n1. 已定案：我已確認的方向、限制，以及目前已完成且有依據的成果。\n2. 待驗證：還沒確認或只規劃過的功能，以及接手時應查看的最新版檔案或網址。\n3. 下一步：請接手的 AI 先處理的一件事，並寫出怎樣算完成。\n只根據這段對話整理。缺少檔案、網址或進度證據時，標明待補。",
+       "en": "Summarize our conversation so far into a one-page project handoff, so an AI that has not seen it can continue the work.\nStart with one sentence on the project goal, then three parts:\n1. Decided: the direction and limits I have confirmed, and the results already done with evidence.\n2. To verify: features not yet confirmed or only planned, and the latest files or URLs the next AI should check.\n3. Next step: the one thing the next AI should do first, and what counts as done.\nUse only this conversation. If files, URLs, or proof of progress are missing, mark them \"to be added\"."
       }
      ],
      "preparedBy": "Codex",
@@ -1039,6 +1291,7 @@ window.ATLAS_DATA = {
   },
   {
    "id": "2026-11-22_國二段考互動學習網站",
+   "code": "N-003",
    "title": "迷你布學習系統",
    "date": "2026-11-22",
    "format": "note",
@@ -1107,14 +1360,15 @@ window.ATLAS_DATA = {
       "想從單次網頁，升級成能持續擴充的系統。"
      ],
      "notes": [
-      "這段是依本專案實際做法整理的模板。",
-      "課本、題庫和動漫圖片要公開前，先確認授權。",
-      "第 6 點的工具判斷細節，見 AI-006。"
+      "限制：這段是依本專案實際做法整理的模板。",
+      "提醒：課本、題庫和動漫圖片要公開前，先確認授權。",
+      "提醒：第 6 點的工具判斷細節，見 AI-006。"
      ],
      "prompts": [
       {
        "label": "",
-       "text": "請協助我開發學習網站系統。先不要寫程式，先整理成一頁開發規格，等我確認。\n1. 初衷：為誰做、想解決什麼、對方最喜歡什麼？<使用者與興趣>\n2. 世界規則：用對方的興趣建立故事世界，讓學科知識成為世界裡的規則。\n3. 角色分工：每個角色只負責一種學習功能，不當裝飾。\n4. 學會標準：定義已讀、已完成、待補強、已補強；閱讀不能代替作答。\n5. 內容來源：保留課本與題庫附圖，標示來源；AI 自編或自解的內容要註明。\n6. 工具判斷：列出每項功能用什麼技能或工具、是否真的需要外部 API。\n7. 試用修正：先做一個單元，給使用者實際操作，再依回饋增刪功能。"
+       "text": "請協助我開發學習網站系統。先不要寫程式，先整理成一頁開發規格，等我確認。\n1. 初衷：為誰做、想解決什麼、對方最喜歡什麼？<使用者與興趣>\n2. 世界規則：用對方的興趣建立故事世界，讓學科知識成為世界裡的規則。\n3. 角色分工：每個角色只負責一種學習功能，不當裝飾。\n4. 學會標準：定義已讀、已完成、待補強、已補強；閱讀不能代替作答。\n5. 內容來源：保留課本與題庫附圖，標示來源；AI 自編或自解的內容要註明。\n6. 工具判斷：列出每項功能用什麼技能或工具、是否真的需要外部 API。\n7. 試用修正：先做一個單元，給使用者實際操作，再依回饋增刪功能。",
+       "en": "Please help me build a learning website. Do not write code yet. First write a one-page spec and wait for my approval.\n1. Purpose: who is it for, what problem does it solve, and what do they love most? <user and interests>\n2. World rules: build a story world from their interests, and make the subject knowledge the rules of that world.\n3. Roles: each character does one learning job only, not decoration.\n4. Mastery: define read, done, needs work, and improved. Reading does not replace answering questions.\n5. Sources: keep the figures from textbooks and question banks, and label sources. Mark content the AI wrote or solved itself.\n6. Tools: list the skill or tool for each feature, and whether an external API is really needed.\n7. Test and revise: build one unit first, let the user try it, then add or cut features based on feedback."
       }
      ],
      "preparedBy": "Claude",
@@ -1126,6 +1380,7 @@ window.ATLAS_DATA = {
      "practice": [],
      "practiceCount": 0,
      "versions": [
+      "v0.3｜2026-11-25｜提示詞加英文版（English）",
       "v0.2｜2026-11-24｜改名「網站規格」（原名：AI 網站系統開發重點）"
      ],
      "image": null,
@@ -1146,13 +1401,14 @@ window.ATLAS_DATA = {
       "教材、課程或簡報需要可操作的地圖。"
      ],
      "notes": [
-      "現代地理資料不等於聖經或其他歷史時代的地理。",
-      "公開前要確認地圖資料授權與國界呈現。"
+      "限制：現代地理資料不等於聖經或其他歷史時代的地理。",
+      "提醒：公開前要確認地圖資料授權與國界呈現。"
      ],
      "prompts": [
       {
        "label": "",
-       "text": "請幫我做一個互動地圖，先不要寫程式，先確認：\n1. 目標：使用者是誰、看完要理解什麼？<對象與目標>\n2. 內容：要呈現哪些地點、路線或區域？<內容>\n3. 資料：屬於現代地理或歷史地理？歷史地名、國界和路線的來源是什麼？\n4. 工具：優先評估 d3-geo 與 Natural Earth；資料不常變動時放進網站，不使用 API。\n5. 試做：先做一個地點或一段路線給我試用，確認後再擴充。\n6. 回報：列出已實作、已測試、尚未驗證的項目，以及所有資料來源。"
+       "text": "請幫我做一個互動地圖，先不要寫程式，先確認：\n1. 目標：使用者是誰、看完要理解什麼？<對象與目標>\n2. 內容：要呈現哪些地點、路線或區域？<內容>\n3. 資料：屬於現代地理或歷史地理？歷史地名、國界和路線的來源是什麼？\n4. 工具：優先評估 d3-geo 與 Natural Earth；資料不常變動時放進網站，不使用 API。\n5. 試做：先做一個地點或一段路線給我試用，確認後再擴充。\n6. 回報：列出已實作、已測試、尚未驗證的項目，以及所有資料來源。",
+       "en": "Please help me make an interactive map. Do not write code yet. First confirm:\n1. Goal: who is the user, and what should they understand after using it? <audience and goal>\n2. Content: which places, routes, or areas to show? <content>\n3. Data: is it modern or historical geography? What are the sources for historical place names, borders, and routes?\n4. Tools: evaluate d3-geo and Natural Earth first. If the data rarely changes, put it in the website and do not use an API.\n5. Trial: build one place or one route for me to try, then expand after I confirm.\n6. Report: list what is built, what is tested, what is not yet verified, and all data sources."
       }
      ],
      "preparedBy": "Claude",
@@ -1196,6 +1452,7 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 1,
      "versions": [
+      "v0.4｜2026-11-25｜提示詞加英文版（English）",
       "v0.3｜2026-11-24｜改名「互動地圖」（原名：互動式地圖製作）",
       "v0.2｜2026-11-24｜加互動地圖網頁示意圖；刪除過時的「尚未在第二個專案驗證」",
       "v0.1｜2026-11-23｜依迷你布開發紀錄建立"
@@ -1222,14 +1479,15 @@ window.ATLAS_DATA = {
       "資料要放進網站，不確定多久更新一次。"
      ],
      "notes": [
-      "放進網站的資料不會自動更新，例如時事題要手動改。",
-      "題目要分開標示真題、改編題與 AI 仿題。",
-      "涉及付款、個資或正式系統時，另做資安檢查。"
+      "限制：放進網站的資料不會自動更新，例如時事題要手動改。",
+      "提醒：題目要分開標示真題、改編題與 AI 仿題。",
+      "提醒：涉及付款、個資或正式系統時，另做資安檢查。"
      ],
      "prompts": [
       {
        "label": "",
-       "text": "這個功能先不要實作，請幫我判斷該用哪種方式：<功能>\n請依序回答：\n1. Skill：有沒有成熟且來源可信的 AI Skill？\n2. 程式庫：有沒有成熟的程式庫？\n3. 公開資料：有沒有官方或公開資料集？授權是什麼？\n4. 靜態檔案：資料多久變一次？可以直接放進網站嗎？\n5. API：真的需要嗎？費用、金鑰、權限、額度和故障時怎麼處理？\n最後給一個建議，說明為什麼不選其他方式，並列出待驗證事項。"
+       "text": "這個功能先不要實作，請幫我判斷該用哪種方式：<功能>\n請依序回答：\n1. Skill：有沒有成熟且來源可信的 AI Skill？\n2. 程式庫：有沒有成熟的程式庫？\n3. 公開資料：有沒有官方或公開資料集？授權是什麼？\n4. 靜態檔案：資料多久變一次？可以直接放進網站嗎？\n5. API：真的需要嗎？費用、金鑰、權限、額度和故障時怎麼處理？\n最後給一個建議，說明為什麼不選其他方式，並列出待驗證事項。",
+       "en": "Do not build this feature yet. Help me decide which approach to use: <feature>\nAnswer in this order:\n1. Skill: is there a mature AI Skill from a trusted source?\n2. Library: is there a mature code library?\n3. Public data: is there an official or public dataset? What is its license?\n4. Static files: how often does the data change? Can it go directly into the website?\n5. API: is it really needed? What about cost, keys, permissions, quotas, and what happens when it fails?\nEnd with one recommendation, explain why you did not choose the others, and list items still to verify."
       }
      ],
      "preparedBy": "Claude",
@@ -1271,6 +1529,7 @@ window.ATLAS_DATA = {
      ],
      "practiceCount": 2,
      "versions": [
+      "v0.4｜2026-11-25｜提示詞加英文版（English）",
       "v0.3｜2026-11-24｜改名「工具選擇」，改用適用／不適用／注意，移除固定驗證狀態",
       "v0.2｜2026-11-23｜新增 AI 工作圖鑑實戰紀錄",
       "v0.1｜2026-11-23｜依迷你布開發紀錄建立"
@@ -1287,7 +1546,48 @@ window.ATLAS_DATA = {
    ]
   },
   {
+   "id": "2026-11-22_深化導入申請表製作流程",
+   "code": "N-007",
+   "title": "深化導入申請表製作流程：架構、出處、數字、審查",
+   "date": "2026-11-22",
+   "format": "note",
+   "summary": "依企業結案分析報告，做出可送審的政府計畫申請表。",
+   "cost": [],
+   "tags": [
+    "文件審查",
+    "Claude",
+    "Codex",
+    "交叉審查",
+    "個資遮蔽"
+   ],
+   "sources": [],
+   "internalSources": 2,
+   "draft": false,
+   "archived": false,
+   "archivedDate": "",
+   "top3": [],
+   "related": [
+    "AI-001"
+   ],
+   "sections": [
+    {
+     "title": "做什麼",
+     "html": "<p>依企業結案分析報告，做出可送審的政府計畫申請表。</p>"
+    },
+    {
+     "title": "怎麼做",
+     "html": "<ol><li>先排章節，標出每章資料從哪份報告來。</li><li>每段文字、每個數字都要查得到出處，經費與人天前後一致。</li><li>送審前遮蔽客戶資料，再請 Codex 交叉審查。</li></ol>"
+    },
+    {
+     "title": "學到什麼",
+     "html": "<ol><li>先定架構再寫內容，章節和資料來源不會漏。</li><li>數字一致性要單獨檢查一輪。</li><li>客戶名稱、統編要先遮蔽才給別的 AI 看。</li></ol>"
+    }
+   ],
+   "cards": []
+  },
+  {
    "id": "2026-11-20_Claude與Codex交叉審查",
+   "code": "N-001",
    "title": "讓兩個 AI 互相檢查：Claude × Codex 交叉審查",
    "date": "2026-11-20",
    "format": "note",
@@ -1353,36 +1653,43 @@ window.ATLAS_DATA = {
       "對外發布或法規相關文件"
      ],
      "notes": [
-      "要先裝好 Codex 外掛和審查技能，Codex 用 ChatGPT 帳號登入。",
-      "短訊息不要用；程式碼改用 /codex:review。",
-      "事前驗屍只列退件原因，改不改仍由我決定。"
+      "準備：先裝好 Codex 外掛和審查技能，Codex 用 ChatGPT 帳號登入。",
+      "提醒：風險預演只列退件或失敗原因，改不改仍由我決定。",
+      "提醒：在 Claude、Codex 直接打 <code>XR &lt;檔案&gt;</code>、<code>XP &lt;檔案&gt;</code> 也可以。"
      ],
      "prompts": [
       {
-       "label": "XR｜在 Claude 使用（請 Codex 審查）",
-       "text": "請 Codex 審查這份文件：<檔案位置>"
+       "label": "XR｜在 Claude 打：請 Codex 審查",
+       "text": "請 Codex 審查這份文件：<檔案位置>",
+       "en": "Please ask Codex to review this document: <file path>"
       },
       {
-       "label": "XR｜在 Codex 使用（請 Claude 審查）",
-       "text": "請 Claude 審查這份文件：<檔案位置>"
+       "label": "XR｜在 Codex 打：請 Claude 審查",
+       "text": "請 Claude 審查這份文件：<檔案位置>",
+       "en": "Please ask Claude to review this document: <file path>"
       },
       {
-       "label": "XP｜送審前事前驗屍（計畫書、申請表，在 Claude 使用）",
-       "text": "請 Codex 審查這份文件：<檔案位置>\n審查角度加一項：假設這份文件已經被審查委員退件，列出最可能的 5 個原因，依嚴重度排序。"
+       "label": "XP｜在 Claude 打：請 Codex 做風險預演（送審或上線前）",
+       "text": "請 Codex 審查這份文件：<檔案位置>\n審查角度加一項：風險預演。假設這份文件已經被退件或失敗，列出最可能的 5 個原因，依嚴重度排序。",
+       "en": "Please ask Codex to review this document: <file path>\nAdd one review angle: pre-mortem. Assume this document has already been rejected or has failed. List the 5 most likely reasons, ranked by severity."
       },
       {
-       "label": "XC｜程式碼審查與修正（在 Claude Code 的 Git 專案使用）",
+       "label": "XC｜在 Claude Code 打：Codex 審程式（指令不用翻譯）",
        "text": "/codex:review --wait"
       },
       {
-       "label": "",
-       "text": "請根據剛剛 Codex 的程式碼審查結果，修正已確認的問題，完成後重新測試功能。"
+       "label": "XC｜在 Claude Code 打：Claude 依審查結果修正",
+       "text": "請根據剛剛 Codex 的程式碼審查結果，修正已確認的問題，完成後重新測試功能。",
+       "en": "Based on Codex's code review just now, fix the confirmed issues, then test the features again."
       }
      ],
      "preparedBy": "Claude",
      "promptOutline": false,
      "domain": "工作職場",
-     "notFor": [],
+     "notFor": [
+      "短訊息、閒聊：浪費額度。",
+      "程式碼改動：改用 XC（/codex:review）。"
+     ],
      "steps": [],
      "tools": [],
      "practice": [],
@@ -1406,18 +1713,22 @@ window.ATLAS_DATA = {
       "想讓動手做的 AI 和檢查的 AI 分開。"
      ],
      "notes": [
-      "Codex 沙盒讀不到鑰匙圈，呼叫 Claude 時要核准在沙盒外執行。",
-      "會用到 Claude 方案額度；一件事最多一次跨模型檢查。",
-      "完整交辦流程尚未在正式工作驗證。"
+      "準備：Codex 沙盒讀不到鑰匙圈，呼叫 Claude 時要核准在沙盒外執行。",
+      "限制：會用到 Claude 方案額度；一件事最多一次跨模型檢查。",
+      "限制：完整交辦流程尚未在正式工作驗證。",
+      "提醒：對方沒跑完或沒回報，就是「無法驗證」，不是通過。",
+      "提醒：每個建議都要逐點判斷，不用會自動照改的工具。"
      ],
      "prompts": [
       {
-       "label": "XE｜交給 Claude 執行（在 Codex 使用）",
-       "text": "請交給 Claude 執行（claude-executor）。先寫任務單給我確認，再呼叫 Claude。\n1. 目標：<要完成的事>\n2. 範圍：只能改 <資料夾或檔案>，不能改 <排除項目>。\n3. 成品：<要交出的檔案或畫面>\n4. 驗收標準：<怎樣算完成>\n5. 停止條件：遇到發布、刪除、付款或範圍外的檔案，先停下來問我。\nClaude 做完後，請讀實際檔案逐項判斷「通過／不通過／無法驗證」，不要只看 Claude 的回報。\nClaude 執行失敗、沒有回報或額度不足時，一律算「無法驗證」，不可當作通過。\n修正後最多複驗 2 輪，還沒通過就停下來，列出剩下的問題給我決定。"
+       "label": "XE｜在 Codex 打：交給 Claude 執行",
+       "text": "請交給 Claude 執行（claude-executor）。先寫任務單給我確認，再呼叫 Claude。\n1. 目標：<要完成的事>\n2. 範圍：只能改 <資料夾或檔案>，不能改 <排除項目>。\n3. 成品：<要交出的檔案或畫面>\n4. 驗收標準：<怎樣算完成>\n5. 停止條件：遇到發布、刪除、付款或範圍外的檔案，先停下來問我。\nClaude 做完後，請讀實際檔案逐項判斷「通過／不通過／無法驗證」，不要只看 Claude 的回報。\nClaude 執行失敗、沒有回報或額度不足時，一律算「無法驗證」，不可當作通過。\n修正後最多複驗 2 輪，還沒通過就停下來，列出剩下的問題給我決定。",
+       "en": "Hand this to Claude (claude-executor). Write a task sheet for my approval first, then call Claude.\n1. Goal: <what to finish>\n2. Scope: change only <folders or files>. Do not change <excluded items>.\n3. Deliverable: <files or screens>\n4. Acceptance criteria: <what counts as done>\n5. Stop rule: if it involves publishing, deleting, payment, or files outside the scope, stop and ask me first.\nAfter Claude finishes, read the actual files and mark each item \"pass / fail / cannot verify\". Do not rely only on Claude's report.\nIf Claude fails, does not report, or runs out of quota, mark it \"cannot verify\", never \"pass\".\nAfter fixes, re-check at most 2 rounds. If it still fails, stop and list the remaining issues for me to decide."
       },
       {
-       "label": "XV｜修正後複驗（在 Codex 使用）",
-       "text": "唯讀複驗，不可修改檔案，也不要呼叫 Claude。\n上次問題：<問題>。現已改為：<修正內容>。\n只檢查這項改動，以及會不會影響 <相關畫面或功能>，回報通過或不通過。"
+       "label": "XV｜在 Codex 打：Codex 自己複驗（不呼叫 Claude）",
+       "text": "唯讀複驗，不可修改檔案，也不要呼叫 Claude。\n上次問題：<問題>。現已改為：<修正內容>。\n只檢查這項改動，以及會不會影響 <相關畫面或功能>，回報通過或不通過。",
+       "en": "Read-only re-check. Do not change any files, and do not call Claude.\nLast issue: <issue>. Now changed to: <fix>.\nCheck only this change, and whether it affects <related screens>. Report pass or fail."
       }
      ],
      "preparedBy": "Claude",
@@ -1438,7 +1749,7 @@ window.ATLAS_DATA = {
       "claude-executor：Codex 技能，把任務交給 Claude 並獨立驗收。",
       "<a href=\"https://github.com/openai/codex-plugin-cc\" target=\"_blank\" rel=\"noopener\">Codex 官方外掛原始碼（GitHub）</a>",
       "<a href=\"https://trailofbits.com/skills/second-opinion/\" target=\"_blank\" rel=\"noopener\">Trail of Bits：second-opinion（失敗就算未完成）</a>",
-      "<a href=\"https://github.com/KamakuraCrypto/claude-codex-review\" target=\"_blank\" rel=\"noopener\">claude-codex-review（事前驗屍、限制輪數）</a>"
+      "<a href=\"https://github.com/KamakuraCrypto/claude-codex-review\" target=\"_blank\" rel=\"noopener\">claude-codex-review（風險預演、限制輪數）</a>"
      ],
      "practice": [
       {
@@ -1449,10 +1760,20 @@ window.ATLAS_DATA = {
        "result": "抓到 1 個選單遮擋問題，修正後複驗通過",
        "log": "2026-11-20_Claude與Codex交叉審查",
        "learned": "複驗只看上次的問題，省時間和額度"
+      },
+      {
+       "date": "2026-11-25",
+       "project": "線上畫畫課剪輯",
+       "status": "已驗證完成",
+       "how": "Codex 依逐字稿與時間軸審查影片剪點清單",
+       "result": "6 點中採用 3 點，修正 3 個誤剪",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "Codex 看不到影片，也能用逐字稿抓剪錯"
       }
      ],
-     "practiceCount": 1,
+     "practiceCount": 2,
      "versions": [
+      "v0.3｜2026-11-25｜提示詞加英文版；標籤統一寫「在哪裡打」",
       "v0.2｜2026-11-24｜參考 GitHub 跨模型審查技能：複驗最多 2 輪、失敗算無法驗證",
       "v0.1｜2026-11-24｜依 claude-executor 技能與 AT 驗收紀錄建立"
      ],
@@ -1489,6 +1810,9 @@ window.ATLAS_DATA = {
     });
     e.card = (e.archived ? archivedCards : cards).filter(function (v) { return v.logId === e.id; }).map(function (v) { return v.card; })[0];
   });
+  // 小卡排序（2026-11-25）：新加入的在前，依固定編號 AI-xxx 由大到小（編號照加入順序給）
+  var cardNo = function (v) { return +((/(\d+)$/.exec(v.card.code || '') || [0, 0])[1]); };
+  cards.sort(function (a, b) { return cardNo(b) - cardNo(a); });
   function cardsOfLog(id, withArchived) { return cards.concat(withArchived ? archivedCards : []).filter(function (v) { return v.logId === id; }); }
   var app = document.getElementById('app');
   var CLAUDE_URL = 'https://claude.ai/new';
@@ -1511,7 +1835,7 @@ window.ATLAS_DATA = {
   function plain(html) { return String(html).replace(/<[^>]+>/g, ' '); }
   function matches(e, q) {
     if (!q) return true;
-    var hay = [e.title, e.summary, e.tags.join(' '), plain((e.top3 || []).join(' ')), e.sections.map(function (s) { return plain(s.html); }).join(' ')];
+    var hay = [e.code || '', e.title, e.summary, e.tags.join(' '), plain((e.top3 || []).join(' ')), e.sections.map(function (s) { return plain(s.html); }).join(' ')];
     (e.logId ? [e.card] : e.cards).forEach(function (c) {
       hay.push(cardCode(c), c.code, c.name, c.use, c.series ? c.series.name : '', plain(c.when.join(' ')), plain(c.notes.join(' ')));
       c.prompts.forEach(function (p) { hay.push(p.label, p.text); });
@@ -1599,11 +1923,36 @@ window.ATLAS_DATA = {
   }
 
   // 首頁快速指令：資料只存在私人預覽版
+  // 跨模型縮寫顏色（2026-11-25）：藍＝只看不改檔（XR、XP、XV），紫＝會動手改檔（XE、XC）
+  var X_FAM = { XR: 'read', XP: 'read', XV: 'read', XE: 'act', XC: 'act' };
+  function xFamCls(label) { var m = /^(X[A-Z])/.exec(label || ''); return m && X_FAM[m[1]] ? ' x-' + X_FAM[m[1]] : ''; }
+  function phMark(html) { return html.replace(/&lt;[^&\n]{1,24}&gt;/g, function (m) { return '<span class="ph">' + m + '</span>'; }); }
+  // 說明頁的跨模型縮寫表；正式定義在 Lynn總部/AGENTS.md，改那裡時這裡一起改
+  function xTable() {
+    var rows = [
+      ['XR', '交叉審查', 'Cross Review', '文件或成品寫好，想要第二意見', '請 Codex 審', '請 Claude 審', '自己審'],
+      ['XP', '風險預演', 'Pre-mortem', '送審或上線前：假設已被退件或失敗，列 5 個原因', '請 Codex 做', '請 Claude 做', '自己做'],
+      ['XE', '交給 Claude 執行', 'Execute', '在 Codex 裡，範圍清楚的工作要 Claude 動手', '', 'Codex 寫任務單 → Claude 做 → Codex 驗收', ''],
+      ['XV', '唯讀複驗', 'Verify', '照審查意見改完，確認上次問題改好沒', '自己檢查', '自己檢查', '自己檢查'],
+      ['XC', '程式碼審查', 'Code Review', 'Claude Code 改完 Git 專案的程式', 'Codex 審 → Claude 修正、重測', '', '']
+    ];
+    var cell = function (v, alt) { return v ? '<td>' + esc(v) + '</td>' : '<td class="x-na">' + alt + '</td>'; };
+    return '<p class="x-rule"><strong>一句話記法：在哪個 AI 打，就請「另一個 AI」來看或來做；打字的那個 AI 最後判斷、修正。</strong></p>' +
+      '<p class="x-legend"><span class="x-chip x-read">只看不改檔</span>XR、XP、XV　<span class="x-chip x-act">會動手改檔</span>XE、XC</p>' +
+      '<div class="x-wrap"><table class="x-table"><thead><tr><th scope="col">縮寫</th><th scope="col">什麼時候用</th>' +
+      '<th scope="col" class="t-claude">在 Claude 打</th><th scope="col" class="t-codex">在 Codex 打</th><th scope="col" class="t-gpt">在 ChatGPT 打</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        return '<tr><th scope="row"><span class="x-chip' + xFamCls(r[0]) + '">' + r[0] + '</span><b>' + esc(r[1]) + '</b><small lang="en">' + esc(r[2]) + '</small></th>' +
+          '<td>' + esc(r[3]) + '</td>' + cell(r[4], r[0] === 'XE' ? '不用：Claude 直接做' : '不適用') + cell(r[5], '不適用') + cell(r[6], r[0] === 'XE' ? '提醒換到 Codex' : '提醒換到 Claude Code') + '</tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<p>常見順序：做完 → <code>XR</code>（送審前用 <code>XP</code>）→ 修正 → <code>XV</code>。縮寫後面接檔案或任務，例如 <code>XP 申請表.docx</code>。</p>' +
+      '<p>AI 會在適合時，於回答最後提示可以打哪個縮寫；你打了才會執行（避免浪費額度）。ChatGPT、Claude Chat 要先貼總說明短版才認得縮寫。' + (DATA.preview ? '首頁「跨模型」按鈕可一鍵複製完整指令。' : '') + '</p>';
+  }
   // 跨模型快捷（xPrompts）由 build 從小卡提示詞「XR｜…」自動產生
   function quickRow(list, label, attr, cls) {
     if (!list.length) return '';
     return '<div class="quick-bar' + (cls ? ' ' + cls : '') + '"><span class="quick-label">' + label + '</span>' + list.map(function (p, i) {
-      return '<button type="button" class="quick-btn" ' + attr + '="' + i + '" aria-label="複製提示詞：' + esc(p.label) + '，' + esc(p.hint) + '" title="點一下複製"><span class="quick-text"><strong>' + esc(p.label) + '</strong><small>' + esc(p.hint) + '</small></span>' + ICON.copy + '</button>';
+      return '<button type="button" class="quick-btn' + (p.code ? xFamCls(p.code) : '') + '" ' + attr + '="' + i + '" aria-label="複製提示詞：' + esc(p.label) + '，' + esc(p.hint) + '" title="點一下複製"><span class="quick-text"><strong>' + esc(p.label) + '</strong><small>' + esc(p.hint) + '</small></span>' + ICON.copy + '</button>';
     }).join('') + '</div>';
   }
   function quickBar() {
@@ -1613,16 +1962,19 @@ window.ATLAS_DATA = {
 
   // ---------- 頁面 ----------
   function home() {
+    // 首頁（2026-11-25）：一進來先看最新小卡（新加入的在前）和最新 3 篇筆記
     var latest = entries.slice(0, 3);
     var favN = favCount();
     return '' +
       '<div class="topline"><span>LYNN\'S AI WORK ATLAS</span><span>' + cards.length + ' 張小卡／' + entries.length + ' 篇筆記｜<a href="#/about">第一次來？看說明 →</a></span></div>' +
       quickBar() +
-      '<div class="hero"><div>' +
-        '<span class="kicker">Lynn 的 AI 學習紀錄</span>' +
-        '<h1 class="hero-title">AI 工作圖鑑</h1>' +
-        '<p class="hero-sub">Lynn\'s AI Work Atlas</p><div class="redbar"></div>' +
-      '</div><aside class="story"><h2>THE STORY</h2><p>每次用 AI 完成工作，記成一篇筆記；<br>值得再用的方法，<br>整理成可複製的小卡。</p></aside></div>' +
+      (cards.length ? '<div class="card-theme"><div class="sec-head"><span class="en">NEW CARDS</span><span class="zh">最新小卡</span><span class="sec-note">新加入的在前</span></div>' +
+        '<div class="bc-grid">' + cards.slice(0, 6).map(function (e) { return battleCard(e, 'mini'); }).join('') + '</div>' +
+        '<p class="more-links"><a href="#/cards">看全部小卡 →</a>' + (favN ? '<a href="#/cards?fav=1">' + ICON.bookmark + '我的收藏（' + favN + '）→</a>' : '') + '</p></div>' : '') +
+      '<div class="sec-head"><span class="en">LATEST</span><span class="zh">最新筆記</span><span class="sec-note">前 3 篇</span></div>' +
+      listHtml(latest, 'log') +
+      '<p class="more-links"><a href="#/logs">看全部筆記 →</a></p>' +
+      '<div class="sec-head"><span class="en">SEARCH</span><span class="zh">找筆記</span></div>' +
       searchBox('logs', '') +
       tagLinks(allTags(entries), 'logs') +
       '<div class="doors">' +
@@ -1630,12 +1982,11 @@ window.ATLAS_DATA = {
         '<a class="door" href="#/logs"><span class="num">02</span><h3>筆記</h3><p>真實做過的 AI 工作：做什麼、怎麼做、學到什麼。</p></a>' +
         '<a class="door" href="' + CLAUDE_URL + '" target="_blank" rel="noopener"><span class="num">03</span><h3>開啟 Claude ↗</h3><p>複製小卡上的提示詞，再開啟 Claude 貼上使用。</p></a>' +
       '</div>' +
-      (cards.length ? '<div class="card-theme"><div class="sec-head"><span class="en">CARDS</span><span class="zh">小卡</span></div>' +
-        seriesBar({}) +
-        '<div class="bc-grid">' + cards.slice(0, 6).map(function (e) { return battleCard(e, 'mini'); }).join('') + '</div>' +
-        '<p class="more-links"><a href="#/cards">看全部小卡 →</a>' + (favN ? '<a href="#/cards?fav=1">' + ICON.bookmark + '我的收藏（' + favN + '）→</a>' : '') + '</p></div>' : '') +
-      '<div class="sec-head"><span class="en">LATEST</span><span class="zh">最新筆記</span></div>' +
-      listHtml(latest, 'log');
+      '<div class="hero hero-end"><div>' +
+        '<span class="kicker">Lynn 的 AI 學習紀錄</span>' +
+        '<h1 class="hero-title">AI 工作圖鑑</h1>' +
+        '<p class="hero-sub">Lynn\'s AI Work Atlas</p><div class="redbar"></div>' +
+      '</div><aside class="story"><h2>THE STORY</h2><p>每次用 AI 完成工作，記成一篇筆記；<br>值得再用的方法，<br>整理成可複製的小卡。</p></aside></div>';
   }
 
   function listHtml(list, kind) {
@@ -1643,7 +1994,7 @@ window.ATLAS_DATA = {
     if (kind === 'card') return '<div class="bc-grid">' + list.map(function (e) { return battleCard(e, 'mini'); }).join('') + '</div>';
     return '<ul class="list">' + list.map(function (e) {
       var isCard = kind === 'card';
-      var title = isCard ? (e.card.code ? e.card.code + '　' : '') + e.card.name : e.title;
+      var title = isCard ? (e.card.code ? e.card.code + '　' : '') + e.card.name : (e.code ? e.code + '　' : '') + e.title;
       var href = '#/' + kind + '/' + enc(e.id);
       return '<li class="item"><div class="date">' + esc(e.date) + '</div><div>' +
         '<h3><a href="' + href + '">' + esc(title) + '</a>' + (!isCard && e.card ? '<span class="badge">有小卡</span>' : '') + draftBadge(e) + '</h3>' +
@@ -1778,7 +2129,8 @@ window.ATLAS_DATA = {
     copy: SVG('<rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/>'),
     book: SVG('<path d="M3.5 5.5h6a2.5 2.5 0 0 1 2.5 2.5v11.5a2 2 0 0 0-2-2h-6.5z"/><path d="M20.5 5.5h-6A2.5 2.5 0 0 0 12 8v11.5a2 2 0 0 1 2-2h6.5z"/>'),
     bookmark: SVG('<path d="M6.5 3.5h11v17l-5.5-4.5-5.5 4.5z"/>', ' class="i-bm"'),
-    no: SVG('<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>')
+    no: SVG('<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>'),
+    info: SVG('<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.3"/>')
   };
   // 系別代號、英文、顏色和圖示。系別說明來自 _關鍵字清單.md。
   var SERIES = {
@@ -1841,7 +2193,8 @@ window.ATLAS_DATA = {
       favBtn(e) + '</header>';
     var img = c.image;
     var thumb = img ? '<img class="bc-thumb" src="' + img.src + '" alt="" title="有示意圖" loading="lazy">' : '';
-    var figure = img ? '<figure class="bc-figure"><img src="' + img.src + '" alt="' + esc(img.alt) + '" loading="lazy"><figcaption>示意圖：' + esc(img.alt) + '</figcaption></figure>' : '';
+    // 示意圖點一下放大（2026-11-25）：手機上字小時可全螢幕看、可縮放
+    var figure = img ? '<figure class="bc-figure"><button type="button" class="bc-zoom" data-zoom="' + img.src + '" aria-label="放大示意圖：' + esc(img.alt) + '"><img src="' + img.src + '" alt="' + esc(img.alt) + '" loading="lazy"></button><figcaption>示意圖：' + esc(img.alt) + '｜點圖放大</figcaption></figure>' : '';
     var code = '<p class="bc-code"><span>' + esc(cardCode(c) || 'AI') + '</span><span class="bc-domain">' + esc(c.domain || '工作職場') + '</span>' + (e.draft ? '<em>未公開</em>' : '') + (e.archived ? '<em class="arch">已封存</em>' : '') + (full ? '' : thumb) + '</p>';
     var name;
     if (full) name = '<h3 class="bc-name">' + esc(c.name) + '</h3>';
@@ -1857,21 +2210,33 @@ window.ATLAS_DATA = {
         head + code + name + use + (opts.compact ? '' : '<div class="bc-panel">' + when + '</div>') +
         '<footer class="bc-foot"><span>' + ICON.chat + '指令 ×' + c.prompts.length + '</span>' + cardArchBtn(e) + '<span class="bc-go">看小卡 →</span></footer>' + origNo(c) + '</article>';
     }
-    var prompts = '<section class="bc-prompts" id="ch-copy' + (opts.suffix || '') + '"><h4 class="bc-ptitle">' + ICON.chat + 'Prompt</h4>' +
+    // 有跨模型縮寫標籤的小卡，在 Prompt 標題下說明顏色（藍＝只看不改檔，紫＝會動手改檔）
+    var xf = {}; c.prompts.forEach(function (p) { var k = xFamCls(p.label); if (k) xf[k] = 1; });
+    var legend = (xf[' x-read'] || xf[' x-act']) ? '<p class="x-legend bc-xlegend">' + (xf[' x-read'] ? '<span class="x-chip x-read">藍</span>只看不改檔　' : '') + (xf[' x-act'] ? '<span class="x-chip x-act">紫</span>會動手改檔' : '') + '</p>' : '';
+    var prompts = '<section class="bc-prompts" id="ch-copy' + (opts.suffix || '') + '"><h4 class="bc-ptitle">' + ICON.chat + 'Prompt</h4>' + legend +
       c.prompts.map(function (p, i) {
         var promptText = esc(p.text);
         if (c.promptOutline) {
           promptText = promptText.replace(/^([\t ]*\d+\.[\t ]+)([^：\n]{1,12})(?=：)/gm, '$1<strong>$2</strong>');
         }
-        promptText = promptText.replace(/&lt;[^&\n]{1,20}&gt;/g, function (m) { return '<span class="ph">' + m + '</span>'; });
-        return '<div class="bc-prompt">' + (p.label ? '<span class="bc-plabel">' + esc(p.label) + '</span>' : '') +
-          '<pre' + (c.promptOutline ? ' class="bc-prompt-outline"' : '') + '>' + promptText + '</pre>' +
+        promptText = phMark(promptText);
+        var head = (p.label ? '<span class="bc-plabel' + xFamCls(p.label) + '">' + esc(p.label) + '</span>' : '') +
+          (p.en ? '<span class="bc-lang" role="group" aria-label="提示詞語言"><button type="button" data-lang="zh" aria-pressed="true">中文</button><button type="button" data-lang="en" aria-pressed="false">EN</button></span>' : '');
+        return '<div class="bc-prompt">' + (head ? '<div class="bc-phead">' + head + '</div>' : '') +
+          '<pre data-l="zh"' + (c.promptOutline ? ' class="bc-prompt-outline"' : '') + '>' + promptText + '</pre>' +
+          (p.en ? '<pre data-l="en" lang="en" hidden' + (c.promptOutline ? ' class="bc-prompt-outline"' : '') + '>' + phMark(esc(p.en)) + '</pre>' : '') +
           '<button type="button" class="bc-copy" data-copy="' + i + '" data-id="' + esc(e.id) + '" aria-label="複製指令：' + esc(p.label || p.text) + '">' + ICON.copy + '</button></div>';
       }).join('') + '</section>';
     var notFor = (c.notFor || []).length ? '<section class="bc-row bc-notfor"><h4 class="bc-lab">' + ICON.no + '不適用</h4><ul class="bc-list">' +
       c.notFor.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>' : '';
-    var notes = c.notes.length ? '<section class="bc-row bc-notes"><h4 class="bc-lab">' + ICON.warn + '注意</h4><ul class="bc-list">' +
-      c.notes.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>' : '';
+    // 使用說明（2026-11-25，舊稱注意）：「準備／限制／提醒」小主題依序排列，小主題變成小標籤
+    var NOTE_ORDER = ['準備', '限制', '提醒'];
+    var noteItems = c.notes.map(function (x, i) {
+      var m = /^(準備|限制|提醒)[：:]\s*/.exec(x);
+      return { k: m ? m[1] : '', html: m ? x.slice(m[0].length) : x, i: i };
+    }).sort(function (a, b) { return (NOTE_ORDER.indexOf(a.k) + 9) % 9 - (NOTE_ORDER.indexOf(b.k) + 9) % 9 || a.i - b.i; });
+    var notes = c.notes.length ? '<section class="bc-row bc-notes"><h4 class="bc-lab">' + ICON.info + '使用說明</h4><ul class="bc-list">' +
+      noteItems.map(function (n) { return '<li' + (n.k ? ' class="has-k"' : '') + '>' + (n.k ? '<span class="nk nk-' + NOTE_ORDER.indexOf(n.k) + '">' + n.k + '</span>' : '') + n.html + '</li>'; }).join('') + '</ul></section>' : '';
     return '<article class="bcard full ' + theme + '" style="--s:' + seriesColor(s.name) + '">' + head + code + name +
       '<div class="bc-swash" aria-hidden="true"></div>' + use + figure +
       '<div class="bc-panel">' + when + notFor + prompts + notes + cardMore(c) + '</div>' +
@@ -1943,7 +2308,7 @@ window.ATLAS_DATA = {
       : '<section class="related-cards"><h2>相關小卡</h2>' + relatedList + '</section>';
     var head = '<header class="lead' + (e.card ? ' has-harvest' : '') + '">' +
       '<div class="lead-main"><span class="kicker">筆記</span>' +
-        '<h1>' + esc(e.title) + '</h1>' + metaLine(e) + (DATA.preview && !e.archived ? '<p class="lead-acts">' + actBtn('archive', 'log', e) + '</p>' : '') +
+        (e.code ? '<p class="note-code">' + esc(e.code) + '</p>' : '') + '<h1>' + esc(e.title) + '</h1>' + metaLine(e) + (DATA.preview && !e.archived ? '<p class="lead-acts">' + actBtn('archive', 'log', e) + '</p>' : '') +
         (e.summary && !isNote ? '<p class="lede">' + esc(e.summary) + '</p>' : '') +
         (e.card ? top3 : '') +
         tagLinks(e.tags, 'logs') + '</div>' +
@@ -2028,7 +2393,7 @@ window.ATLAS_DATA = {
       return '<details class="ab-fold"><summary>' + esc(label) + '</summary>' + inner + '</details>';
     };
     var changeList = DATA.changes || [];
-    var chapters = [['ab-what', '筆記與小卡'], ['ab-use', '搜尋、複製、收藏'], ['ab-card', '小卡怎麼看'], ['ab-log', '筆記怎麼寫'], ['ab-rule', '公開與安全'], ['ab-version', '版次與更新']]
+    var chapters = [['ab-what', '筆記與小卡'], ['ab-use', '搜尋、複製、收藏'], ['ab-card', '小卡怎麼看'], ['ab-x', '跨模型縮寫'], ['ab-log', '筆記怎麼寫'], ['ab-rule', '公開與安全'], ['ab-version', '版次與更新']]
       .map(function (c) { return { id: c[0], title: c[1] }; });
     var body = '<article class="article about">' +
       sec('ab-what', '01', '筆記與小卡',
@@ -2043,7 +2408,7 @@ window.ATLAS_DATA = {
       sec('ab-card', '03', '小卡怎麼看',
         '<div class="ab-swatches"><div class="ab-sw navy"><b>深藍</b>工作職場</div><div class="ab-sw cream"><b>奶油白</b>家庭生活</div></div>' +
         '<ul><li><strong>底色＝領域</strong>，<strong>徽章與色帶＝系</strong>（哪一類能力）。</li>' +
-        '<li><strong>卡面</strong>：用途、適用、不適用、提示詞、注意。有示意圖的小卡，列表右上會有小縮圖，點進去看大圖。</li>' +
+        '<li><strong>卡面</strong>：用途、適用、不適用、提示詞、使用說明（準備／限制／提醒）。有示意圖的小卡，列表右上會有小縮圖，點進去看大圖。</li>' +
         '<li><strong>完整資料</strong>（可展開）：步驟、工具與來源、實戰紀錄。實戰次數只算真正做過的案例。</li></ul>' +
         '<ul class="ab-series">' + seriesRows + '</ul>' +
         fold('溝通簡碼（和 AI 討論網站時用）',
@@ -2051,19 +2416,20 @@ window.ATLAS_DATA = {
           codeTable('網站與內容', [['AT', '整個網站', 'Atlas'], ['L', '筆記', 'Log'], ['C', '小卡', 'Card']]) +
           codeTable('使用領域', [['W', '工作職場', 'Work'], ['H', '家庭生活', 'Home']]) +
           codeTable('系別', seriesCodes) +
-          codeTable('小卡欄位', [['T', '卡名', 'Title'], ['D', '用途', 'Description'], ['A', '適用', 'Applies to'], ['P', '提示詞', 'Prompt'], ['N', '注意', 'Notes'], ['BY', '整理標記', 'Prepared by']]) +
-          codeTable('跨模型縮寫（Claude、Codex、ChatGPT 通用）', [['XR', '交叉審查：請另一個 AI 只讀挑錯', 'Cross Review'], ['XP', '事前驗屍：假設被退件，列最可能原因', 'Premortem'], ['XE', '交給 Claude 執行，Codex 驗收（在 Codex 用）', 'Execute'], ['XV', '唯讀複驗：只看上次的問題改好沒', 'Verify'], ['XC', '程式碼審查後修正（在 Claude Code 用）', 'Code review']]) +
-          '<p>用法：縮寫後面接檔案或任務，例如 <code>XR 申請表.docx</code>。在 ChatGPT App 叫不到別的 AI，XR、XP、XV 由 ChatGPT 自己扮審查委員。私人網址首頁的「跨模型」按鈕可一鍵複製完整指令。</p>' +
+          codeTable('小卡欄位', [['T', '卡名', 'Title'], ['D', '用途', 'Description'], ['A', '適用', 'Applies to'], ['P', '提示詞', 'Prompt'], ['N', '使用說明', 'Notes'], ['BY', '整理標記', 'Prepared by']]) +
+          '<p>跨模型縮寫（XR、XP、XE、XV、XC）的使用時機，見下方「跨模型縮寫」。</p>' +
           '<p>小卡代號＝領域－系別－號碼。<code>C W-DE-01 D 縮短</code> 是縮短第一張小卡的用途；<code>P2</code> 指第 2 段提示詞。原本的固定編號（例如 <code>AI-001</code>）繼續保留，新舊代號都能搜尋。</p>')) +
-      sec('ab-log', '04', '筆記怎麼寫',
+      sec('ab-x', '04', '跨模型縮寫', xTable()) +
+      sec('ab-log', '05', '筆記怎麼寫',
         '<ol><li>做什麼（一句話）</li><li>怎麼做</li><li>學到什麼</li><li>相關小卡</li><li>來源</li></ol>' +
         '<p>寫短句，每項只說一件事；只寫真實用過的 AI 做法、程式或工具。</p><p>中英文之間要空格（數字也是）：寫「這是 AI 工作圖鑑」，不寫「這是AI工作圖鑑」。</p>') +
-      sec('ab-rule', '05', '公開與安全',
+      sec('ab-rule', '06', '公開與安全',
         '<ul><li>新筆記先「不公開」，Lynn 看過預覽確認後才公開。</li>' +
+        '<li>上傳 GitHub 前先在私人網址預覽；整段對話的修改都確認後，才一次上傳。</li>' +
         '<li>不寫客戶名、人名、統編、聯絡方式和電腦檔案路徑；程式發現可疑內容就停止更新。</li>' +
         '<li>內部來源只顯示「另有 N 份內部紀錄」，不顯示內容。</li>' +
         '<li><strong>封存</strong>：不要的筆記或小卡先封存，不直接刪除。封存後列表和公開網站都不顯示，私人網址的「封存區」看得到（上方選單「封存」）；之後再決定還原或刪除。封存按鈕在小卡卡尾、筆記標題下方，只在私人網址出現。刪掉的小卡編號不再使用。</li></ul>') +
-      sec('ab-version', '06', '版次與更新',
+      sec('ab-version', '07', '版次與更新',
         '<p>網站目前是 <strong>' + esc(DATA.version || '—') + '</strong>。版面或功能改變才升版號；新增筆記、小卡只看頁尾的更新日期。</p>' +
         '<h3 class="ab-h3">內容更新紀錄（自動）</h3><ul class="ab-log">' + (updates || '<li>尚無</li>') + '</ul>' +
         (changeList.length ? fold('網站改版紀錄（' + changeList.length + ' 筆）', '<ul class="ab-log">' + changes + '</ul>') : '')) +
@@ -2083,7 +2449,7 @@ window.ATLAS_DATA = {
     var params = new URLSearchParams(qi >= 0 ? hash.slice(qi + 1) : '');
     var parts = route.split('/').filter(Boolean);
     var nav = 'home', html, title = 'AI 工作圖鑑';
-    var find = function (id) { return allEntries.filter(function (e) { return e.id === decodeURIComponent(id); })[0]; };
+    var find = function (id) { var k = decodeURIComponent(id); return allEntries.filter(function (e) { return e.id === k || (e.code && e.code === k.toUpperCase()); })[0]; };
     var findCard = function (id) { return cards.concat(archivedCards).filter(function (e) { return e.id === decodeURIComponent(id); })[0]; };
 
     if (!parts.length) html = home();
@@ -2138,9 +2504,18 @@ window.ATLAS_DATA = {
       if (it) copyText(requestText(t.dataset.act, k, it), '✅ 已複製' + ACT_LABEL[t.dataset.act] + '請求，貼給 Claude');
       return;
     }
+    if (t.hasAttribute('data-zoom')) { openZoom(t.dataset.zoom, t.querySelector('img').alt, t); return; }
+    if (t.hasAttribute('data-zoom-close')) { closeZoom(); return; }
     if (t.hasAttribute('data-copy')) {
       var e = cards.filter(function (x) { return x.id === t.dataset.id; })[0];
-      if (e) copyText(e.card.prompts[+t.dataset.copy].text);
+      var pr = e && e.card.prompts[+t.dataset.copy], box = t.closest('.bc-prompt');
+      if (pr) copyText(box && box.dataset.lang === 'en' && pr.en ? pr.en : pr.text);
+    }
+    if (t.hasAttribute('data-lang')) {
+      var bx = t.closest('.bc-prompt'), lg = t.dataset.lang;
+      bx.dataset.lang = lg;
+      bx.querySelectorAll('pre[data-l]').forEach(function (n) { n.hidden = n.dataset.l !== lg; });
+      bx.querySelectorAll('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lang === lg); });
     }
   });
   app.addEventListener('click', function (ev) {
@@ -2160,18 +2535,45 @@ window.ATLAS_DATA = {
     location.hash = '#/' + f.dataset.base + (p.length ? '?' + p.join('&') : '');
   });
 
-  if (DATA.preview) {
-    document.getElementById('draft-banner').hidden = false;
-    // v2.3：私人預覽版的上方選單一直顯示「封存」，沒東西時頁面寫「封存區是空的」
-    var navEl = document.querySelector('.nav');
-    if (navEl && !navEl.querySelector('[data-nav="archive"]')) navEl.insertAdjacentHTML('beforeend', '<a href="#/archive" data-nav="archive">封存</a>');
-  }
+  // 頁面選單（2026-11-25）：上方分頁前面加圖示；左側固定一排圖示（手機改成底部列）。兩處用同一組圖示
+  // v2.3：私人預覽版一直顯示「封存」，沒東西時頁面寫「封存區是空的」
+  var PAGES = [
+    { nav: 'home', href: '#/', label: '首頁', icon: SVG('<path d="M4 11l8-6.5 8 6.5"/><path d="M6.5 9.5v10h4.5v-5h2v5h4.5v-10"/>') },
+    { nav: 'cards', href: '#/cards', label: '小卡', icon: SVG('<rect x="8" y="4.5" width="11" height="15" rx="2"/><path d="M5 7.5v10.5a2 2 0 0 0 2 2h8"/>') },
+    { nav: 'logs', href: '#/logs', label: '筆記', icon: SVG('<path d="M6 3.5h9.5l3 3v14H6z"/><path d="M9 9.5h6.5M9 13h6.5M9 16.5h4"/>') },
+    { nav: 'about', href: '#/about', label: '說明', icon: ICON.info }
+  ];
+  if (DATA.preview) PAGES.push({ nav: 'archive', href: '#/archive', label: '封存', icon: SVG('<rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5v11h14v-11M10 12.5h4"/>') });
+  var navEl = document.querySelector('.nav');
+  if (navEl) navEl.innerHTML = PAGES.map(function (p) { return '<a href="' + p.href + '" data-nav="' + p.nav + '">' + p.icon + '<span>' + p.label + '</span></a>'; }).join('');
+  document.body.insertAdjacentHTML('afterbegin', '<nav class="rail" aria-label="頁面選單（側邊）">' + PAGES.map(function (p) {
+    return '<a href="' + p.href + '" data-nav="' + p.nav + '" aria-label="' + p.label + '" title="' + p.label + '">' + p.icon + '<span class="rail-tip" aria-hidden="true">' + p.label + '</span></a>';
+  }).join('') + '</nav>');
+  document.body.classList.add('has-rail');
+  if (DATA.preview) document.getElementById('draft-banner').hidden = false;
   if (DATA.built) document.getElementById('built').innerHTML = '<a href="#/about?go=ab-version">' + esc((DATA.version ? DATA.version + '｜' : '') + '更新：' + DATA.built) + '</a>';
   window.addEventListener('hashchange', render);
   // 從手機寬度拉回電腦寬度時，章節欄一律展開
   var mq = window.matchMedia('(max-width: 820px)');
   var onMq = function () { var d = app.querySelector('details.chapters'); if (d && !mq.matches) d.open = true; };
   if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
+  // 示意圖放大檢視：全螢幕、可捲動，按「關閉」、點背景或 Esc 關閉
+  var zoomBack = null;
+  function openZoom(src, alt, from) {
+    zoomBack = from;
+    var box = document.createElement('div');
+    box.className = 'zoom-box'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', '示意圖放大：' + alt);
+    box.innerHTML = '<button type="button" class="zoom-close" data-zoom-close>✕ 關閉</button><div class="zoom-scroll"><img src="' + src + '" alt="' + esc(alt) + '"></div>';
+    box.addEventListener('click', function (ev) { if (ev.target === box || ev.target.closest('[data-zoom-close]')) closeZoom(); });
+    document.body.appendChild(box); document.body.classList.add('zooming');
+    box.querySelector('.zoom-close').focus();
+  }
+  function closeZoom() {
+    var box = document.querySelector('.zoom-box'); if (!box) return;
+    box.remove(); document.body.classList.remove('zooming');
+    if (zoomBack) zoomBack.focus();
+  }
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') closeZoom(); });
   render();
 })();
 
