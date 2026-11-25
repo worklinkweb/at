@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta name="at-version" content="v2.8">
-<meta name="at-build" content="3710459fc55c61eb">
+<meta name="at-build" content="c7298c12a111c1bf">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -1160,114 +1160,6 @@ window.ATLAS_DATA = {
    ]
   },
   {
-   "id": "2026-11-23_讓AI讀得到的私密網站發布",
-   "code": "N-004",
-   "title": "讓 AI 讀得到、別人進不來：私密網站發布",
-   "date": "2026-11-23",
-   "format": "note",
-   "summary": "讓 AI 讀得到網站，人看的入口加密碼。",
-   "cost": [],
-   "tags": [
-    "網站開發",
-    "工具選擇",
-    "AI 協作",
-    "資安"
-   ],
-   "sources": [],
-   "internalSources": 1,
-   "draft": false,
-   "archived": false,
-   "archivedDate": "",
-   "top3": [],
-   "related": [
-    "AI-007",
-    "AI-006"
-   ],
-   "sections": [
-    {
-     "title": "做什麼",
-     "html": "<p>讓 AI 讀得到網站，人看的入口加密碼。</p>"
-    },
-    {
-     "title": "怎麼做",
-     "html": "<ol><li>人看的網站加密後放 GitHub Pages。</li><li>AI 閱讀頁放不公開列出的 Gist。</li><li>用一支程式完成檢查、加密、上傳與核對。</li></ol>"
-    },
-    {
-     "title": "學到什麼",
-     "html": "<ol><li>有密碼的頁面 AI 打不開，入口要分開。</li><li>上傳前先看 Git 歷史，只發布成品。</li><li>上傳成功不等於更新成功，要讀回核對。</li></ol>"
-    }
-   ],
-   "cards": [
-    {
-     "code": "AI-007",
-     "name": "讓 AI 可讀的私密網站",
-     "use": "把網站發布成人看要密碼、AI 有專用網址，並在每次更新後核對線上內容。",
-     "when": [
-      "想讓 ChatGPT 等 AI 直接讀你的網站。",
-      "網站只給特定的人看，希望有一道密碼。",
-      "內容常更新，不想每次手動上傳。"
-     ],
-     "notes": [
-      "限制：Gist 不是密碼保護，網址只給需要的 AI。",
-      "限制：StatiCrypt 只保護內容，不能管理個別帳號權限。",
-      "限制：這段提示詞依本案整理，尚未在第二個專案驗證。"
-     ],
-     "prompts": [
-      {
-       "label": "",
-       "text": "請幫我把這個網站發布成「人看要密碼、AI 有專用網址」。先不要上傳，先回報計畫等我確認。\n1. 盤點：列出要公開的內容，檢查路徑、Email、金鑰、私人網址和 Git 歷史。\n2. AI 閱讀頁：產生不需執行程式就能讀的純文字頁，標示版本與更新日期。\n3. 人看入口：用 StatiCrypt 加密後放 GitHub Pages，只上傳成品。\n4. AI 入口：放不公開列出的 Gist，並提醒我拿到網址的人都能讀。\n5. 密碼：由我本人輸入並存在 macOS 鑰匙圈，不要讓 AI 看到。\n6. 核對：上傳後用未登入狀態讀回線上內容並比對版本，沒對上就回報失敗。",
-       "en": "Help me publish this website so people need a password and AI has its own URL. Do not upload yet. First report the plan and wait for my approval.\n1. Inventory: list what will be public, and check for file paths, emails, keys, private URLs, and Git history.\n2. AI reading page: create a plain-text page that works without running code, with the version and update date.\n3. Human entrance: encrypt it with StatiCrypt and put it on GitHub Pages. Upload only the finished page.\n4. AI entrance: put it in an unlisted Gist, and remind me that anyone with the URL can read it.\n5. Password: I will type it myself and store it in the macOS Keychain. Do not let the AI see it.\n6. Check: after upload, read the live content while logged out and compare the version. If it does not match, report a failure."
-      }
-     ],
-     "preparedBy": "Claude",
-     "promptOutline": true,
-     "domain": "工作職場",
-     "notFor": [
-      "內容有個人資料、客戶機密或金鑰。",
-      "需要個別帳號權限或稽核紀錄的正式系統。"
-     ],
-     "steps": [
-      "盤點要公開的內容，檢查有沒有不能外流的資料。",
-      "產生 AI 可直接讀的純文字頁。",
-      "人看的網站加密，AI 閱讀頁放專用網址。",
-      "密碼由本人輸入並存進鑰匙圈。",
-      "上傳後用未登入狀態讀回，比對版本。"
-     ],
-     "tools": [
-      "<a href=\"https://github.com/robinmoisson/staticrypt\" target=\"_blank\" rel=\"noopener\">StatiCrypt</a>：把網頁加密，輸入密碼才解開。",
-      "<a href=\"https://docs.github.com/pages\" target=\"_blank\" rel=\"noopener\">GitHub Pages</a>：免費放靜態網站。",
-      "<a href=\"https://docs.github.com/get-started/writing-on-github/editing-and-sharing-content-with-gists\" target=\"_blank\" rel=\"noopener\">GitHub Gist</a>：放不公開列出的文字內容。",
-      "<a href=\"https://cli.github.com/\" target=\"_blank\" rel=\"noopener\">GitHub CLI</a>：讓電腦自動上傳到 GitHub。"
-     ],
-     "practice": [
-      {
-       "date": "2026-11-23",
-       "project": "AI 工作圖鑑",
-       "status": "已實作未驗證",
-       "how": "人看網站加密、AI 讀專用網址、每次更新自動核對",
-       "result": "<a href=\"https://worklinkweb.github.io/at/\" target=\"_blank\" rel=\"noopener\">AT 網站</a>",
-       "log": "2026-11-23_讓AI讀得到的私密網站發布",
-       "learned": "有密碼的頁面 AI 打不開，入口要分開"
-      }
-     ],
-     "practiceCount": 1,
-     "versions": [
-      "v0.3｜2026-11-25｜提示詞加英文版（English）",
-      "v0.2｜2026-11-24｜改名「讓 AI 可讀的私密網站」（原名：讓 AI 讀得到的私密網站發布）",
-      "v0.1｜2026-11-23｜依 AT 上線 GitHub 的實作建立"
-     ],
-     "image": null,
-     "archived": false,
-     "archivedDate": "",
-     "series": {
-      "name": "自動系",
-      "desc": "流程與批次處理"
-     },
-     "id": "2026-11-23_讓AI讀得到的私密網站發布"
-    }
-   ]
-  },
-  {
    "id": "2026-11-22_AI工作圖鑑技能卡設計",
    "code": "N-002",
    "title": "把小卡做成可重複套用的版型",
@@ -1579,7 +1471,7 @@ window.ATLAS_DATA = {
        "status": "已實作未驗證",
        "how": "用靜態網頁、GitHub Pages 和 Gist，不架伺服器也不接 API",
        "result": "",
-       "log": "2026-11-23_讓AI讀得到的私密網站發布",
+       "log": "",
        "learned": "沒有即時需求，靜態發布就夠"
       }
      ],
