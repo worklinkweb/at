@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta name="at-version" content="v2.8">
-<meta name="at-build" content="c7298c12a111c1bf">
+<meta name="at-build" content="87ed85044c58ec7b">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -874,10 +874,11 @@ window.ATLAS_DATA = {
     "影片剪輯",
     "Claude",
     "工具選擇",
-    "AI 協作"
+    "AI 協作",
+    "AI 作曲"
    ],
    "sources": [],
-   "internalSources": 4,
+   "internalSources": 5,
    "draft": false,
    "archived": false,
    "archivedDate": "",
@@ -892,18 +893,18 @@ window.ATLAS_DATA = {
     },
     {
      "title": "怎麼做",
-     "html": "<ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>程式分析講話與畫面動作，Claude 讀逐字稿判斷剪點。</li><li>做剪點預覽片和審片版，剪輯者依編號勾剪或不剪。</li></ol>"
+     "html": "<ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>Claude 讀逐字稿判斷剪點，做剪點預覽片給剪輯者勾選。</li><li>開源 AI 作曲做配樂候選，程式依片長墊進影片。</li></ol>"
     },
     {
      "title": "學到什麼",
-     "html": "<ol><li>從人剪好的成品反推規則，比自己訂規則準。</li><li>邊畫邊安靜不能剪，要看畫面有沒有在動。</li><li>去雜音用 AI 語音隔離，比音量門檻準。</li></ol>"
+     "html": "<ol><li>從人剪好的成品反推規則，比自己訂規則準。</li><li>去雜音用 AI 語音隔離，比音量門檻準。</li><li>記憶體不夠時 AI 不一定停下，可能回傳亂猜的結果。</li></ol>"
     }
    ],
    "cards": [
     {
      "code": "AI-010",
      "name": "課程影片初剪",
-     "use": "把邊講邊示範的課程原稿，自動剪成去背景音的初剪，並列出剪點給人確認。",
+     "use": "把邊講邊示範的課程原稿，自動剪成去背景音、墊好背景音樂的初剪，並列出剪點給人確認。",
      "when": [
       "老師邊講邊示範的錄影課，有好幾支原稿要接起來。",
       "已經有一集人工剪好的成品可以當範本。",
@@ -926,6 +927,11 @@ window.ATLAS_DATA = {
        "label": "在 Claude Code 打：試剪新的一集",
        "text": "請用剪輯規則試剪這一集：原稿在 <資料夾>。\n片頭片尾用 <檔案>。\n輸出初剪影片，並列出剪輯清單（時間、原因、講了什麼），讓剪輯者勾選剪或不剪。",
        "en": "Use the editing rules to make a rough cut of this lesson. Raw clips are in <folder>.\nUse <files> as the opening and ending.\nExport the rough cut and a cut list (time, reason, what was said) for the editor to mark cut or keep."
+      },
+      {
+       "label": "在 Claude Code 打：做背景音樂候選",
+       "text": "範本成品的背景音樂不能匯出用。\n請先量範本配樂的音量、速度、風格，再用可商用的開源 AI 作曲做 4 首相近風格的新曲，\n每首配一段 60 秒試聽片（含老師聲音），讓剪輯者選 2 首輪流用。\n不要拿原曲當參考音訊，只參考風格描述。",
+       "en": "The background music in the reference edit cannot be exported.\nMeasure its loudness, tempo, and style, then use a commercially licensed open-source AI music model to make 4 new tracks in a similar style.\nMake a 60-second preview with the teacher's voice for each, so the editor can pick 2 to alternate.\nDo not use the original track as reference audio; use only the style description."
       }
      ],
      "preparedBy": "Claude",
@@ -942,12 +948,14 @@ window.ATLAS_DATA = {
       "程式分析講話、畫面動作、逐字稿。",
       "Claude 讀逐字稿，標出等學生、重講、講錯、結尾。",
       "輸出剪點預覽片（紅框＋編號）和審片版（角落標原稿與時間）。",
-      "剪輯者依編號在清單勾剪或不剪，再輸出下一版。"
+      "剪輯者依編號在清單勾剪或不剪，再輸出下一版。",
+      "AI 作曲做 3–4 首背景音樂候選和試聽片，剪輯者選 2 首，程式輪流鋪滿全片。"
      ],
      "tools": [
       "<a href=\"https://ffmpeg.org/\" target=\"_blank\" rel=\"noopener\">FFmpeg</a>：剪接、降噪、音量一致",
       "<a href=\"https://github.com/ml-explore/mlx-examples/tree/main/whisper\" target=\"_blank\" rel=\"noopener\">mlx-whisper</a>：本機語音轉文字",
-      "<a href=\"https://github.com/Rikorose/DeepFilterNet\" target=\"_blank\" rel=\"noopener\">DeepFilterNet</a>：語音隔離"
+      "<a href=\"https://github.com/Rikorose/DeepFilterNet\" target=\"_blank\" rel=\"noopener\">DeepFilterNet</a>：語音隔離",
+      "<a href=\"https://github.com/ace-step/ACE-Step-1.5\" target=\"_blank\" rel=\"noopener\">ACE-Step 1.5</a>：本機 AI 作曲、聽音樂寫描述"
      ],
      "practice": [
       {
@@ -985,13 +993,23 @@ window.ATLAS_DATA = {
        "result": "修正 3 個誤剪",
        "log": "2026-11-25_畫畫課影片自動剪輯",
        "learned": "誤剪比漏剪危險"
+      },
+      {
+       "date": "2026-11-25",
+       "project": "線上畫畫課 Ep2 帆船",
+       "status": "已實作未驗證",
+       "how": "ACE-Step 聽範本配樂、做 4 首候選、程式墊配樂",
+       "result": "4 首候選＋試聽片",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "速度比樂器描述可靠"
       }
      ],
-     "practiceCount": 4,
+     "practiceCount": 5,
      "versions": [
       "v0.1｜2026-11-25｜建立",
       "v0.2｜2026-11-25｜加剪點預覽片、審片版、語音隔離",
-      "v0.3｜2026-11-25｜加 XR 審查剪點"
+      "v0.3｜2026-11-25｜加 XR 審查剪點",
+      "v0.4｜2026-11-25｜加 AI 作曲背景音樂"
      ],
      "image": null,
      "archived": false,
