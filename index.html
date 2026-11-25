@@ -3,7 +3,7 @@
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta name="at-version" content="v2.11">
-<meta name="at-build" content="42d95cf3c1b152a0">
+<meta name="at-build" content="f1832ac3ddf6b527">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -1056,7 +1056,7 @@ window.ATLAS_DATA = {
    "title": "畫畫課影片自動剪輯：從成品反推規則再試剪",
    "date": "2026-11-25",
    "format": "note",
-   "summary": "用 Claude 在本機把課程原稿剪成初剪，人只確認剪點。",
+   "summary": "用 Claude 在本機把課程原稿剪成初剪，配好音樂和字幕。",
    "cost": [],
    "tags": [
     "影片剪輯",
@@ -1077,11 +1077,11 @@ window.ATLAS_DATA = {
    "sections": [
     {
      "title": "做什麼",
-     "html": "<p>用 Claude 在本機把課程原稿剪成初剪，人只確認剪點。</p>"
+     "html": "<p>用 Claude 在本機把課程原稿剪成初剪，配好音樂和字幕。</p>"
     },
     {
      "title": "怎麼做",
-     "html": "<ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>Claude 讀逐字稿判斷剪點，做剪點預覽片給剪輯者勾選。</li><li>開源 AI 作曲做配樂候選，程式依片長墊進影片。</li></ol>"
+     "html": "<ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>Claude 讀逐字稿判斷剪點，做剪點預覽片給剪輯者勾選。</li><li>AI 作曲墊配樂，Whisper 產生字幕再由 Claude 校對。</li></ol>"
     },
     {
      "title": "學到什麼",
@@ -1092,7 +1092,7 @@ window.ATLAS_DATA = {
     {
      "code": "AI-010",
      "name": "課程影片初剪",
-     "use": "把邊講邊示範的課程原稿，自動剪成去背景音、墊好背景音樂的初剪，並列出剪點給人確認。",
+     "use": "把邊講邊示範的課程原稿，自動剪成去背景音、墊好背景音樂、附字幕的初剪。",
      "when": [
       "老師邊講邊示範的錄影課，有好幾支原稿要接起來。",
       "已經有一集人工剪好的成品可以當範本。",
@@ -1120,6 +1120,11 @@ window.ATLAS_DATA = {
        "label": "在 Claude Code 打：做背景音樂候選",
        "text": "範本成品的背景音樂不能匯出用。\n請先量範本配樂的音量、速度、風格，再用可商用的開源 AI 作曲做 4 首相近風格的新曲，\n每首配一段 60 秒試聽片（含老師聲音），讓剪輯者選 2 首輪流用。\n不要拿原曲當參考音訊，只參考風格描述。",
        "en": "The background music in the reference edit cannot be exported.\nMeasure its loudness, tempo, and style, then use a commercially licensed open-source AI music model to make 4 new tracks in a similar style.\nMake a 60-second preview with the teacher's voice for each, so the editor can pick 2 to alternate.\nDo not use the original track as reference audio; use only the style description."
+      },
+      {
+       "label": "在 Claude Code 打：產生並校對字幕",
+       "text": "請把剪好的影片轉成 SRT 字幕，格式比照 <範本字幕檔>（一行、沒有標點、每句約 2 秒）。\n轉成台灣繁體，再讀全文校對同音錯字。\n色號、數字和聽不出原意的地方不要猜，列成清單給我確認。",
+       "en": "Turn the edited video into an SRT file in the same format as <reference subtitle file> (one line, no punctuation, about 2 seconds per cue).\nConvert to Taiwan Traditional Chinese, then proofread the full text for homophone errors.\nDo not guess color codes, numbers, or unclear phrases; list them for me to check."
       }
      ],
      "preparedBy": "Claude",
@@ -1137,13 +1142,16 @@ window.ATLAS_DATA = {
       "Claude 讀逐字稿，標出等學生、重講、講錯、結尾。",
       "輸出剪點預覽片（紅框＋編號）和審片版（角落標原稿與時間）。",
       "剪輯者依編號在清單勾剪或不剪，再輸出下一版。",
-      "AI 作曲做 3–4 首背景音樂候選和試聽片，剪輯者選 2 首，程式輪流鋪滿全片。"
+      "AI 作曲做 3–4 首背景音樂候選和試聽片，剪輯者選 2 首，程式輪流鋪滿全片。",
+      "剪好的影片轉成字幕，Claude 校對錯字，聽不出的地方列給人確認。"
      ],
      "tools": [
       "<a href=\"https://ffmpeg.org/\" target=\"_blank\" rel=\"noopener\">FFmpeg</a>：剪接、降噪、音量一致",
       "<a href=\"https://github.com/ml-explore/mlx-examples/tree/main/whisper\" target=\"_blank\" rel=\"noopener\">mlx-whisper</a>：本機語音轉文字",
       "<a href=\"https://github.com/Rikorose/DeepFilterNet\" target=\"_blank\" rel=\"noopener\">DeepFilterNet</a>：語音隔離",
-      "<a href=\"https://github.com/ace-step/ACE-Step-1.5\" target=\"_blank\" rel=\"noopener\">ACE-Step 1.5</a>：本機 AI 作曲、聽音樂寫描述"
+      "<a href=\"https://github.com/ace-step/ACE-Step-1.5\" target=\"_blank\" rel=\"noopener\">ACE-Step 1.5</a>：本機 AI 作曲、聽音樂寫描述",
+      "<a href=\"https://github.com/BYVoid/OpenCC\" target=\"_blank\" rel=\"noopener\">OpenCC</a>：簡體轉台灣繁體",
+      "<a href=\"https://github.com/fxsjy/jieba\" target=\"_blank\" rel=\"noopener\">jieba</a>：中文斷詞，字幕斷句不切開詞"
      ],
      "practice": [
       {
@@ -1199,14 +1207,24 @@ window.ATLAS_DATA = {
        "result": "剪輯者選定 2 首",
        "log": "2026-11-25_畫畫課影片自動剪輯",
        "learned": "寫「不要爵士」反而偏爵士"
+      },
+      {
+       "date": "2026-11-26",
+       "project": "線上畫畫課 Ep2 帆船",
+       "status": "已實作未驗證",
+       "how": "Whisper 轉字幕、簡轉繁、Claude 校對",
+       "result": "1,165 句字幕，17 處待確認",
+       "log": "2026-11-25_畫畫課影片自動剪輯",
+       "learned": "和人工字幕只差 5.4%"
       }
      ],
-     "practiceCount": 6,
+     "practiceCount": 7,
      "versions": [
       "v0.1｜2026-11-25｜建立",
       "v0.2｜2026-11-25｜加剪點預覽片、審片版、語音隔離",
       "v0.3｜2026-11-25｜加 XR 審查剪點",
-      "v0.4｜2026-11-25｜加 AI 作曲背景音樂"
+      "v0.4｜2026-11-25｜加 AI 作曲背景音樂",
+      "v0.5｜2026-11-26｜加自動字幕與 Claude 校對"
      ],
      "image": null,
      "archived": false,
