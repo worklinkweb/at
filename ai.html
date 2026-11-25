@@ -1,0 +1,179 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AI 工作圖鑑 AT｜AI 閱讀版</title><style>body{max-width:820px;margin:0 auto;padding:16px;font:16px/1.7 system-ui,"PingFang TC",sans-serif;color:#141414;background:#fff}pre{white-space:pre-wrap;background:#f5f2ee;padding:12px;overflow-wrap:anywhere}article{border-top:2px solid #8f1d22;margin-top:28px}@media(prefers-color-scheme:dark){body{background:#181818;color:#eee}pre{background:#2a2a2a}a{color:#ffb4a8}}</style></head><body>
+<h1>AI 工作圖鑑 AT｜AI 閱讀版</h1>
+<p>版本：v2.11｜更新：2026-11-25｜筆記 6 篇｜小卡 8 張</p>
+<p>用詞：「筆記」是一次真實的 AI 工作紀錄（舊稱學習日誌、開發日誌、案例）；「小卡」是可重複使用的方法與提示詞（舊稱指令卡、技能卡）。</p>
+<p>給 AI 審查者：這是 Lynn 的 AI 學習錦囊。請先回報上方版本、筆記數與小卡數，再評論。請只提出建議，不要推測頁面沒有寫的內容。</p>
+<article><h2>筆記：畫畫課影片自動剪輯：從成品反推規則再試剪</h2><p>日期：2026-11-25｜關鍵字：影片剪輯、Claude、工具選擇、AI 協作、AI 作曲</p>
+
+<h4>做什麼</h4><p>用 Claude 在本機把課程原稿剪成初剪，人只確認剪點。</p><h4>怎麼做</h4><ol><li>原稿和剪好的成品比對逐字稿，反推剪輯規則。</li><li>Claude 讀逐字稿判斷剪點，做剪點預覽片給剪輯者勾選。</li><li>開源 AI 作曲做配樂候選，程式依片長墊進影片。</li></ol><h4>學到什麼</h4><ol><li>從人剪好的成品反推規則，比自己訂規則準。</li><li>去雜音用 AI 語音隔離，比音量門檻準。</li><li>記憶體不夠時 AI 不一定停下，可能回傳亂猜的結果。</li></ol>
+<h4>相關小卡</h4><ul><li>W-AU-10 課程影片初剪</li></ul>
+
+<section><h3>小卡 W-AU-10（AI-010）課程影片初剪</h3>
+<p>用途：把邊講邊示範的課程原稿，自動剪成去背景音、墊好背景音樂的初剪，並列出剪點給人確認。</p><p>系別：自動系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>老師邊講邊示範的錄影課，有好幾支原稿要接起來。</li><li>已經有一集人工剪好的成品可以當範本。</li><li>要固定加系列片頭、片尾。</li></ul><h4>不適用</h4><ul><li>需要轉場、特效、字卡的精剪。</li><li>沒有講話的純示範影片：逐字稿判斷不了。</li><li>要用 AI 生成新畫面的影片。</li></ul>
+<h4>提示詞</h4><p>在 Claude Code 打：比對範本、歸納規則</p><pre>這是同一集課程的原稿和剪好的成品。
+請比對逐字稿，列出成品剪掉了哪些內容、保留了哪些，整理成剪輯規則。
+先說結論，規則分「要剪」「不剪」「聲音處理」三類。</pre><p>English</p><pre>These are the raw clips and the finished edit of the same lesson.
+Compare the transcripts, list what the finished edit removed and kept, and turn it into editing rules.
+Lead with the conclusion; group rules into &quot;cut&quot;, &quot;keep&quot;, and &quot;audio&quot;.</pre><p>在 Claude Code 打：試剪新的一集</p><pre>請用剪輯規則試剪這一集：原稿在 &lt;資料夾&gt;。
+片頭片尾用 &lt;檔案&gt;。
+輸出初剪影片，並列出剪輯清單（時間、原因、講了什麼），讓剪輯者勾選剪或不剪。</pre><p>English</p><pre>Use the editing rules to make a rough cut of this lesson. Raw clips are in &lt;folder&gt;.
+Use &lt;files&gt; as the opening and ending.
+Export the rough cut and a cut list (time, reason, what was said) for the editor to mark cut or keep.</pre><p>在 Claude Code 打：做背景音樂候選</p><pre>範本成品的背景音樂不能匯出用。
+請先量範本配樂的音量、速度、風格，再用可商用的開源 AI 作曲做 4 首相近風格的新曲，
+每首配一段 60 秒試聽片（含老師聲音），讓剪輯者選 2 首輪流用。
+不要拿原曲當參考音訊，只參考風格描述。</pre><p>English</p><pre>The background music in the reference edit cannot be exported.
+Measure its loudness, tempo, and style, then use a commercially licensed open-source AI music model to make 4 new tracks in a similar style.
+Make a 60-second preview with the teacher's voice for each, so the editor can pick 2 to alternate.
+Do not use the original track as reference audio; use only the style description.</pre>
+<h4>使用說明</h4><ul><li>準備：Mac 要先裝 ffmpeg 與 Whisper 環境，第一次約 10 分鐘。</li><li>限制：70 分鐘原稿，分析約 15 分鐘、輸出約 12 分鐘。</li><li>限制：影片檔很大，不放進 Git 和雲端同步資料夾。</li><li>提醒：第一版先保守剪，再依剪輯者的勾選調整。</li><li>提醒：剪點清單可先用 XR 請 Codex 依逐字稿抓誤剪。</li></ul><h4>操作步驟</h4><ol><li>準備一集人剪好的成品和它的原稿，請 Claude 比對、整理剪輯規則。</li><li>新的一集：原稿依錄影順序放進同一個資料夾。</li><li>程式分析講話、畫面動作、逐字稿。</li><li>Claude 讀逐字稿，標出等學生、重講、講錯、結尾。</li><li>輸出剪點預覽片（紅框＋編號）和審片版（角落標原稿與時間）。</li><li>剪輯者依編號在清單勾剪或不剪，再輸出下一版。</li><li>AI 作曲做 3–4 首背景音樂候選和試聽片，剪輯者選 2 首，程式輪流鋪滿全片。</li></ol><h4>工具與來源</h4><ul><li><a href="https://ffmpeg.org/" target="_blank" rel="noopener">FFmpeg</a>：剪接、降噪、音量一致</li><li><a href="https://github.com/ml-explore/mlx-examples/tree/main/whisper" target="_blank" rel="noopener">mlx-whisper</a>：本機語音轉文字</li><li><a href="https://github.com/Rikorose/DeepFilterNet" target="_blank" rel="noopener">DeepFilterNet</a>：語音隔離</li><li><a href="https://github.com/ace-step/ACE-Step-1.5" target="_blank" rel="noopener">ACE-Step 1.5</a>：本機 AI 作曲、聽音樂寫描述</li></ul>
+<h4>實戰紀錄（6 次，規劃應用不計入）</h4><ul><li>2026-11-25｜線上畫畫課 Ep2 範本｜已驗證完成｜原稿逐字稿比對成品字幕｜新學到：成品只剪掉 12%｜成果：剪輯規則 v1</li><li>2026-11-25｜線上畫畫課 Ep2 帆船｜已實作未驗證｜10 支原稿自動試剪｜新學到：第一版剪得比範本保守｜成果：70.8 分鐘初剪、15 處剪點</li><li>2026-11-25｜線上畫畫課 Ep2 帆船｜已實作未驗證｜改用剪點預覽片、審片版；8 種聲音樣本比較｜新學到：降噪加閘門會吃掉小聲講話｜成果：選定語音隔離</li><li>2026-11-25｜線上畫畫課 Ep2 帆船｜已驗證完成｜XR：Codex 依逐字稿審查剪輯清單｜新學到：誤剪比漏剪危險｜成果：修正 3 個誤剪</li><li>2026-11-25｜線上畫畫課 Ep2 帆船｜已實作未驗證｜ACE-Step 聽範本配樂、做 4 首候選、程式墊配樂｜新學到：速度比樂器描述可靠｜成果：4 首候選＋試聽片</li><li>2026-11-25｜線上畫畫課 Ep2 帆船｜已驗證完成｜剪輯者退件後改鋼琴、118–120 拍再做 4 首｜新學到：寫「不要爵士」反而偏爵士｜成果：剪輯者選定 2 首</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.1｜2026-11-25｜建立</li><li>v0.2｜2026-11-25｜加剪點預覽片、審片版、語音隔離</li><li>v0.3｜2026-11-25｜加 XR 審查剪點</li><li>v0.4｜2026-11-25｜加 AI 作曲背景音樂</li></ul></section></article>
+<article><h2>筆記：跨模型縮寫：打兩個字母就叫另一個 AI 幫忙</h2><p>日期：2026-11-25｜關鍵字：交叉審查、Claude、Codex、AI 協作、文件審查</p>
+
+<h4>做什麼</h4><p>用 5 個縮寫，在三種 AI 裡快速叫出審查或交辦。</p><h4>怎麼做</h4><ol><li>研究外部教學與 GitHub 技能，只借做法、不安裝。</li><li>縮寫寫進 Claude、Codex 與 ChatGPT 的設定。</li><li>網站首頁按鈕從小卡指令自動產生。</li></ol><h4>學到什麼</h4><ol><li>同一個縮寫，在不同 AI 做對應的事。</li><li>ChatGPT 叫不到別的 AI，就自己當審查委員。</li><li>縮寫定義只放一處，其他地方指過去。</li></ol>
+<h4>相關小卡</h4><ul><li>W-DE-09 跨模型縮寫</li><li>W-DE-01 跨模型交叉審查</li><li>W-AU-08 跨模型接力</li></ul>
+<h4>來源</h4><ul><li><a href="https://app.notion.com/p/Claude-Codex-OpenAI-422b7e19746a80059c82f7c93efd4875">Claude × Codex 官方外掛安裝教學（Notion）</a></li><li><a href="https://trailofbits.com/skills/second-opinion/">Trail of Bits：second-opinion</a></li><li><a href="https://github.com/KamakuraCrypto/claude-codex-review">claude-codex-review（風險預演、限制輪數）</a></li><li><a href="https://github.com/openai/codex-plugin-cc">Codex 官方外掛原始碼（GitHub）</a></li></ul>
+<section><h3>小卡 W-DE-09（AI-009）跨模型縮寫</h3>
+<p>用途：打一個縮寫，就讓 Claude、Codex 或 ChatGPT 做跨模型審查、交辦或複驗。</p><p>示意圖：有（跨模型縮寫，在網站小卡上看圖）</p><p>系別：防禦系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>正式文件送審前，想快速找第二意見。</li><li>在 Codex 想把任務交給 Claude 做。</li><li>修正後只想確認上次的問題。</li></ul><h4>不適用</h4><ul><li>短訊息、閒聊：浪費額度。</li><li>有個人資料又不能遮蔽的檔案。</li><li>要對外發布、付款或刪除的工作。</li></ul>
+<h4>提示詞</h4><p>XR 交叉審查｜Claude、Codex、ChatGPT 都能打</p><pre>XR &lt;檔案位置&gt;</pre><p>English</p><pre>XR &lt;file path&gt;</pre><p>XP 風險預演｜Claude、Codex、ChatGPT 都能打（送審或上線前）</p><pre>XP &lt;檔案位置&gt;</pre><p>English</p><pre>XP &lt;file path&gt;</pre><p>XE 交給 Claude 執行｜只在 Codex 打</p><pre>XE &lt;要完成的事&gt;
+範圍：只能改 &lt;資料夾或檔案&gt;
+驗收標準：&lt;怎樣算完成&gt;</pre><p>English</p><pre>XE &lt;what to finish&gt;
+Scope: change only &lt;folders or files&gt;
+Acceptance criteria: &lt;what counts as done&gt;</pre><p>XV 唯讀複驗｜Claude、Codex、ChatGPT 都能打</p><pre>XV 上次問題：&lt;問題&gt;。現已改為：&lt;修正內容&gt;</pre><p>English</p><pre>XV Last issue: &lt;issue&gt;. Now changed to: &lt;fix&gt;</pre><p>XC 程式碼審查｜只在 Claude Code 打（指令不用翻譯）</p><pre>XC</pre>
+<h4>使用說明</h4><ul><li>準備：ChatGPT、Claude Chat 要先把總說明短版貼進自訂指令，才認得縮寫。</li><li>準備：送審前先遮公司名、人名、統編。</li><li>提醒：對方沒跑完算「無法驗證」；複驗最多 2 輪。</li><li>提醒：XP 舊稱「事前驗屍」，2026-11-25 改成較中性的「風險預演」。</li></ul><h4>操作步驟</h4><ol><li>記法：在哪個 AI 打，就請另一個 AI 來看或來做；打字的 AI 最後判斷。</li><li>顏色：藍色只看不改檔（XR、XP、XV）；紫色會動手改檔（XE、XC）。</li><li>XR 交叉審查：文件寫好、想要第二意見時。在 Claude 打由 Codex 審，在 Codex 打由 Claude 審。</li><li>XP 風險預演：送審或上線前。做法同 XR，再假設已被退件或失敗，列 5 個原因。</li><li>XE 交給 Claude 執行：只在 Codex 打。Codex 寫任務單，Claude 做，Codex 驗收。</li><li>XV 唯讀複驗：照審查意見改完後。在哪裡打，就由那個 AI 自己檢查，不叫別的 AI。</li><li>XC 程式碼審查：只在 Claude Code 打。Codex 審程式，Claude 修正並重新測試。</li><li>在 ChatGPT 打：XR、XP、XV 由 ChatGPT 自己做；XE、XC 會提醒換工具。</li><li>常見順序：做完 → XR（送審前用 XP）→ 修正 → XV。</li><li>AI 會在適合時，於回答最後提示要打哪個縮寫；我打了才執行。</li></ol><h4>工具與來源</h4><ul><li>AGENTS.md「跨模型縮寫」：縮寫的正式定義，Claude 和 Codex 都會讀。</li><li>AI 回答習慣總說明：貼到 ChatGPT、Claude Chat 自訂指令的版本。</li><li>codex-reviewer、claude-reviewer、claude-executor：三個技能都把縮寫加進觸發詞。</li><li><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">Codex 官方外掛原始碼（GitHub）</a></li></ul>
+<h4>實戰紀錄（1 次，規劃應用不計入）</h4><ul><li>2026-11-25｜AI 工作圖鑑｜已實作未驗證｜縮寫寫進 Claude、Codex、ChatGPT 設定，首頁加跨模型按鈕｜新學到：按鈕從小卡自動產生，改一處就好｜成果：5 個縮寫、4 個快捷按鈕</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.2｜2026-11-25｜XP 改名風險預演；加使用時機、顏色與英文版提示詞</li><li>v0.1｜2026-11-25｜建立：XR、XP、XE、XV、XC 五個縮寫</li></ul></section></article>
+<article><h2>筆記：把小卡做成可重複套用的版型</h2><p>日期：2026-11-22｜關鍵字：Claude、Codex、網站開發、AI 協作</p>
+
+<h4>做什麼</h4><p>把圖鑑小卡做成每張都能沿用的版型。</p><h4>怎麼做</h4><ol><li>在 ChatGPT 用生圖比較卡片風格。</li><li>把欄位、配色、分類寫成版面規則。</li><li>交給 Claude Code 套用到原網站。</li></ol><h4>學到什麼</h4><ol><li>先想讀者最常做什麼，再排首頁順序。</li><li>生圖適合比風格，選定後要寫成規則。</li><li>換對話前，先整理成交接摘要。</li></ol>
+<h4>相關小卡</h4><ul><li>W-KN-02 專案交接摘要</li></ul>
+
+<section><h3>小卡 W-KN-02（AI-002）專案交接摘要</h3>
+<p>用途：在長對話換到新對話或另一個 AI 時，把已定案、待驗證和下一步交接清楚。</p><p>系別：知識系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>網站、簡報或課程聊了好幾輪，想開新對話繼續。</li><li>已在 ChatGPT 用語音討論過，準備把確認的內容交給 Codex 或 Claude Code。</li></ul>
+<h4>提示詞</h4><p>把目前這段對話整理成交接摘要</p><pre>請把我們目前這段對話整理成一頁內的專案交接摘要，讓沒看過前文的 AI 也能接著做。
+先用一句話說明專案目標，再分成三項：
+1. 已定案：我已確認的方向、限制，以及目前已完成且有依據的成果。
+2. 待驗證：還沒確認或只規劃過的功能，以及接手時應查看的最新版檔案或網址。
+3. 下一步：請接手的 AI 先處理的一件事，並寫出怎樣算完成。
+只根據這段對話整理。缺少檔案、網址或進度證據時，標明待補。</pre><p>English</p><pre>Summarize our conversation so far into a one-page project handoff, so an AI that has not seen it can continue the work.
+Start with one sentence on the project goal, then three parts:
+1. Decided: the direction and limits I have confirmed, and the results already done with evidence.
+2. To verify: features not yet confirmed or only planned, and the latest files or URLs the next AI should check.
+3. Next step: the one thing the next AI should do first, and what counts as done.
+Use only this conversation. If files, URLs, or proof of progress are missing, mark them &quot;to be added&quot;.</pre>
+<h4>使用說明</h4><ul><li>提醒：先在原對話整理，再把摘要和最新版檔案貼進新對話。</li><li>提醒：其他專案要附上當前簡報、網站網址或課程稿。</li><li>限制：這段是依圖鑑實際交接整理的模板。</li></ul>
+
+</section></article>
+<article><h2>筆記：迷你布學習系統</h2><p>日期：2026-11-22｜關鍵字：學習系統、網站開發、互動地圖、工具選擇</p>
+
+<h4>做什麼</h4><p>製作可逐年擴充的國中學習網站。</p><h4>怎麼做</h4><ol><li>用公開地圖資料製作可旋轉地球儀。</li><li>先訂故事規則，再編寫教材內容。</li><li>把教材內容與網站程式分開，方便新增章節。</li></ol><h4>學到什麼</h4><ol><li>先辨認功能需要的是工具、程式，還是資料。</li><li>資料不常變時，可放進網站，減少 API 費用與維護。</li><li>題目要區分真題、改編題與 AI 仿題。</li></ol>
+<h4>相關小卡</h4><ul><li>H-KN-03 網站規格</li><li>H-AU-05 互動地圖</li><li>H-IN-06 工具選擇</li></ul>
+<h4>來源</h4><ul><li><a href="https://claude.ai/artifact/JTfND6dJAH4XSsSFmGviKs">迷你布學園（成果網站）</a></li><li><a href="https://github.com/danjdewhurst/story-skills">story-skills（故事寫作技能）</a></li><li><a href="https://github.com/d3/d3-geo">d3-geo（地圖程式庫）</a></li><li><a href="https://www.naturalearthdata.com/">Natural Earth（世界地圖資料）</a></li></ul>
+<section><h3>小卡 H-KN-03（AI-003）網站規格</h3>
+<p>用途：開發學習網站前，先把初衷、規則、內容來源和工具整理成一頁規格。</p><p>系別：知識系｜領域：家庭生活</p>
+<h4>適用</h4><ul><li>想把教材做成互動學習網站或系統。</li><li>想從單次網頁，升級成能持續擴充的系統。</li></ul>
+<h4>提示詞</h4><pre>請協助我開發學習網站系統。先不要寫程式，先整理成一頁開發規格，等我確認。
+1. 初衷：為誰做、想解決什麼、對方最喜歡什麼？&lt;使用者與興趣&gt;
+2. 世界規則：用對方的興趣建立故事世界，讓學科知識成為世界裡的規則。
+3. 角色分工：每個角色只負責一種學習功能，不當裝飾。
+4. 學會標準：定義已讀、已完成、待補強、已補強；閱讀不能代替作答。
+5. 內容來源：保留課本與題庫附圖，標示來源；AI 自編或自解的內容要註明。
+6. 工具判斷：列出每項功能用什麼技能或工具、是否真的需要外部 API。
+7. 試用修正：先做一個單元，給使用者實際操作，再依回饋增刪功能。</pre><p>English</p><pre>Please help me build a learning website. Do not write code yet. First write a one-page spec and wait for my approval.
+1. Purpose: who is it for, what problem does it solve, and what do they love most? &lt;user and interests&gt;
+2. World rules: build a story world from their interests, and make the subject knowledge the rules of that world.
+3. Roles: each character does one learning job only, not decoration.
+4. Mastery: define read, done, needs work, and improved. Reading does not replace answering questions.
+5. Sources: keep the figures from textbooks and question banks, and label sources. Mark content the AI wrote or solved itself.
+6. Tools: list the skill or tool for each feature, and whether an external API is really needed.
+7. Test and revise: build one unit first, let the user try it, then add or cut features based on feedback.</pre>
+<h4>使用說明</h4><ul><li>限制：這段是依本專案實際做法整理的模板。</li><li>提醒：課本、題庫和動漫圖片要公開前，先確認授權。</li><li>提醒：第 6 點的工具判斷細節，見 AI-006。</li></ul>
+
+<h4>版本紀錄</h4><ul><li>v0.3｜2026-11-25｜提示詞加英文版（English）</li><li>v0.2｜2026-11-24｜改名「網站規格」（原名：AI 網站系統開發重點）</li></ul></section><section><h3>小卡 H-AU-05（AI-005）互動地圖</h3>
+<p>用途：用 d3-geo 和 Natural Earth，把地點、路線和區域做成可操作的互動地圖。</p><p>示意圖：有（互動地圖示意，在網站小卡上看圖）</p><p>系別：自動系｜領域：家庭生活</p>
+<h4>適用</h4><ul><li>要讓人理解地點、路線或區域關係。</li><li>教材、課程或簡報需要可操作的地圖。</li></ul><h4>不適用</h4><ul><li>導航、即時路況或精準測量。</li><li>需要法律效力的邊界資料。</li></ul>
+<h4>提示詞</h4><pre>請幫我做一個互動地圖，先不要寫程式，先確認：
+1. 目標：使用者是誰、看完要理解什麼？&lt;對象與目標&gt;
+2. 內容：要呈現哪些地點、路線或區域？&lt;內容&gt;
+3. 資料：屬於現代地理或歷史地理？歷史地名、國界和路線的來源是什麼？
+4. 工具：優先評估 d3-geo 與 Natural Earth；資料不常變動時放進網站，不使用 API。
+5. 試做：先做一個地點或一段路線給我試用，確認後再擴充。
+6. 回報：列出已實作、已測試、尚未驗證的項目，以及所有資料來源。</pre><p>English</p><pre>Please help me make an interactive map. Do not write code yet. First confirm:
+1. Goal: who is the user, and what should they understand after using it? &lt;audience and goal&gt;
+2. Content: which places, routes, or areas to show? &lt;content&gt;
+3. Data: is it modern or historical geography? What are the sources for historical place names, borders, and routes?
+4. Tools: evaluate d3-geo and Natural Earth first. If the data rarely changes, put it in the website and do not use an API.
+5. Trial: build one place or one route for me to try, then expand after I confirm.
+6. Report: list what is built, what is tested, what is not yet verified, and all data sources.</pre>
+<h4>使用說明</h4><ul><li>限制：現代地理資料不等於聖經或其他歷史時代的地理。</li><li>提醒：公開前要確認地圖資料授權與國界呈現。</li></ul><h4>操作步驟</h4><ol><li>確認對象和看完要理解什麼。</li><li>選地圖資料，確認是現代或歷史地理。</li><li>把程式與資料放進專案，先做一站。</li><li>測電腦和手機，再標示資料來源。</li></ol><h4>工具與來源</h4><ul><li><a href="https://github.com/d3/d3-geo" target="_blank" rel="noopener">d3-geo</a>：繪製地圖。</li><li><a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>：世界地圖資料。</li><li><a href="https://github.com/topojson/world-atlas" target="_blank" rel="noopener">world-atlas</a>：網頁可用的 Natural Earth 格式。</li><li><a href="https://github.com/topojson/topojson-client" target="_blank" rel="noopener">topojson-client</a>：把資料轉成可繪製的形狀。</li></ul>
+<h4>實戰紀錄（1 次，規劃應用不計入）</h4><ul><li>2026-11-22｜迷你布學習系統｜已實作未驗證｜現代地理可旋轉地球儀與飛行導覽｜新學到：程式和資料放進網站，不接 API｜成果：<a href="https://claude.ai/artifact/JTfND6dJAH4XSsSFmGviKs" target="_blank" rel="noopener">迷你布學園</a></li><li>ChurchBD 聖經地理｜規劃應用｜尚未實作｜新學到：歷史地名與路線要另外查證</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.4｜2026-11-25｜提示詞加英文版（English）</li><li>v0.3｜2026-11-24｜改名「互動地圖」（原名：互動式地圖製作）</li><li>v0.2｜2026-11-24｜加互動地圖網頁示意圖；刪除過時的「尚未在第二個專案驗證」</li><li>v0.1｜2026-11-23｜依迷你布開發紀錄建立</li></ul></section><section><h3>小卡 H-IN-06（AI-006）工具選擇</h3>
+<p>用途：動手前判斷該用 Skill、程式庫、公開資料、靜態檔案或 API。</p><p>系別：洞察系｜領域：家庭生活</p>
+<h4>適用</h4><ul><li>要加新功能，不確定用什麼工具。</li><li>AI 建議接 API，想先確認是否必要。</li><li>資料要放進網站，不確定多久更新一次。</li></ul><h4>不適用</h4><ul><li>付款、個資或正式系統串接的最後決定；這張卡只做初步判斷。</li></ul>
+<h4>提示詞</h4><pre>這個功能先不要實作，請幫我判斷該用哪種方式：&lt;功能&gt;
+請依序回答：
+1. Skill：有沒有成熟且來源可信的 AI Skill？
+2. 程式庫：有沒有成熟的程式庫？
+3. 公開資料：有沒有官方或公開資料集？授權是什麼？
+4. 靜態檔案：資料多久變一次？可以直接放進網站嗎？
+5. API：真的需要嗎？費用、金鑰、權限、額度和故障時怎麼處理？
+最後給一個建議，說明為什麼不選其他方式，並列出待驗證事項。</pre><p>English</p><pre>Do not build this feature yet. Help me decide which approach to use: &lt;feature&gt;
+Answer in this order:
+1. Skill: is there a mature AI Skill from a trusted source?
+2. Library: is there a mature code library?
+3. Public data: is there an official or public dataset? What is its license?
+4. Static files: how often does the data change? Can it go directly into the website?
+5. API: is it really needed? What about cost, keys, permissions, quotas, and what happens when it fails?
+End with one recommendation, explain why you did not choose the others, and list items still to verify.</pre>
+<h4>使用說明</h4><ul><li>限制：放進網站的資料不會自動更新，例如時事題要手動改。</li><li>提醒：題目要分開標示真題、改編題與 AI 仿題。</li><li>提醒：涉及付款、個資或正式系統時，另做資安檢查。</li></ul><h4>操作步驟</h4><ol><li>先找成熟可信的 AI Skill。</li><li>需要能力時找程式庫，需要資料時找公開資料集。</li><li>資料不常變，就做成靜態檔案。</li><li>必須即時、個人化或寫回系統，才用 API。</li></ol><h4>工具與來源</h4><ul><li><a href="https://github.com/d3/d3-geo" target="_blank" rel="noopener">d3-geo</a>：世界地圖案例使用的程式庫。</li><li><a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>：世界地圖案例使用的公開資料。</li><li><a href="https://cna.com.tw/news/aipl/202608200078.aspx" target="_blank" rel="noopener">中央社選舉報導</a></li></ul>
+<h4>實戰紀錄（2 次，規劃應用不計入）</h4><ul><li>2026-11-22｜迷你布學習系統｜已實作未驗證｜地圖用靜態資料、時事題固定、會考題分來源｜新學到：先問資料多久變一次｜成果：<a href="https://claude.ai/artifact/JTfND6dJAH4XSsSFmGviKs" target="_blank" rel="noopener">迷你布學園</a></li><li>2026-11-23｜AI 工作圖鑑｜已實作未驗證｜用靜態網頁、GitHub Pages 和 Gist，不架伺服器也不接 API｜新學到：沒有即時需求，靜態發布就夠</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.4｜2026-11-25｜提示詞加英文版（English）</li><li>v0.3｜2026-11-24｜改名「工具選擇」，改用適用／不適用／注意，移除固定驗證狀態</li><li>v0.2｜2026-11-23｜新增 AI 工作圖鑑實戰紀錄</li><li>v0.1｜2026-11-23｜依迷你布開發紀錄建立</li></ul></section></article>
+<article><h2>筆記：深化導入申請表製作流程：架構、出處、數字、審查</h2><p>日期：2026-11-22｜關鍵字：文件審查、Claude、Codex、交叉審查、個資遮蔽</p>
+
+<h4>做什麼</h4><p>依企業結案分析報告，做出可送審的政府計畫申請表。</p><h4>怎麼做</h4><ol><li>先排章節，標出每章資料從哪份報告來。</li><li>每段文字、每個數字都要查得到出處，經費與人天前後一致。</li><li>送審前遮蔽客戶資料，再請 Codex 交叉審查。</li></ol><h4>學到什麼</h4><ol><li>先定架構再寫內容，章節和資料來源不會漏。</li><li>數字一致性要單獨檢查一輪。</li><li>客戶名稱、統編要先遮蔽才給別的 AI 看。</li></ol>
+<h4>相關小卡</h4><ul><li>W-DE-01 跨模型交叉審查</li></ul>
+
+</article>
+<article><h2>筆記：讓兩個 AI 互相檢查：Claude × Codex 交叉審查</h2><p>日期：2026-11-20｜關鍵字：交叉審查、Claude、Codex、文件審查、個資遮蔽</p>
+
+<h4>做什麼</h4><p>讓兩個 AI 互相檢查，或一個做、一個驗收。</p><h4>怎麼做</h4><ol><li>在 Claude 安裝 Codex 官方外掛。</li><li>建立互相審查與「交給 Claude 執行」技能。</li><li>送審前先遮蔽公司名、人名、統編。</li></ol><h4>學到什麼</h4><ol><li>/codex:review 只看程式改動，文件要用自建技能。</li><li>另一個 AI 的建議要逐點判斷再採用。</li><li>審查的 AI 只列問題、不改檔。</li></ol>
+<h4>相關小卡</h4><ul><li>W-DE-01 跨模型交叉審查</li><li>W-AU-08 跨模型接力</li><li>W-DE-09 跨模型縮寫</li></ul>
+<h4>來源</h4><ul><li><a href="https://wilson-men.tw/claude-codex-plugin/">威森：Claude × Codex 外掛教學</a></li><li><a href="https://convra.net/kit/%E5%88%86%E5%B7%A5">Convra：AI 分工教學</a></li><li><a href="https://github.com/openai/codex-plugin-cc">Codex 官方外掛原始碼（GitHub）</a></li><li><a href="https://app.notion.com/p/Claude-Codex-OpenAI-422b7e19746a80059c82f7c93efd4875">Claude × Codex 官方外掛安裝教學（Notion）</a></li></ul>
+<section><h3>小卡 W-DE-01（AI-001）跨模型交叉審查</h3>
+<p>用途：文件寫好後，讓另一個 AI 先遮個資、只讀挑錯，再由我決定改不改。</p><p>系別：防禦系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>政府計畫書、重要提案</li><li>有金額、數字、條款要核對</li><li>對外發布或法規相關文件</li></ul><h4>不適用</h4><ul><li>短訊息、閒聊：浪費額度。</li><li>程式碼改動：改用 XC（/codex:review）。</li></ul>
+<h4>提示詞</h4><p>XR｜在 Claude 打：請 Codex 審查</p><pre>請 Codex 審查這份文件：&lt;檔案位置&gt;</pre><p>English</p><pre>Please ask Codex to review this document: &lt;file path&gt;</pre><p>XR｜在 Codex 打：請 Claude 審查</p><pre>請 Claude 審查這份文件：&lt;檔案位置&gt;</pre><p>English</p><pre>Please ask Claude to review this document: &lt;file path&gt;</pre><p>XP｜在 Claude 打：請 Codex 做風險預演（送審或上線前）</p><pre>請 Codex 審查這份文件：&lt;檔案位置&gt;
+審查角度加一項：風險預演。假設這份文件已經被退件或失敗，列出最可能的 5 個原因，依嚴重度排序。</pre><p>English</p><pre>Please ask Codex to review this document: &lt;file path&gt;
+Add one review angle: pre-mortem. Assume this document has already been rejected or has failed. List the 5 most likely reasons, ranked by severity.</pre><p>XC｜在 Claude Code 打：Codex 審程式（指令不用翻譯）</p><pre>/codex:review --wait</pre><p>XC｜在 Claude Code 打：Claude 依審查結果修正</p><pre>請根據剛剛 Codex 的程式碼審查結果，修正已確認的問題，完成後重新測試功能。</pre><p>English</p><pre>Based on Codex's code review just now, fix the confirmed issues, then test the features again.</pre>
+<h4>使用說明</h4><ul><li>準備：先裝好 Codex 外掛和審查技能，Codex 用 ChatGPT 帳號登入。</li><li>提醒：風險預演只列退件或失敗原因，改不改仍由我決定。</li><li>提醒：在 Claude、Codex 直接打 <code>XR &lt;檔案&gt;</code>、<code>XP &lt;檔案&gt;</code> 也可以。</li></ul>
+
+</section><section><h3>小卡 W-AU-08（AI-008）跨模型接力</h3>
+<p>用途：把任務交給 Claude 動手做，再由 Codex 依驗收標準獨立檢查。</p><p>系別：自動系｜領域：工作職場</p>
+<h4>適用</h4><ul><li>任務範圍清楚、有明確成品，例如網站改版、文件批次修改。</li><li>想讓動手做的 AI 和檢查的 AI 分開。</li></ul><h4>不適用</h4><ul><li>只要第二意見、不需要對方動手：用 AI-001。</li><li>有個人資料、金鑰，或要對外發布、付款的工作。</li></ul>
+<h4>提示詞</h4><p>XE｜在 Codex 打：交給 Claude 執行</p><pre>請交給 Claude 執行（claude-executor）。先寫任務單給我確認，再呼叫 Claude。
+1. 目標：&lt;要完成的事&gt;
+2. 範圍：只能改 &lt;資料夾或檔案&gt;，不能改 &lt;排除項目&gt;。
+3. 成品：&lt;要交出的檔案或畫面&gt;
+4. 驗收標準：&lt;怎樣算完成&gt;
+5. 停止條件：遇到發布、刪除、付款或範圍外的檔案，先停下來問我。
+Claude 做完後，請讀實際檔案逐項判斷「通過／不通過／無法驗證」，不要只看 Claude 的回報。
+Claude 執行失敗、沒有回報或額度不足時，一律算「無法驗證」，不可當作通過。
+修正後最多複驗 2 輪，還沒通過就停下來，列出剩下的問題給我決定。</pre><p>English</p><pre>Hand this to Claude (claude-executor). Write a task sheet for my approval first, then call Claude.
+1. Goal: &lt;what to finish&gt;
+2. Scope: change only &lt;folders or files&gt;. Do not change &lt;excluded items&gt;.
+3. Deliverable: &lt;files or screens&gt;
+4. Acceptance criteria: &lt;what counts as done&gt;
+5. Stop rule: if it involves publishing, deleting, payment, or files outside the scope, stop and ask me first.
+After Claude finishes, read the actual files and mark each item &quot;pass / fail / cannot verify&quot;. Do not rely only on Claude's report.
+If Claude fails, does not report, or runs out of quota, mark it &quot;cannot verify&quot;, never &quot;pass&quot;.
+After fixes, re-check at most 2 rounds. If it still fails, stop and list the remaining issues for me to decide.</pre><p>XV｜在 Codex 打：Codex 自己複驗（不呼叫 Claude）</p><pre>唯讀複驗，不可修改檔案，也不要呼叫 Claude。
+上次問題：&lt;問題&gt;。現已改為：&lt;修正內容&gt;。
+只檢查這項改動，以及會不會影響 &lt;相關畫面或功能&gt;，回報通過或不通過。</pre><p>English</p><pre>Read-only re-check. Do not change any files, and do not call Claude.
+Last issue: &lt;issue&gt;. Now changed to: &lt;fix&gt;.
+Check only this change, and whether it affects &lt;related screens&gt;. Report pass or fail.</pre>
+<h4>使用說明</h4><ul><li>準備：Codex 沙盒讀不到鑰匙圈，呼叫 Claude 時要核准在沙盒外執行。</li><li>限制：會用到 Claude 方案額度；一件事最多一次跨模型檢查。</li><li>限制：完整交辦流程尚未在正式工作驗證。</li><li>提醒：對方沒跑完或沒回報，就是「無法驗證」，不是通過。</li><li>提醒：每個建議都要逐點判斷，不用會自動照改的工具。</li></ul><h4>操作步驟</h4><ol><li>在 Codex 說「交給 Claude 執行」，寫清楚範圍、可改的檔案和驗收標準。</li><li>Codex 存成任務單，用最小權限呼叫 Claude。</li><li>Claude 做完回報，Codex 讀實際檔案逐項判斷通過或不通過。</li><li>不通過就修正，複驗只看上次的問題。</li><li>最多複驗 2 輪；還沒通過就停下，把剩下的問題交給我決定。</li></ol><h4>工具與來源</h4><ul><li>claude-executor：Codex 技能，把任務交給 Claude 並獨立驗收。</li><li><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">Codex 官方外掛原始碼（GitHub）</a></li><li><a href="https://trailofbits.com/skills/second-opinion/" target="_blank" rel="noopener">Trail of Bits：second-opinion（失敗就算未完成）</a></li><li><a href="https://github.com/KamakuraCrypto/claude-codex-review" target="_blank" rel="noopener">claude-codex-review（風險預演、限制輪數）</a></li></ul>
+<h4>實戰紀錄（2 次，規劃應用不計入）</h4><ul><li>2026-11-23｜AI 工作圖鑑｜已驗證完成｜Claude 改網站 v1.5，Codex 唯讀驗收並對照改版前版本｜新學到：複驗只看上次的問題，省時間和額度｜成果：抓到 1 個選單遮擋問題，修正後複驗通過</li><li>2026-11-25｜線上畫畫課剪輯｜已驗證完成｜Codex 依逐字稿與時間軸審查影片剪點清單｜新學到：Codex 看不到影片，也能用逐字稿抓剪錯｜成果：6 點中採用 3 點，修正 3 個誤剪</li></ul>
+<h4>版本紀錄</h4><ul><li>v0.3｜2026-11-25｜提示詞加英文版；標籤統一寫「在哪裡打」</li><li>v0.2｜2026-11-24｜參考 GitHub 跨模型審查技能：複驗最多 2 輪、失敗算無法驗證</li><li>v0.1｜2026-11-24｜依 claude-executor 技能與 AT 驗收紀錄建立</li></ul></section></article></body></html>
