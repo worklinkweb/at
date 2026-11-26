@@ -2,8 +2,8 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta name="robots" content="noindex,nofollow">
-<meta name="at-version" content="v2.11">
-<meta name="at-build" content="7e0960e5748b4076">
+<meta name="at-version" content="v2.12">
+<meta name="at-build" content="ab8d3146bcfc1c4a">
 <meta charset="utf-8">
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -698,8 +698,13 @@ body.zooming { overflow: hidden; }
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 window.ATLAS_DATA = {
- "version": "v2.11",
+ "version": "v2.12",
  "changes": [
+  {
+   "v": "v2.12",
+   "date": "2026-11-26",
+   "text": "本機後台第 1 版（admin.mjs：草稿匣、清單與狀態、表單、即時預覽、儲存備份、貼上草稿、上傳更新）；首頁「AT 編輯」改為「wat 寫成草稿」「用編號修改」「加實戰紀錄」（所有 AI 先存草稿，上傳時才給編號）"
+  },
   {
    "v": "v2.11",
    "date": "2026-11-25",
@@ -837,14 +842,14 @@ window.ATLAS_DATA = {
  "preview": false,
  "editPrompts": [
   {
-   "label": "wat 寫成筆記",
-   "hint": "在 Claude、ChatGPT、Codex 原對話打 wat",
+   "label": "wat 寫成草稿",
+   "hint": "在 Claude、ChatGPT、Codex 原對話打 wat，草稿進後台",
    "text": "wat"
   },
   {
-   "label": "wat 草稿上架",
-   "hint": "ChatGPT 或 Codex 草稿回到 Claude",
-   "text": "wat（ChatGPT 草稿貼在下面；Codex 草稿在 00_收件暫存）"
+   "label": "用編號修改",
+   "hint": "改好存草稿，在後台上傳",
+   "text": "N-001 的「學到什麼」第 2 點改成：……（改好存成草稿，我在後台上傳）"
   },
   {
    "label": "加實戰紀錄",
